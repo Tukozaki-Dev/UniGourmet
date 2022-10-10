@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16pt;
+}
+
+/* Font Text Styles */
+
+$display-large:64pt;
+
+$display-medium:52pt;
+
+$display-small:44pt;
+
+$headline-large:40pt;
+
+$headline-medium:36pt;
+
+$headline-small:32pt;
+
+$title-large:28pt;
+
+$title-medium:24pt;
+
+$title-small:20pt;
+
+$label-large:20pt;
+
+$label-medium:16pt;
+
+$label-small:16pt;
+
+$body-large:24pt;
+
+$body-medium:20pt;
+
+$body--small: 16pt;
+
+/* Font Text Styles */
+
+/* Color Styles */
+
+$light-primary: #19545e;
+
+$light-onprimary:#FFFFFF;
+
+$light-primary-container:#A0EFFF;
+
+$light-secondary: #006A66;
+
+$light-onsecondary:#FFFFFF;
+
+$light-secondary-container:#70F7F0;
+
+$light-tertiary: #509792;
+
+$light-ontertiary:#FFFFFF;
+
+$light-tertiary-container:#70F7EF;
+
+$light-error:#BA1A1A;
+
+$light-onerror:#FFFFFF;
+
+$light-error-container:#FFDAD6;
+
+$light-background:#F6FEFF;
+
+$light-onbackground:#001F24;
+
+$light-surface:#F6FEFF;
+
+$light-onsurface:#001F24;
+
+$light-surface-variant:#DBE4E6;
+
+$light-onsurface-variant:#3F484A;
+
+$light-outline:#6F797B;
+
+$light-surface1:linear-gradient(0deg, rgba(0, 104, 118, 0.05), rgba(0, 104, 118, 0.05)), #F6FEFF;
+
+$light-surface2:linear-gradient(0deg, rgba(0, 104, 118, 0.08), rgba(0, 104, 118, 0.08)), #F6FEFF;
+
+$light-surface3: linear-gradient(0deg, rgba(0, 104, 118, 0.11), rgba(0, 104, 118, 0.11)), #F6FEFF;
+
+$light-surface4:linear-gradient(0deg, rgba(0, 104, 118, 0.12), rgba(0, 104, 118, 0.12)), #F6FEFF;
+
+$light-surface5:linear-gradient(0deg, rgba(0, 104, 118, 0.14), rgba(0, 104, 118, 0.14)), #F6FEFF;
+
+$key-primary: #19545E;
+
+$key-secondary: #107D79;
+
+$key-tertiary: #509792;
+
+$key-error: #BA1A1A;
+
+$key-neutral:#FFFFFF;
+
+$key-neutral-variant:#576062;
+
+/* Color Styles */
