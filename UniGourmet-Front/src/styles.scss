@@ -10,100 +10,211 @@ body {
   font-size: 16pt;
 }
 
-/* Font Text Styles */
+/* Color styles */
+$uni-gourmet--white: rgba(255, 255, 255, 1);
+$uni-gourmet--black: rgba(0, 0, 0, 1);
+$uni-gourmet--source--seed: rgba(25, 84, 94, 1);
+$uni-gourmet--source--primary: rgba(25, 84, 94, 1);
+$uni-gourmet--source--secondary: rgba(16, 125, 121, 1);
+$uni-gourmet--source--tertiary: rgba(80, 151, 146, 1);
+$uni-gourmet--source--neutral: rgba(255, 255, 255, 1);
+$uni-gourmet--sys--light--surface-tint: rgba(0, 104, 118, 1);
+$uni-gourmet--sys--light--surface-tint-color: rgba(0, 104, 118, 1);
+$uni-gourmet--sys--light--on-error-container: rgba(65, 0, 2, 1);
+$uni-gourmet--sys--light--on-error: rgba(255, 255, 255, 1);
+$uni-gourmet--sys--light--error-container: rgba(255, 218, 214, 1);
+$uni-gourmet--sys--light--on-tertiary-container: rgba(0, 32, 30, 1);
+$uni-gourmet--sys--light--on-tertiary: rgba(255, 255, 255, 1);
+$uni-gourmet--sys--light--tertiary-container: rgba(112, 247, 239, 1);
+$uni-gourmet--sys--light--tertiary: rgba(0, 106, 101, 1);
+$uni-gourmet--sys--light--shadow: rgba(0, 0, 0, 1);
+$uni-gourmet--sys--light--error: rgba(186, 26, 26, 1);
+$uni-gourmet--sys--light--outline: rgba(111, 121, 123, 1);
+$uni-gourmet--sys--light--on-background: rgba(0, 31, 36, 1);
+$uni-gourmet--sys--light--background: rgba(246, 254, 255, 1);
+$uni-gourmet--sys--light--inverse-on-surface: rgba(208, 248, 255, 1);
+$uni-gourmet--sys--light--inverse-surface: rgba(0, 54, 61, 1);
+$uni-gourmet--sys--light--on-surface-variant: rgba(63, 72, 74, 1);
+$uni-gourmet--sys--light--on-surface: rgba(0, 31, 36, 1);
+$uni-gourmet--sys--light--surface-variant: rgba(219, 228, 230, 1);
+$uni-gourmet--sys--light--surface: rgba(246, 254, 255, 1);
+$uni-gourmet--sys--light--on-secondary-container: rgba(0, 32, 31, 1);
+$uni-gourmet--sys--light--on-secondary: rgba(255, 255, 255, 1);
+$uni-gourmet--sys--light--secondary-container: rgba(112, 247, 240, 1);
+$uni-gourmet--sys--light--secondary: rgba(0, 106, 102, 1);
+$uni-gourmet--sys--light--inverse-primary: rgba(81, 215, 238, 1);
+$uni-gourmet--sys--light--on-primary-container: rgba(0, 31, 37, 1);
+$uni-gourmet--sys--light--on-primary: rgba(255, 255, 255, 1);
+$uni-gourmet--sys--light--primary-container: rgba(160, 239, 255, 1);
+$uni-gourmet--sys--light--primary: rgba(0, 104, 118, 1);
+$uni-gourmet--sys--dark--surface-tint: rgba(81, 215, 238, 1);
+$uni-gourmet--sys--dark--surface-tint-color: rgba(81, 215, 238, 1);
+$uni-gourmet--sys--dark--on-error-container: rgba(255, 218, 214, 1);
+$uni-gourmet--sys--dark--on-error: rgba(105, 0, 5, 1);
+$uni-gourmet--sys--dark--error-container: rgba(147, 0, 10, 1);
+$uni-gourmet--sys--dark--on-tertiary-container: rgba(112, 247, 239, 1);
+$uni-gourmet--sys--dark--on-tertiary: rgba(0, 55, 52, 1);
+$uni-gourmet--sys--dark--tertiary-container: rgba(0, 80, 76, 1);
+$uni-gourmet--sys--dark--tertiary: rgba(79, 218, 210, 1);
+$uni-gourmet--sys--dark--shadow: rgba(0, 0, 0, 1);
+$uni-gourmet--sys--dark--error: rgba(255, 180, 171, 1);
+$uni-gourmet--sys--dark--outline: rgba(137, 146, 149, 1);
+$uni-gourmet--sys--dark--on-background: rgba(151, 240, 255, 1);
+$uni-gourmet--sys--dark--background: rgba(0, 31, 36, 1);
+$uni-gourmet--sys--dark--inverse-on-surface: rgba(0, 31, 36, 1);
+$uni-gourmet--sys--dark--inverse-surface: rgba(151, 240, 255, 1);
+$uni-gourmet--sys--dark--on-surface-variant: rgba(191, 200, 202, 1);
+$uni-gourmet--sys--dark--on-surface: rgba(151, 240, 255, 1);
+$uni-gourmet--sys--dark--surface-variant: rgba(63, 72, 74, 1);
+$uni-gourmet--sys--dark--surface: rgba(0, 31, 36, 1);
+$uni-gourmet--sys--dark--on-secondary-container: rgba(112, 247, 240, 1);
+$uni-gourmet--sys--dark--on-secondary: rgba(0, 55, 53, 1);
+$uni-gourmet--sys--dark--secondary-container: rgba(0, 80, 77, 1);
+$uni-gourmet--sys--dark--secondary: rgba(78, 218, 212, 1);
+$uni-gourmet--sys--dark--inverse-primary: rgba(0, 104, 118, 1);
+$uni-gourmet--sys--dark--on-primary-container: rgba(160, 239, 255, 1);
+$uni-gourmet--sys--dark--on-primary: rgba(0, 54, 62, 1);
+$uni-gourmet--sys--dark--primary-container: rgba(0, 78, 89, 1);
+$uni-gourmet--sys--dark--primary: rgba(81, 215, 238, 1);
+$uni-gourmet--ref--error--error0: rgba(0, 0, 0, 1);
+$uni-gourmet--ref--error--error10: rgba(65, 0, 2, 1);
+$uni-gourmet--ref--error--error20: rgba(105, 0, 5, 1);
+$uni-gourmet--ref--error--error30: rgba(147, 0, 10, 1);
+$uni-gourmet--ref--error--error40: rgba(186, 26, 26, 1);
+$uni-gourmet--ref--error--error50: rgba(222, 55, 48, 1);
+$uni-gourmet--ref--error--error60: rgba(255, 84, 73, 1);
+$uni-gourmet--ref--error--error70: rgba(255, 137, 125, 1);
+$uni-gourmet--ref--error--error80: rgba(255, 180, 171, 1);
+$uni-gourmet--ref--error--error90: rgba(255, 218, 214, 1);
+$uni-gourmet--ref--error--error95: rgba(255, 237, 234, 1);
+$uni-gourmet--ref--error--error99: rgba(255, 251, 255, 1);
+$uni-gourmet--ref--error--error100: rgba(255, 255, 255, 1);
+$uni-gourmet--ref--error--error5: rgba(45, 0, 1, 1);
+$uni-gourmet--ref--error--error15: rgba(84, 0, 3, 1);
+$uni-gourmet--ref--error--error25: rgba(126, 0, 7, 1);
+$uni-gourmet--ref--error--error35: rgba(168, 7, 16, 1);
+$uni-gourmet--ref--error--error98: rgba(255, 248, 247, 1);
+$uni-gourmet--ref--primary--primary0: rgba(0, 0, 0, 1);
+$uni-gourmet--ref--primary--primary10: rgba(0, 31, 37, 1);
+$uni-gourmet--ref--primary--primary20: rgba(0, 54, 62, 1);
+$uni-gourmet--ref--primary--primary30: rgba(0, 78, 89, 1);
+$uni-gourmet--ref--primary--primary40: rgba(0, 104, 118, 1);
+$uni-gourmet--ref--primary--primary50: rgba(0, 131, 148, 1);
+$uni-gourmet--ref--primary--primary60: rgba(0, 159, 180, 1);
+$uni-gourmet--ref--primary--primary70: rgba(38, 187, 210, 1);
+$uni-gourmet--ref--primary--primary80: rgba(81, 215, 238, 1);
+$uni-gourmet--ref--primary--primary90: rgba(160, 239, 255, 1);
+$uni-gourmet--ref--primary--primary95: rgba(211, 247, 255, 1);
+$uni-gourmet--ref--primary--primary99: rgba(247, 253, 255, 1);
+$uni-gourmet--ref--primary--primary100: rgba(255, 255, 255, 1);
+$uni-gourmet--ref--primary--primary5: rgba(0, 1, 77, 1);
+$uni-gourmet--ref--primary--primary15: rgba(19, 24, 110, 1);
+$uni-gourmet--ref--primary--primary25: rgba(0, 66, 75, 1);
+$uni-gourmet--ref--primary--primary35: rgba(0, 91, 103, 1);
+$uni-gourmet--ref--primary--primary98: rgba(238, 252, 255, 1);
+$uni-gourmet--ref--secondary--secondary0: rgba(0, 0, 0, 1);
+$uni-gourmet--ref--secondary--secondary10: rgba(0, 32, 31, 1);
+$uni-gourmet--ref--secondary--secondary20: rgba(0, 55, 53, 1);
+$uni-gourmet--ref--secondary--secondary30: rgba(0, 80, 77, 1);
+$uni-gourmet--ref--secondary--secondary40: rgba(0, 106, 102, 1);
+$uni-gourmet--ref--secondary--secondary50: rgba(0, 133, 129, 1);
+$uni-gourmet--ref--secondary--secondary60: rgba(0, 162, 156, 1);
+$uni-gourmet--ref--secondary--secondary70: rgba(34, 190, 184, 1);
+$uni-gourmet--ref--secondary--secondary80: rgba(78, 218, 212, 1);
+$uni-gourmet--ref--secondary--secondary90: rgba(112, 247, 240, 1);
+$uni-gourmet--ref--secondary--secondary95: rgba(176, 255, 250, 1);
+$uni-gourmet--ref--secondary--secondary99: rgba(242, 255, 253, 1);
+$uni-gourmet--ref--secondary--secondary100: rgba(255, 255, 255, 1);
+$uni-gourmet--ref--secondary--secondary5: rgba(14, 15, 33, 1);
+$uni-gourmet--ref--secondary--secondary15: rgba(35, 36, 55, 1);
+$uni-gourmet--ref--secondary--secondary25: rgba(0, 67, 65, 1);
+$uni-gourmet--ref--secondary--secondary35: rgba(0, 93, 90, 1);
+$uni-gourmet--ref--secondary--secondary98: rgba(227, 255, 252, 1);
+$uni-gourmet--ref--tertiary--tertiary0: rgba(0, 0, 0, 1);
+$uni-gourmet--ref--tertiary--tertiary10: rgba(0, 32, 30, 1);
+$uni-gourmet--ref--tertiary--tertiary20: rgba(0, 55, 52, 1);
+$uni-gourmet--ref--tertiary--tertiary30: rgba(0, 80, 76, 1);
+$uni-gourmet--ref--tertiary--tertiary40: rgba(0, 106, 101, 1);
+$uni-gourmet--ref--tertiary--tertiary50: rgba(0, 133, 128, 1);
+$uni-gourmet--ref--tertiary--tertiary60: rgba(0, 162, 155, 1);
+$uni-gourmet--ref--tertiary--tertiary70: rgba(35, 190, 183, 1);
+$uni-gourmet--ref--tertiary--tertiary80: rgba(79, 218, 210, 1);
+$uni-gourmet--ref--tertiary--tertiary90: rgba(112, 247, 239, 1);
+$uni-gourmet--ref--tertiary--tertiary95: rgba(177, 255, 248, 1);
+$uni-gourmet--ref--tertiary--tertiary99: rgba(242, 255, 253, 1);
+$uni-gourmet--ref--tertiary--tertiary100: rgba(255, 255, 255, 1);
+$uni-gourmet--ref--tertiary--tertiary5: rgba(33, 7, 27, 1);
+$uni-gourmet--ref--tertiary--tertiary15: rgba(58, 27, 48, 1);
+$uni-gourmet--ref--tertiary--tertiary25: rgba(0, 67, 64, 1);
+$uni-gourmet--ref--tertiary--tertiary35: rgba(0, 93, 89, 1);
+$uni-gourmet--ref--tertiary--tertiary98: rgba(227, 255, 252, 1);
+$uni-gourmet--ref--neutral--neutral0: rgba(0, 0, 0, 1);
+$uni-gourmet--ref--neutral--neutral10: rgba(0, 31, 36, 1);
+$uni-gourmet--ref--neutral--neutral20: rgba(0, 54, 61, 1);
+$uni-gourmet--ref--neutral--neutral30: rgba(0, 79, 88, 1);
+$uni-gourmet--ref--neutral--neutral40: rgba(0, 104, 116, 1);
+$uni-gourmet--ref--neutral--neutral50: rgba(0, 131, 145, 1);
+$uni-gourmet--ref--neutral--neutral60: rgba(0, 160, 176, 1);
+$uni-gourmet--ref--neutral--neutral70: rgba(34, 188, 207, 1);
+$uni-gourmet--ref--neutral--neutral80: rgba(79, 216, 235, 1);
+$uni-gourmet--ref--neutral--neutral90: rgba(151, 240, 255, 1);
+$uni-gourmet--ref--neutral--neutral95: rgba(208, 248, 255, 1);
+$uni-gourmet--ref--neutral--neutral99: rgba(246, 254, 255, 1);
+$uni-gourmet--ref--neutral--neutral100: rgba(255, 255, 255, 1);
+$uni-gourmet--ref--neutral--neutral-na-n: rgba(255, 255, 255, 1);
+$uni-gourmet--ref--neutral--neutral5: rgba(17, 17, 20, 1);
+$uni-gourmet--ref--neutral--neutral15: rgba(38, 37, 41, 1);
+$uni-gourmet--ref--neutral--neutral25: rgba(0, 66, 74, 1);
+$uni-gourmet--ref--neutral--neutral35: rgba(0, 91, 102, 1);
+$uni-gourmet--ref--neutral--neutral98: rgba(237, 252, 255, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant0: rgba(0, 0, 0, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant10: rgba(20, 29, 31, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant20: rgba(41, 50, 52, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant30: rgba(63, 72, 74, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant40: rgba(87, 96, 98, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant50: rgba(111, 121, 123, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant60: rgba(137, 146, 149, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant70: rgba(163, 173, 175, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant80: rgba(191, 200, 202, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant90: rgba(219, 228, 230, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant95: rgba(233, 242, 245, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant99: rgba(247, 253, 255, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant100: rgba(255, 255, 255, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant5: rgba(16, 16, 24, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant15: rgba(37, 37, 45, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant25: rgba(52, 61, 63, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant35: rgba(75, 84, 86, 1);
+$uni-gourmet--ref--neutral-variant--neutral-variant98: rgba(242, 251, 253, 1);
+$uni-gourmet--key-colors--primary: rgba(25, 84, 94, 1);
+$uni-gourmet--key-colors--secondary: rgba(16, 125, 121, 1);
+$uni-gourmet--key-colors--tertiary: rgba(80, 151, 146, 1);
+$uni-gourmet--key-colors--error: rgba(186, 26, 26, 1);
+$uni-gourmet--key-colors--neutral: rgba(255, 255, 255, 1);
+$uni-gourmet--key-colors--neutral-variant: rgba(87, 96, 98, 1);
+$uni-gourmet--surfaces--light--surface1: rgba(246, 254, 255, 1);
+$uni-gourmet--surfaces--light--surface2: rgba(246, 254, 255, 1);
+$uni-gourmet--surfaces--light--surface3: rgba(246, 254, 255, 1);
+$uni-gourmet--surfaces--light--surface4: rgba(246, 254, 255, 1);
+$uni-gourmet--surfaces--light--surface5: rgba(246, 254, 255, 1);
+$uni-gourmet--surfaces--dark--surface1: rgba(0, 31, 36, 1);
+$uni-gourmet--surfaces--dark--surface2: rgba(0, 31, 36, 1);
+$uni-gourmet--surfaces--dark--surface3: rgba(0, 31, 36, 1);
+$uni-gourmet--surfaces--dark--surface4: rgba(0, 31, 36, 1);
+$uni-gourmet--surfaces--dark--surface5: rgba(0, 31, 36, 1);
 
-$display-large:64pt;
-
-$display-medium:52pt;
-
-$display-small:44pt;
-
-$headline-large:40pt;
-
-$headline-medium:36pt;
-
-$headline-small:32pt;
-
-$title-large:28pt;
-
-$title-medium:24pt;
-
-$title-small:20pt;
-
-$label-large:20pt;
-
-$label-medium:16pt;
-
-$label-small:16pt;
-
-$body-large:24pt;
-
-$body-medium:20pt;
-
-$body--small: 16pt;
-
-/* Font Text Styles */
-
-/* Color Styles */
-
-$light-primary: #19545e;
-
-$light-onprimary:#FFFFFF;
-
-$light-primary-container:#A0EFFF;
-
-$light-secondary: #006A66;
-
-$light-onsecondary:#FFFFFF;
-
-$light-secondary-container:#70F7F0;
-
-$light-tertiary: #509792;
-
-$light-ontertiary:#FFFFFF;
-
-$light-tertiary-container:#70F7EF;
-
-$light-error:#BA1A1A;
-
-$light-onerror:#FFFFFF;
-
-$light-error-container:#FFDAD6;
-
-$light-background:#F6FEFF;
-
-$light-onbackground:#001F24;
-
-$light-surface:#F6FEFF;
-
-$light-onsurface:#001F24;
-
-$light-surface-variant:#DBE4E6;
-
-$light-onsurface-variant:#3F484A;
-
-$light-outline:#6F797B;
-
-$light-surface1:linear-gradient(0deg, rgba(0, 104, 118, 0.05), rgba(0, 104, 118, 0.05)), #F6FEFF;
-
-$light-surface2:linear-gradient(0deg, rgba(0, 104, 118, 0.08), rgba(0, 104, 118, 0.08)), #F6FEFF;
-
-$light-surface3: linear-gradient(0deg, rgba(0, 104, 118, 0.11), rgba(0, 104, 118, 0.11)), #F6FEFF;
-
-$light-surface4:linear-gradient(0deg, rgba(0, 104, 118, 0.12), rgba(0, 104, 118, 0.12)), #F6FEFF;
-
-$light-surface5:linear-gradient(0deg, rgba(0, 104, 118, 0.14), rgba(0, 104, 118, 0.14)), #F6FEFF;
-
-$key-primary: #19545E;
-
-$key-secondary: #107D79;
-
-$key-tertiary: #509792;
-
-$key-error: #BA1A1A;
-
-$key-neutral:#FFFFFF;
-
-$key-neutral-variant:#576062;
-
-/* Color Styles */
+/* Text-size styles */
+$uni-gourmet--label--small: 11pt;
+$uni-gourmet--label--medium: 12pt;
+$uni-gourmet--label--large: 14pt;
+$uni-gourmet--body--small: 12pt;
+$uni-gourmet--body--medium: 14pt;
+$uni-gourmet--body--large: 16pt;
+$uni-gourmet--headline--small: 24pt;
+$uni-gourmet--headline--medium: 28pt;
+$uni-gourmet--headline--large: 32pt;
+$uni-gourmet--display--small: 36pt;
+$uni-gourmet--display--medium: 45pt;
+$uni-gourmet--display--large: 57pt;
+$uni-gourmet--title--small: 14pt;
+$uni-gourmet--title--medium: 16pt;
+$uni-gourmet--title--large: 22pt;
