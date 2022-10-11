@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { EditRecipeAdminComponent } from './edit-recipe-admin/edit-recipe-admin.component';
 import { RecipeAdminComponent } from './recipe-admin/recipe-admin.component';
-import { EditStudantAdminComponent } from './edit-studant-admin/edit-studant-admin.component';
-import { StudantAdminComponent } from './studant-admin/studant-admin.component';
+import { EditStudentAdminComponent } from './edit-student-admin/edit-student-admin.component';
+import { StudentAdminComponent } from './student-admin/student-admin.component';
 import { EditSubjectAdminComponent } from './edit-subject-admin/edit-subject-admin.component';
 import { SubjectAdminComponent } from './subject-admin/subject-admin.component';
 import { EditClassAdminComponent } from './edit-class-admin/edit-class-admin.component';
@@ -21,8 +21,8 @@ import { ProfessorAdminComponent } from './professor-admin/professor-admin.compo
     HomeAdminComponent,
     EditRecipeAdminComponent,
     RecipeAdminComponent,
-    EditStudantAdminComponent,
-    StudantAdminComponent,
+    EditStudentAdminComponent,
+    StudentAdminComponent,
     SubjectAdminComponent,
     EditSubjectAdminComponent,
     EditClassAdminComponent,
