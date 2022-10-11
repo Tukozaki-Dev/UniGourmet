@@ -15,6 +15,10 @@ import { EditIngredientAdminComponent } from './edit-ingredient-admin/edit-ingre
 import { IngredientAdminComponent } from './ingredient-admin/ingredient-admin.component';
 import { EditProfessorAdminComponent } from './edit-professor-admin/edit-professor-admin.component';
 import { ProfessorAdminComponent } from './professor-admin/professor-admin.component';
+import { AdminComponent } from './admin.component';
+import { HeaderAdmComponent } from '../shared-components/header-adm/header-adm.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,10 @@ import { ProfessorAdminComponent } from './professor-admin/professor-admin.compo
     IngredientAdminComponent,
     EditProfessorAdminComponent,
     ProfessorAdminComponent,
+    AdminComponent,
+    HeaderAdmComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule, AngularMaterialModule],
+  exports: [AdminComponent],
 })
 export class AdminModule {}

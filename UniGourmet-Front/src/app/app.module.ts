@@ -5,16 +5,17 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { AdminModule } from './admin/admin.module';
-import { HeaderMobileComponent } from './shared-components/header-mobile/header-mobile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [AppComponent, HeaderMobileComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     AdminModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

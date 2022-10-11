@@ -1,0 +1,112 @@
+<!-- Desktop Menu -->
+<mat-toolbar color="primary" class="header" *ngIf="!mobileMenu">
+    <img src="../../../assets/img/LogoRetangular.png" class="logo">
+    <button mat-icon-button>
+        <span class="color-white">Home</span>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="management">
+        <span class="color-white">Administrar</span>
+        <mat-menu #management="matMenu" class="bg-color">
+            <button mat-menu-item>
+                <fa-icon [icon]="faGraduationCap" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Professores</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faUserGroup" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Alunos</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faList" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Matérias</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faChalkboardUser" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Turmas</span>
+            </button>
+        </mat-menu>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="recipes">
+        <span class="color-white">Receitas</span>
+        <mat-menu #recipes="matMenu">
+            <button mat-menu-item>
+                <fa-icon [icon]="faBook" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Receitas</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faBasketShopping" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Ingredientes</span>
+            </button>
+        </mat-menu>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="events">
+        <span class="color-white">Eventos</span>
+        <mat-menu #events="matMenu">
+            <button mat-menu-item>
+                <fa-icon [icon]="faCalendar" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Calendário</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faNoteSticky" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Eventos</span>
+            </button>
+        </mat-menu>
+    </button>
+    <button mat-icon-button>
+        <fa-icon [icon]="faUser"></fa-icon>
+        <span class="subicon-position">{{login}}</span>
+    </button>
+</mat-toolbar>
+<!-- Mobile Menu -->
+<mat-toolbar color="primary" class="header-mobile" *ngIf="mobileMenu">
+    <button mat-icon-button class="bg-color icon-position">
+        <mat-icon class="icon-color">home</mat-icon>
+    </button>
+    <button mat-icon-button class="bg-color icon-position" [matMenuTriggerFor]="management">
+        <mat-icon class="icon-color">school</mat-icon>
+        <mat-menu #management="matMenu" class="bg-color">
+            <button mat-menu-item>
+                <fa-icon [icon]="faGraduationCap" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Professores</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faUserGroup" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Alunos</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faList" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Matérias</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faChalkboardUser" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Turmas</span>
+            </button>
+        </mat-menu>
+    </button>
+    <button mat-icon-button class="bg-color icon-position" [matMenuTriggerFor]="recipes">
+        <mat-icon class="icon-color">library_books</mat-icon>
+        <mat-menu #recipes="matMenu">
+            <button mat-menu-item>
+                <fa-icon [icon]="faBook" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Receitas</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faBasketShopping" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Ingredientes</span>
+            </button>
+        </mat-menu>
+    </button>
+    <button mat-icon-button class="bg-color icon-position" [matMenuTriggerFor]="events">
+        <mat-icon class="icon-color">summarize</mat-icon>
+        <mat-menu #events="matMenu">
+            <button mat-menu-item>
+                <fa-icon [icon]="faCalendar" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Calendário</span>
+            </button>
+            <button mat-menu-item>
+                <fa-icon [icon]="faNoteSticky" class="subicon-color"></fa-icon>
+                <span class="subicon-color subicon-position">Eventos</span>
+            </button>
+        </mat-menu>
+    </button>
+
+</mat-toolbar>
