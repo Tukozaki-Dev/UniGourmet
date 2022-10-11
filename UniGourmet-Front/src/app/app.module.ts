@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { AdminModule } from './admin/admin.module';
+import { HeaderMobileComponent } from './shared-components/header-mobile/header-mobile.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderMobileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
