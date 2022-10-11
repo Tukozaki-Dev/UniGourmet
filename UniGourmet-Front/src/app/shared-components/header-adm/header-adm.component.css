@@ -1,0 +1,42 @@
+.logo {
+  width: 80pt;
+}
+.header-mobile {
+  position: fixed;
+  bottom: 0;
+  height: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+}
+
+.bg-color {
+  background-color: var(--key-colors--tertiary);
+}
+
+.icon-color {
+  color: var(--sys--light--surface);
+}
+
+.icon-position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subicon-color {
+  color: var(--sys--light--primary);
+}
+
+.subicon-position {
+  padding-left: 5pt;
+}
+
+.color-white {
+  color: var(--white);
+}

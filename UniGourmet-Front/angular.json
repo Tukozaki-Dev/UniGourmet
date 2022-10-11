@@ -105,5 +105,8 @@
       }
     }
   },
-  "defaultProject": "UniGourmet-Front"
+  "defaultProject": "UniGourmet-Front",
+  "cli": {
+    "analytics": false
+  }
 }
