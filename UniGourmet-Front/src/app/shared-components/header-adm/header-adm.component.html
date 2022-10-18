@@ -1,59 +1,61 @@
 <!-- Desktop Menu -->
 <mat-toolbar color="primary" class="header" *ngIf="!mobileMenu">
-    <img src="../../../assets/img/LogoRetangular.png" class="logo">
-    <button mat-icon-button>
-        <span class="color-white">Home</span>
+    <a routerLink="/" class="navbar-brand">
+        <img src="../../../assets/img/LogoRetangular.png" class="logo">
+    </a>
+    <button mat-icon-button routerLinkActive="active">
+        <span routerLink="/" class="color-white">Home</span>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="management">
+    <button mat-icon-button [matMenuTriggerFor]="management" routerLinkActive="active">
         <span class="color-white">Administrar</span>
         <mat-menu #management="matMenu" class="bg-color">
             <button mat-menu-item>
                 <fa-icon [icon]="faGraduationCap" class="subicon-color"></fa-icon>
-                <span class="subicon-color subicon-position">Professores</span>
+                <span routerLink="/professors" class="subicon-color subicon-position">Professores</span>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faUserGroup" class="subicon-color"></fa-icon>
-                <span class="subicon-color subicon-position">Alunos</span>
+                <span routerLink="/students" class="subicon-color subicon-position">Alunos</span>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faList" class="subicon-color"></fa-icon>
-                <span class="subicon-color subicon-position">Matérias</span>
+                <span routerLink="/subjects" class="subicon-color subicon-position">Matérias</span>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faChalkboardUser" class="subicon-color"></fa-icon>
-                <span class="subicon-color subicon-position">Turmas</span>
+                <span routerLink="/classes" class="subicon-color subicon-position">Turmas</span>
             </button>
         </mat-menu>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="recipes">
+    <button mat-icon-button [matMenuTriggerFor]="recipes" routerLinkActive="active">
         <span class="color-white">Receitas</span>
         <mat-menu #recipes="matMenu">
             <button mat-menu-item>
                 <fa-icon [icon]="faBook" class="subicon-color"></fa-icon>
-                <span class="subicon-color subicon-position">Receitas</span>
+                <span routerLink="/recipes" class="subicon-color subicon-position">Receitas</span>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faBasketShopping" class="subicon-color"></fa-icon>
-                <span class="subicon-color subicon-position">Ingredientes</span>
+                <span routerLink="/ingredients" class="subicon-color subicon-position">Ingredientes</span>
             </button>
         </mat-menu>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="events">
+    <button mat-icon-button [matMenuTriggerFor]="events" routerLinkActive="active">
         <span class="color-white">Eventos</span>
         <mat-menu #events="matMenu">
             <button mat-menu-item>
                 <fa-icon [icon]="faCalendar" class="subicon-color"></fa-icon>
-                <span class="subicon-color subicon-position">Calendário</span>
+                <span routerLink="/calendar" class="subicon-color subicon-position">Calendário</span>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faNoteSticky" class="subicon-color"></fa-icon>
-                <span class="subicon-color subicon-position">Eventos</span>
+                <span routerLink="/events" class="subicon-color subicon-position">Eventos</span>
             </button>
         </mat-menu>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button routerLinkActive="active">
         <fa-icon [icon]="faUser"></fa-icon>
-        <span class="subicon-position">{{login}}</span>
+        <span routerLink="/login" class="subicon-position">{{login}}</span>
     </button>
 </mat-toolbar>
 <!-- Mobile Menu -->
