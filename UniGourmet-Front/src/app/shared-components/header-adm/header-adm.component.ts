@@ -35,12 +35,18 @@ export class HeaderAdmComponent implements OnInit {
   constructor() {}
   //See the window size, and if its mobile, change de "mobile menu" var to true
   @HostListener('window:resize') onResize() {
-    if (window.screen.width <= 420) {
+    if (window.screen.width <= 540) {
       this.mobileMenu = true;
     } else {
       this.mobileMenu = false;
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (window.screen.width <= 540) {
+      this.mobileMenu = true;
+    } else {
+      this.mobileMenu = false;
+    }
+  }
 }

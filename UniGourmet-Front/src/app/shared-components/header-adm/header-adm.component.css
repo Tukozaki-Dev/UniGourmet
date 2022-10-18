@@ -1,5 +1,6 @@
 .logo {
   width: 80pt;
+  cursor: pointer;
 }
 .header-mobile {
   position: fixed;
@@ -8,6 +9,7 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
+  z-index: 10;
 }
 
 .header {
