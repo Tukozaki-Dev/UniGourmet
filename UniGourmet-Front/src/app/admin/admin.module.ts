@@ -19,6 +19,7 @@ import { AdminComponent } from './admin.component';
 import { HeaderAdmComponent } from '../shared-components/header-adm/header-adm.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,12 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
     AdminComponent,
     HeaderAdmComponent,
   ],
-  imports: [CommonModule, FontAwesomeModule, AngularMaterialModule],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    AngularMaterialModule,
+    AppRoutingModule,
+  ],
   exports: [AdminComponent],
 })
 export class AdminModule {}

@@ -57,6 +57,7 @@ a {
 
 .font-size-healine-medium {
   font-size: var(--headline--medium);
+  line-height: var(--headline--medium);
 }
 
 .font-size-label-large {
