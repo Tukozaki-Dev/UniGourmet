@@ -47,14 +47,14 @@
         <div class="col-lg-6 order-lg-2 col-md-6 order-md-2 col-12 text-center">
             <mat-form-field appearance="fill" color="primary" class="width-large">
                 <mat-label>Matérias</mat-label>
-                <mat-chip-list #chipList aria-label="Subject selection">
+                <mat-chip-list #sujectList aria-label="Subject selection">
                     <mat-chip *ngFor="let subject of subjects" (removed)="remove(subject)">
                         {{subject.name}}
                         <button matChipRemove>
                             <mat-icon>cancel</mat-icon>
                         </button>
                     </mat-chip>
-                    <input placeholder="Nova matéria" [matChipInputFor]="chipList"
+                    <input placeholder="Nova matéria" [matChipInputFor]="sujectList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                         (matChipInputTokenEnd)="add($event)">
                 </mat-chip-list>
@@ -63,14 +63,14 @@
         <div class="col-lg-6 order-lg-4 col-md-6 order-md-4 col-12 text-center">
             <mat-form-field appearance="fill" color="primary" class="width-large">
                 <mat-label>Especialidade</mat-label>
-                <mat-chip-list #chipList aria-label="Subject selection">
+                <mat-chip-list #specialtyList aria-label="Subject selection">
                     <mat-chip *ngFor="let specialty of specialties" (removed)="remove(specialty)" color="primary">
                         {{specialty.name}}
                         <button matChipRemove>
                             <mat-icon>cancel</mat-icon>
                         </button>
                     </mat-chip>
-                    <input placeholder="Nova matéria" [matChipInputFor]="chipList"
+                    <input placeholder="Nova matéria" [matChipInputFor]="specialtyList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                         (matChipInputTokenEnd)="add($event)">
                 </mat-chip-list>
