@@ -1,22 +1,16 @@
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-6 left-space top-spacing">
-            <div [ngClass]="mobileMode?'justify-start':'justify-end'">
-                <p class="primary-color font-size-title-medium bottom-spacing">
+        <div class="col-12 col-md-12 col-lg-12 left-space top-spacing">
+            <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+                <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
                     {{ editProfessor }}
                 </p>
             </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 text-start left-space-mobile top-spacing"
-            [ngClass]="mobileMode?'text-center':'text-start'">
-            <mat-form-field appearance="fill" *ngIf="editMode" color="primary">
-                <mat-label>Escolha um professor</mat-label>
-                <mat-select [(value)]="selected">
-                    <mat-option *ngFor="let professor of professors" [value]="professor">{{professor}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <p>Você selecionou: {{selected}}</p>
+            <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+                <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="!editMode">
+                    {{ addProfessor }}
+                </p>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -45,38 +39,50 @@
             </mat-form-field>
         </div>
         <div class="col-lg-6 order-lg-2 col-md-6 order-md-2 col-12 text-center">
-            <mat-form-field appearance="fill" color="primary" class="width-large">
+            <mat-form-field color="primary" appearance="fill" class="width-large">
                 <mat-label>Matérias</mat-label>
-                <mat-chip-list #sujectList aria-label="Subject selection">
-                    <mat-chip *ngFor="let subject of subjects" (removed)="remove(subject)">
-                        {{subject.name}}
+                <mat-chip-list #subjectChipList aria-label="Subject">
+                    <mat-chip *ngFor="let subject of subjects" (removed)="removeSubject(subject)">
+                        {{subject}}
                         <button matChipRemove>
                             <mat-icon>cancel</mat-icon>
                         </button>
                     </mat-chip>
-                    <input placeholder="Nova matéria" [matChipInputFor]="sujectList"
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                        (matChipInputTokenEnd)="add($event)">
+                    <input placeholder="Nova Matéria" #subjectInput [formControl]="subjectCtrl"
+                        [matAutocomplete]="autoSubject" [matChipInputFor]="subjectChipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addSubject($event)">
                 </mat-chip-list>
+                <mat-autocomplete #autoSubject="matAutocomplete" (optionSelected)="selectedSubject($event)">
+                    <mat-option *ngFor="let subject of filteredSubjects | async" [value]="subject">
+                        {{subject}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
         </div>
         <div class="col-lg-6 order-lg-4 col-md-6 order-md-4 col-12 text-center">
-            <mat-form-field appearance="fill" color="primary" class="width-large">
+            <mat-form-field color="primary" appearance="fill" class="width-large">
                 <mat-label>Especialidade</mat-label>
-                <mat-chip-list #specialtyList aria-label="Subject selection">
-                    <mat-chip *ngFor="let specialty of specialties" (removed)="remove(specialty)" color="primary">
-                        {{specialty.name}}
+                <mat-chip-list #specialtyChipList aria-label="Specialty">
+                    <mat-chip *ngFor="let specialty of specialties" (removed)="removeSpecialty(specialty)">
+                        {{specialty}}
                         <button matChipRemove>
                             <mat-icon>cancel</mat-icon>
                         </button>
                     </mat-chip>
-                    <input placeholder="Nova matéria" [matChipInputFor]="specialtyList"
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                        (matChipInputTokenEnd)="add($event)">
+                    <input placeholder="Nova Especialidade" #specialtyInput [formControl]="specialtyCtrl"
+                        [matAutocomplete]="autoSpecialty" [matChipInputFor]="specialtyChipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addSpecialty($event)">
                 </mat-chip-list>
+                <mat-autocomplete #autoSpecialty="matAutocomplete" (optionSelected)="selectedSpecialty($event)">
+                    <mat-option *ngFor="let specialty of filteredSpecialties | async" [value]="specialty">
+                        {{specialty}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
         </div>
-        <div class="col-lg-6 order-lg-last col-md-6 order-md-last col-12 text-center">
+        <div class="col-lg-6 order-lg-last col-md-6 order-md-last col-12 text-center bottom-spacing">
             <button mat-raised-button color="primary">Salvar</button>
         </div>
     </div>

@@ -20,6 +20,7 @@ import { HeaderAdmComponent } from '../shared-components/header-adm/header-adm.c
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AppRoutingModule } from '../app-routing.module';
     FontAwesomeModule,
     AngularMaterialModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   exports: [AdminComponent],
 })

@@ -12,6 +12,7 @@ import { SubjectAdminComponent } from './admin/subject-admin/subject-admin.compo
 const appRoutes: Routes = [
   { path: '', component: HomeAdminComponent },
   { path: 'professors', component: ProfessorAdminComponent },
+  { path: 'professors/:ra', component: ProfessorAdminComponent },
   { path: 'students', component: StudentAdminComponent },
   { path: 'subjects', component: SubjectAdminComponent },
   { path: 'classes', component: ClassAdminComponent },

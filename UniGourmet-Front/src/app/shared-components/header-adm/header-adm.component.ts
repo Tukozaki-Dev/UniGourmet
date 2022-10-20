@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   faChalkboardUser,
   faGraduationCap,
@@ -10,6 +10,7 @@ import {
   faCalendar,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 
 @Component({
   selector: 'app-header-adm',
@@ -28,25 +29,17 @@ export class HeaderAdmComponent implements OnInit {
   faCalendar = faCalendar;
   faUser = faUser;
   //fontAwesome Icons
-
-  mobileMenu = false;
   login = 'Logout';
 
-  constructor() {}
-  //See the window size, and if its mobile, change de "mobile menu" var to true
-  @HostListener('window:resize') onResize() {
-    if (window.screen.width <= 540) {
-      this.mobileMenu = true;
-    } else {
-      this.mobileMenu = false;
-    }
+  public isMobileMenu: boolean;
+
+  constructor(private globalStatesService: GlobalStatesServiceService) {
+    this.isMobileMenu = this.globalStatesService.mobileMenu;
   }
 
   ngOnInit() {
-    if (window.screen.width <= 540) {
-      this.mobileMenu = true;
-    } else {
-      this.mobileMenu = false;
-    }
+    this.globalStatesService.mobileMenuChanges.subscribe((val) => {
+      this.isMobileMenu = val;
+    });
   }
 }

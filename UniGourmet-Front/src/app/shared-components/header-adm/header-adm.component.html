@@ -1,5 +1,5 @@
 <!-- Desktop Menu -->
-<mat-toolbar color="primary" class="header" *ngIf="!mobileMenu">
+<mat-toolbar color="primary" class="header" *ngIf="!isMobileMenu">
     <a routerLink="/" class="navbar-brand">
         <img src="../../../assets/img/LogoRetangular.png" class="logo">
     </a>
@@ -59,7 +59,7 @@
     </button>
 </mat-toolbar>
 <!-- Mobile Menu -->
-<mat-toolbar color="primary" class="header-mobile" *ngIf="mobileMenu">
+<mat-toolbar color="primary" class="header-mobile" *ngIf="isMobileMenu">
     <button mat-icon-button class="bg-color icon-position">
         <mat-icon class="icon-color">home</mat-icon>
     </button>

@@ -9,6 +9,7 @@ import {
   faNoteSticky,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 
 @Component({
   selector: 'app-home-admin',
@@ -27,9 +28,18 @@ export class HomeAdminComponent implements OnInit {
   faNoteSticky = faNoteSticky;
   faUser = faUser;
   //fontAwesome Icons
-  mobileMenu = false;
-  login = 'Logout';
-  constructor() {}
 
-  ngOnInit(): void {}
+  login = 'Logout';
+
+  public isMobileMenu: boolean;
+
+  constructor(private globalStatesService: GlobalStatesServiceService) {
+    this.isMobileMenu = this.globalStatesService.mobileMenu;
+  }
+
+  ngOnInit() {
+    this.globalStatesService.mobileMenuChanges.subscribe((val) => {
+      this.isMobileMenu = val;
+    });
+  }
 }
