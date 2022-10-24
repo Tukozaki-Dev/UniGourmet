@@ -122,6 +122,7 @@ export class EditProfessorAdminComponent implements OnInit {
       } else {
         //The register code don't exists will throw an error
         alert('Esse professor não existe!');
+        this.router.navigate(['../'], { relativeTo: this.route });
       }
     } else {
       this.editMode = false;
