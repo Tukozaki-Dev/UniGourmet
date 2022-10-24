@@ -15,22 +15,22 @@ export class ProfessorService {
       '../../assets/img/LogoQuadrado.png',
       [
         {
-          name: 'Cozinha Clássica',
-          registerCode: 'Sub1828828',
+          name: 'Cozinha das Américas',
+          registerCode: 'Sub123453',
           semester: 4,
           numberOfClasses: 20,
         },
         {
-          name: 'Cozinha Italiana',
-          registerCode: 'Sub182833',
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
           semester: 2,
           numberOfClasses: 24,
         },
       ],
       [
-        { specialtyName: 'Carne' },
-        { specialtyName: 'Peixes' },
-        { specialtyName: 'Massa' },
+        { specialtyName: 'Carne', id: 2 },
+        { specialtyName: 'Peixe', id: 8 },
+        { specialtyName: 'Massa', id: 7 },
       ]
     ),
     new Professor(
@@ -40,21 +40,21 @@ export class ProfessorService {
       [
         {
           name: 'Cozinha Francesa',
-          registerCode: 'Sub1828828',
+          registerCode: 'Sub123454',
           semester: 4,
           numberOfClasses: 20,
         },
         {
-          name: 'Cozinha Arabe',
-          registerCode: 'Sub182833',
+          name: 'Cozinha Italiana',
+          registerCode: 'Sub123455',
           semester: 2,
           numberOfClasses: 24,
         },
       ],
       [
-        { specialtyName: 'Carne' },
-        { specialtyName: 'Peixes' },
-        { specialtyName: 'Aves' },
+        { specialtyName: 'Carne', id: 2 },
+        { specialtyName: 'Peixe', id: 8 },
+        { specialtyName: 'Conservas', id: 3 },
       ]
     ),
   ];
@@ -78,13 +78,16 @@ export class ProfessorService {
     });
   }
 
-  addProfessor(professor: Professor) {
-    this.professors.push(professor);
+  addProfessor(newProfessor: Professor) {
+    this.professors.push(newProfessor);
     this.professorsChanged.next(this.professors.slice());
   }
 
-  updateProfessor(ra: string, newProfessor: Professor) {
-    this.professors[ra] = newProfessor;
+  updateProfessor(ra: string, editedProfessor: Professor) {
+    const index = this.professors.findIndex((prof) => {
+      return ra === prof.registerCode;
+    });
+    this.professors[index] = editedProfessor;
     this.professorsChanged.next(this.professors.slice());
   }
 }
