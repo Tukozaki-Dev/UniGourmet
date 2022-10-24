@@ -1,0 +1,15 @@
+<div class="background bg-center">
+    <input type="file" class="file-input" (change)="onFileSelected($event)" requiredFileType="image/png" #fileUpload>
+    <div class="file-upload center">
+        <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+            <mat-icon icon-color class="icon-size">upload_file</mat-icon>
+        </button>
+        <span class="primary-color top-spacing">{{fileName || "Nenhuma foto adicionada ainda."}}</span>
+    </div>
+    <div class="progress">
+        <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
+        </mat-progress-bar>
+        <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
+
+    </div>
+</div>

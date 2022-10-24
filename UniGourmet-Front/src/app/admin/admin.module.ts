@@ -21,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FileUploadComponent } from '../shared-components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfessorAdminComponent,
     AdminComponent,
     HeaderAdmComponent,
+    FileUploadComponent,
   ],
   imports: [
     CommonModule,

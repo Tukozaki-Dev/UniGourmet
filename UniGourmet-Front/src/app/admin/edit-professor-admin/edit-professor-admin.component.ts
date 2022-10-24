@@ -1,4 +1,4 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, E, ENTER } from '@angular/cdk/keycodes';
 import {
   Component,
   ElementRef,
@@ -8,14 +8,14 @@ import {
 } from '@angular/core';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
-import { FormControl } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Professor } from 'src/app/shared-components/models/professor.model';
 import { ProfessorService } from 'src/app/services/professor.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-professor-admin',
@@ -25,19 +25,23 @@ import { ActivatedRoute } from '@angular/router';
 export class EditProfessorAdminComponent implements OnInit, OnDestroy {
   public isMobileMenu: boolean;
 
-  faImage = faImage;
-
   editProfessor = 'Edite as informações do professor abaixo.';
   addProfessor =
     'Você está no modo cadastro de professor, preencha todos os dados abaixo corretamente.';
+  faImage = faImage;
 
   editMode: boolean = false;
 
   selectedProfessor: Professor;
   professorRegister = '';
   professorName = '';
+  imagePath = '';
+  subjects: string[] = [];
+  specialties: string[] = [];
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  professorForm: FormGroup;
 
   subjectCtrl = new FormControl('');
 
@@ -46,10 +50,6 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
   filteredSubjects: Observable<string[]>;
 
   filteredSpecialties: Observable<string[]>;
-
-  subjects: string[];
-
-  specialties: string[];
 
   allSubjects: string[] = [
     'Cozinha Italiana',
@@ -69,7 +69,8 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
   constructor(
     private globalStatesService: GlobalStatesServiceService,
     private professorService: ProfessorService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.isMobileMenu = this.globalStatesService.mobileMenu;
 
@@ -91,6 +92,7 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.initForm();
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
     });
@@ -99,13 +101,13 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
     this.professorRegister = this.route.snapshot.paramMap.get('ra');
     if (!!this.professorRegister) {
       this.editMode = true;
-
       //Search the Professor at ProfessorService
       this.selectedProfessor = this.professorService.getProfessor(
         this.professorRegister
       );
 
       if (!!this.selectedProfessor) {
+        this.imagePath = this.selectedProfessor.imagePath;
         this.subjects = this.selectedProfessor.subjects.map((s) => {
           return s.name;
         });
@@ -116,11 +118,53 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
         this.professorName = this.selectedProfessor.name;
       } else {
         //não existe professor com esse RA
-        alert('Esse professor não existe! VAZA');
+        alert('Esse professor não existe!');
       }
     } else {
       this.editMode = false;
     }
+  }
+
+  private initForm() {
+    let professorRegister = '';
+    let professorName = '';
+    let imagePath = '';
+    let subjects: string[];
+    let specialties: string[];
+
+    this.professorForm = new FormGroup({
+      imagePath: new FormControl(imagePath),
+      professorName: new FormControl(professorName, Validators.required),
+      professorRegister: new FormControl(
+        professorRegister,
+        Validators.required
+      ),
+      subjects: new FormControl(subjects),
+      specialties: new FormControl(specialties),
+    });
+    console.log(this.professorForm);
+  }
+  //método para editar professor -> ver se algum campo teve alteração, se tiver alterar
+  onUpdate() {}
+
+  //método para adicioinar professor
+  //ler os dados inseridos e enviar para o service de professor
+  onAddProfessor() {}
+
+  //check if you are in edit or add mode and send updates
+  onSubmit() {
+    if (this.editMode) {
+      this.professorService.updateProfessor(
+        this.professorRegister,
+        this.professorForm.value
+      );
+    } else {
+      this.professorService.addProfessor(this.professorForm.value);
+    }
+    this.onCancel();
+  }
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   addSubject(event: MatChipInputEvent): void {
@@ -167,10 +211,6 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
     this.specialties.push(event.option.viewValue);
     this.specialtyInput.nativeElement.value = '';
     this.specialtyCtrl.setValue(null);
-  }
-
-  onEditItem(index: number) {
-    this.professorService.startedEditing.next(index);
   }
 
   private _filterSubject(value: string): string[] {

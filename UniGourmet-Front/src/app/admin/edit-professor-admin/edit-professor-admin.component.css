@@ -10,6 +10,11 @@ a {
   line-height: var(--title--medium);
 }
 
+.font-size-title-small {
+  font-size: var(--title--small);
+  line-height: var(--title--small);
+}
+
 .top-spacing {
   padding-top: 80pt;
 }
@@ -26,33 +31,10 @@ a {
   padding-left: 10pt;
 }
 
-.background {
-  width: 300pt;
-  height: 150pt;
-  background-color: var(--surfaces--light--surface1);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.bg-color {
-  background-color: var(--sys--light--primary);
-}
-
-.bg-rounded {
+.img-size {
+  width: 100pt;
+  border: 2pt solid rgb(121, 121, 121);
   border-radius: 50%;
-  width: 90pt;
-  height: 90pt;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.icon-color {
-  color: var(--sys--light--surface);
-  transform: scale(2);
 }
 
 .square-container {

@@ -6,14 +6,13 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ProfessorService {
-  startedEditing = new Subject<number>();
   professorsChanged = new Subject<Professor[]>();
 
   private professors: Professor[] = [
     new Professor(
       'Graziely Tukozaki',
       'RA123456',
-      'URL',
+      '../../assets/img/LogoQuadrado.png',
       [
         {
           name: 'Cozinha Clássica',
@@ -84,13 +83,8 @@ export class ProfessorService {
     this.professorsChanged.next(this.professors.slice());
   }
 
-  updateProfessor(index: number, newProfessor: Professor) {
-    this.professors[index] = newProfessor;
-    this.professorsChanged.next(this.professors.slice());
-  }
-
-  deleteProfessor(index: number) {
-    this.professors.splice(index, 1);
+  updateProfessor(ra: string, newProfessor: Professor) {
+    this.professors[ra] = newProfessor;
     this.professorsChanged.next(this.professors.slice());
   }
 }
