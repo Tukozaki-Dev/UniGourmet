@@ -1,5 +1,5 @@
 import { Ingredient } from './ingredient.model';
-import { ProfessorSubject } from './professor-subject.model';
+import { ProfessorSubject } from './discipline.model';
 
 export class Recipe {
   imagePath: string;

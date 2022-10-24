@@ -1,28 +1,25 @@
-import { COMMA, E, ENTER } from '@angular/cdk/keycodes';
-import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Professor } from 'src/app/shared-components/models/professor.model';
 import { ProfessorService } from 'src/app/services/professor.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Specialty } from 'src/app/shared-components/models/specialty.model';
+import { Discipline } from 'src/app/shared-components/models/discipline.model';
+import { DisciplineService } from 'src/app/services/discipline.service';
+import { SpecialtyService } from 'src/app/services/specialty.service';
 
 @Component({
   selector: 'app-edit-professor-admin',
   templateUrl: './edit-professor-admin.component.html',
   styleUrls: ['./edit-professor-admin.component.css'],
 })
-export class EditProfessorAdminComponent implements OnInit, OnDestroy {
+export class EditProfessorAdminComponent implements OnInit {
   public isMobileMenu: boolean;
 
   editProfessor = 'Edite as informações do professor abaixo.';
@@ -31,34 +28,34 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
   faImage = faImage;
 
   editMode: boolean = false;
-
-  selectedProfessor: Professor;
   professorRegister = '';
-  professorName = '';
+  selectedProfessor: Professor;
+  subjects: Discipline[] = [];
+  specialties: Specialty[] = [];
+
   imagePath = '';
-  subjects: string[] = [];
-  specialties: string[] = [];
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  professorForm: FormGroup;
+  professorForm = new FormGroup({
+    imagePath: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    registerCode: new FormControl('', Validators.required),
+    subjects: new FormControl([], Validators.required),
+    specialties: new FormControl([], Validators.required),
+  });
 
-  subjectCtrl = new FormControl('');
+  subjectCtrl = new FormControl('', Validators.required);
 
-  specialtyCtrl = new FormControl('');
+  specialtyCtrl = new FormControl('', Validators.required);
 
-  filteredSubjects: Observable<string[]>;
+  filteredSubjects: Observable<Discipline[]>;
 
-  filteredSpecialties: Observable<string[]>;
+  filteredSpecialties: Observable<Specialty[]>;
 
-  allSubjects: string[] = [
-    'Cozinha Italiana',
-    'Cozinha Francesa',
-    'Confeitaria',
-    'Panificação',
-  ];
+  allSubjects = this.disciplineService.discipline;
 
-  allSpecialties: string[] = ['Carne', 'Confeitaria', 'Massa', 'Peixe'];
+  allSpecialties = this.specialtyService.specialty;
 
   @ViewChild('subjectInput', { static: false })
   subjectInput: ElementRef<HTMLInputElement>;
@@ -70,54 +67,60 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
     private globalStatesService: GlobalStatesServiceService,
     private professorService: ProfessorService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private disciplineService: DisciplineService,
+    private specialtyService: SpecialtyService
   ) {
     this.isMobileMenu = this.globalStatesService.mobileMenu;
 
     this.filteredSubjects = this.subjectCtrl.valueChanges.pipe(
       startWith(null),
-      map((subject: string | null) =>
-        subject ? this._filterSubject(subject) : this.allSubjects.slice()
-      )
+      map((typedOnInput: string | null) => {
+        return typedOnInput
+          ? this._filterSubject(typedOnInput)
+          : this.allSubjects.slice();
+      })
     );
 
     this.filteredSpecialties = this.specialtyCtrl.valueChanges.pipe(
       startWith(null),
-      map((specialty: string | null) =>
-        specialty
-          ? this._filterSpecialty(specialty)
-          : this.allSpecialties.slice()
-      )
+      map((typedOnInput: string | null) => {
+        return typedOnInput
+          ? this._filterSpecialty(typedOnInput)
+          : this.allSpecialties.slice();
+      })
     );
   }
 
   ngOnInit() {
-    this.initForm();
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
     });
 
-    //Geting the RA param to edit the professor
+    //Gets the Professor Register (RA) param to edit the professor
     this.professorRegister = this.route.snapshot.paramMap.get('ra');
+
     if (!!this.professorRegister) {
       this.editMode = true;
       //Search the Professor at ProfessorService
       this.selectedProfessor = this.professorService.getProfessor(
         this.professorRegister
       );
-
       if (!!this.selectedProfessor) {
+        const imagePath = this.selectedProfessor.imagePath;
+        this.subjects = this.selectedProfessor.subjects;
+        this.specialties = this.selectedProfessor.specialties;
         this.imagePath = this.selectedProfessor.imagePath;
-        this.subjects = this.selectedProfessor.subjects.map((s) => {
-          return s.name;
+        //updates the form with the professor previus data
+        this.professorForm.patchValue({
+          registerCode: this.professorRegister,
+          name: this.selectedProfessor.name,
+          imagePath: imagePath,
+          specialties: this.selectedProfessor.specialties,
+          subjects: this.selectedProfessor.subjects,
         });
-        this.specialties = this.selectedProfessor.specialities.map((s) => {
-          return s.specialtyName;
-        });
-
-        this.professorName = this.selectedProfessor.name;
       } else {
-        //não existe professor com esse RA
+        //The register code don't exists will throw an error
         alert('Esse professor não existe!');
       }
     } else {
@@ -125,41 +128,25 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  private initForm() {
-    let professorRegister = '';
-    let professorName = '';
-    let imagePath = '';
-    let subjects: string[];
-    let specialties: string[];
-
-    this.professorForm = new FormGroup({
-      imagePath: new FormControl(imagePath),
-      professorName: new FormControl(professorName, Validators.required),
-      professorRegister: new FormControl(
-        professorRegister,
-        Validators.required
-      ),
-      subjects: new FormControl(subjects),
-      specialties: new FormControl(specialties),
-    });
-    console.log(this.professorForm);
+  //method to edit professor through the Professor Service
+  onUpdate() {
+    this.professorService.updateProfessor(
+      this.professorRegister,
+      this.professorForm.getRawValue()
+    );
   }
-  //método para editar professor -> ver se algum campo teve alteração, se tiver alterar
-  onUpdate() {}
 
-  //método para adicioinar professor
-  //ler os dados inseridos e enviar para o service de professor
-  onAddProfessor() {}
+  //method to add a new professor through the Professor Service
+  onAddProfessor() {
+    this.professorService.addProfessor(this.professorForm.getRawValue());
+  }
 
   //check if you are in edit or add mode and send updates
   onSubmit() {
     if (this.editMode) {
-      this.professorService.updateProfessor(
-        this.professorRegister,
-        this.professorForm.value
-      );
+      this.onUpdate();
     } else {
-      this.professorService.addProfessor(this.professorForm.value);
+      this.onAddProfessor();
     }
     this.onCancel();
   }
@@ -167,67 +154,68 @@ export class EditProfessorAdminComponent implements OnInit, OnDestroy {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  addSubject(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    if (value) {
-      this.subjects.push(value);
-    }
-    event.chipInput!.clear();
-    this.subjectCtrl.setValue(null);
-  }
-
-  removeSubject(subject: string): void {
-    const index = this.subjects.indexOf(subject);
+  //method  to remove the selected subject chip from the list (array)
+  removeSubject(subjectId: string): void {
+    const index = this.subjects.findIndex((s) => {
+      return s.registerCode == subjectId;
+    });
 
     if (index >= 0) {
       this.subjects.splice(index, 1);
     }
+    this.professorForm.patchValue({
+      subjects: this.subjects,
+    });
   }
-
+  //method  to select and insert the selected chip subject from the list (array)
   selectedSubject(event: MatAutocompleteSelectedEvent): void {
-    this.subjects.push(event.option.viewValue);
+    const subject = event.option.value;
+    this.subjects.push(subject);
+    this.professorForm.patchValue({
+      subjects: this.subjects,
+    });
     this.subjectInput.nativeElement.value = '';
     this.subjectCtrl.setValue(null);
   }
 
-  addSpecialty(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    if (value) {
-      this.specialties.push(value);
-    }
-    event.chipInput!.clear();
-    this.specialtyCtrl.setValue(null);
-  }
-
-  removeSpecialty(specialty: string): void {
-    const index = this.specialties.indexOf(specialty);
+  //method  to remove the selected specialty chip from the list (array)
+  removeSpecialty(specialtyId: string): void {
+    const index = this.specialties.findIndex((s) => {
+      return s.id.toString() == specialtyId;
+    });
 
     if (index >= 0) {
       this.specialties.splice(index, 1);
     }
+    this.professorForm.patchValue({
+      specialties: this.specialties,
+    });
   }
-
+  //method  to select and insert the selected chip specialty from the list (array)
   selectedSpecialty(event: MatAutocompleteSelectedEvent): void {
-    this.specialties.push(event.option.viewValue);
+    const specialty = event.option.value;
+    this.specialties.push(specialty);
     this.specialtyInput.nativeElement.value = '';
     this.specialtyCtrl.setValue(null);
+    this.professorForm.patchValue({
+      specialties: this.specialties,
+    });
   }
 
-  private _filterSubject(value: string): string[] {
+  //List all subjects and filter while the user type a letter
+  private _filterSubject(value: string): Discipline[] {
     const filterValue = value.toLowerCase();
-
     return this.allSubjects.filter((subject) =>
-      subject.toLowerCase().includes(filterValue)
+      subject.name.toLowerCase().includes(filterValue)
     );
   }
 
-  private _filterSpecialty(value: string): string[] {
+  //List all specialties and filter while the user type a letter
+  private _filterSpecialty(value: string): Specialty[] {
     const filterValue = value.toLowerCase();
 
     return this.allSpecialties.filter((specialty) =>
-      specialty.toLowerCase().includes(filterValue)
+      specialty.specialtyName.toLowerCase().includes(filterValue)
     );
   }
-
-  ngOnDestroy() {}
 }

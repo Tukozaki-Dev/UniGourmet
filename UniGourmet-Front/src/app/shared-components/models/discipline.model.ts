@@ -1,4 +1,4 @@
-export class ProfessorSubject {
+export class Discipline {
   name: string;
   registerCode: string;
   semester: number;
