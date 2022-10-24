@@ -35,8 +35,8 @@ export class ProfessorService {
     ),
     new Professor(
       'Izabela Soares',
-      'URL',
-      'RA129956',
+      'RA123457',
+      '../../assets/img/LogoQuadrado.png',
       [
         {
           name: 'Cozinha Francesa',
