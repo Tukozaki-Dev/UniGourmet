@@ -1,44 +1,82 @@
+import { Discipline } from './discipline.model';
 import { Ingredient } from './ingredient.model';
-import { ProfessorSubject } from './discipline.model';
 
 export class Recipe {
-  imagePath: string;
   name: string;
+  registerCode: string;
+  imagePath: string;
   description: string;
-  subject: ProfessorSubject;
+  discipline: Discipline;
   region: string;
   prep_duration: string;
   yeldis: number;
-  ingredients: Ingredient[];
-  plate_up?: string;
-  equip_utensils?: string;
-  chefs_note?: string;
-  harmonization?: string;
+  ingredients: SelectedIngredient[];
+  prep_instructions: PrepInstructions[];
+  plate_up?: SingleInstruction[];
+  equip_utensils?: string[];
+  chefs_note?: string[];
+  harmonization?: string[];
   constructor(
-    imagePath: string,
     name: string,
+    registerCode: string,
+    imagePath: string,
     description: string,
-    subject: ProfessorSubject,
+    discipline: Discipline,
     region: string,
     prep_duration: string,
     yeldis: number,
-    ingredients: Ingredient[],
-    plate_up?: string,
-    equip_utensils?: string,
-    chefs_note?: string,
-    harmonization?: string
+    ingredients: SelectedIngredient[],
+    prep_instructions: PrepInstructions[],
+    plate_up?: SingleInstruction[],
+    equip_utensils?: string[],
+    chefs_note?: string[],
+    harmonization?: string[]
   ) {
-    this.imagePath = imagePath;
     this.name = name;
+    this.registerCode = registerCode;
+    this.imagePath = imagePath;
     this.description = description;
-    this.subject = subject;
+    this.discipline = discipline;
     this.region = region;
     this.prep_duration = prep_duration;
     this.yeldis = yeldis;
     this.ingredients = ingredients;
+    this.prep_instructions = prep_instructions;
     this.plate_up = plate_up;
     this.equip_utensils = equip_utensils;
     this.chefs_note = chefs_note;
     this.harmonization = harmonization;
   }
 }
+
+class SelectedIngredient {
+  ingredient: Ingredient;
+  quantity: number;
+
+  constructor(ingredient: Ingredient, quantity: number) {
+    this.ingredient = ingredient;
+    this.quantity = quantity;
+  }
+}
+
+class SingleInstruction {
+  step: number;
+  description: string;
+
+  constructor(step: number, description: string) {
+    this.step = step;
+    this.description = description;
+  }
+}
+
+class PrepInstructions {
+  instruction_name: string;
+  instruction_steps: SingleInstruction[];
+
+  constructor(instruction_name: string, instruction_steps: SingleInstruction[]) {
+    this.instruction_name = instruction_name;
+    this.instruction_steps = instruction_steps;
+  }
+}
+
+
