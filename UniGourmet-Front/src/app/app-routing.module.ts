@@ -8,6 +8,7 @@ import { ProfessorAdminComponent } from './admin/professor-admin/professor-admin
 import { RecipeAdminComponent } from './admin/recipe-admin/recipe-admin.component';
 import { StudentAdminComponent } from './admin/student-admin/student-admin.component';
 import { SubjectAdminComponent } from './admin/subject-admin/subject-admin.component';
+import { ButtonComponent } from './shared-components/button/button.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeAdminComponent },

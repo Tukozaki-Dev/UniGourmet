@@ -46,6 +46,7 @@ a {
   width: 250pt;
 }
 
+
 @media (max-width: 540px) {
   .left-space-mobile {
     padding-left: 20pt;
