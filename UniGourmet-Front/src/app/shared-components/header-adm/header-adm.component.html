@@ -11,19 +11,19 @@
         <mat-menu #management="matMenu" class="bg-color">
             <button mat-menu-item>
                 <fa-icon [icon]="faGraduationCap" class="subicon-color"></fa-icon>
-                <a routerLink="/professors" class="subicon-color subicon-position">Professores</a>
+                <a routerLink="/professores" class="subicon-color subicon-position">Professores</a>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faUserGroup" class="subicon-color"></fa-icon>
-                <a routerLink="/students" class="subicon-color subicon-position">Alunos</a>
+                <a routerLink="/alunos" class="subicon-color subicon-position">Alunos</a>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faList" class="subicon-color"></fa-icon>
-                <a routerLink="/subjects" class="subicon-color subicon-position">Matérias</a>
+                <a routerLink="/materias" class="subicon-color subicon-position">Matérias</a>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faChalkboardUser" class="subicon-color"></fa-icon>
-                <a routerLink="/classes" class="subicon-color subicon-position">Turmas</a>
+                <a routerLink="/turmas" class="subicon-color subicon-position">Turmas</a>
             </button>
         </mat-menu>
     </button>
@@ -32,11 +32,11 @@
         <mat-menu #recipes="matMenu">
             <button mat-menu-item>
                 <fa-icon [icon]="faBook" class="subicon-color"></fa-icon>
-                <a routerLink="/recipes" class="subicon-color subicon-position">Receitas</a>
+                <a routerLink="/receitas" class="subicon-color subicon-position">Receitas</a>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faBasketShopping" class="subicon-color"></fa-icon>
-                <a routerLink="/ingredients" class="subicon-color subicon-position">Ingredientes</a>
+                <a routerLink="/ingredientes" class="subicon-color subicon-position">Ingredientes</a>
             </button>
         </mat-menu>
     </button>
@@ -45,11 +45,11 @@
         <mat-menu #events="matMenu">
             <button mat-menu-item>
                 <fa-icon [icon]="faCalendar" class="subicon-color"></fa-icon>
-                <a routerLink="/calendar" class="subicon-color subicon-position">Calendário</a>
+                <a routerLink="/calendario" class="subicon-color subicon-position">Calendário</a>
             </button>
             <button mat-menu-item>
                 <fa-icon [icon]="faNoteSticky" class="subicon-color"></fa-icon>
-                <a routerLink="/events" class="subicon-color subicon-position">Eventos</a>
+                <a routerLink="/eventos" class="subicon-color subicon-position">Eventos</a>
             </button>
         </mat-menu>
     </button>
@@ -67,20 +67,28 @@
         <mat-icon class="icon-color">school</mat-icon>
         <mat-menu #management="matMenu" class="bg-color">
             <button mat-menu-item>
+              <a routerLink="/professores" class="subicon-color subicon-position">
                 <fa-icon [icon]="faGraduationCap" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Professores</span>
+              </a>
             </button>
             <button mat-menu-item>
+              <a routerLink="/alunos" class="subicon-color subicon-position">
                 <fa-icon [icon]="faUserGroup" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Alunos</span>
+              </a>
             </button>
             <button mat-menu-item>
+              <a routerLink="/materias" class="subicon-color subicon-position">
                 <fa-icon [icon]="faList" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Matérias</span>
+              </a>
             </button>
             <button mat-menu-item>
+              <a routerLink="/turmas" class="subicon-color subicon-position">
                 <fa-icon [icon]="faChalkboardUser" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Turmas</span>
+              </a>
             </button>
         </mat-menu>
     </button>
@@ -88,12 +96,16 @@
         <mat-icon class="icon-color">library_books</mat-icon>
         <mat-menu #recipes="matMenu">
             <button mat-menu-item>
+              <a routerLink="/receitas" class="subicon-color subicon-position">
                 <fa-icon [icon]="faBook" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Receitas</span>
+              </a>
             </button>
             <button mat-menu-item>
+              <a routerLink="/ingredientes" class="subicon-color subicon-position">
                 <fa-icon [icon]="faBasketShopping" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Ingredientes</span>
+              </a>
             </button>
         </mat-menu>
     </button>
@@ -101,12 +113,16 @@
         <mat-icon class="icon-color">summarize</mat-icon>
         <mat-menu #events="matMenu">
             <button mat-menu-item>
+              <a routerLink="/calendario" class="subicon-color subicon-position">
                 <fa-icon [icon]="faCalendar" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Calendário</span>
+              </a>
             </button>
             <button mat-menu-item>
+              <a routerLink="/eventos" class="subicon-color subicon-position">
                 <fa-icon [icon]="faNoteSticky" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Eventos</span>
+              </a>
             </button>
         </mat-menu>
     </button>

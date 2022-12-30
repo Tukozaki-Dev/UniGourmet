@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClassAdminComponent } from './admin/class-admin/class-admin.component';
+import { EditClassAdminComponent } from './admin/edit-class-admin/edit-class-admin.component';
+import { EditEventAdminComponent } from './admin/edit-event-admin/edit-event-admin.component';
+import { EditProfessorAdminComponent } from './admin/edit-professor-admin/edit-professor-admin.component';
+import { EditRecipeAdminComponent } from './admin/edit-recipe-admin/edit-recipe-admin.component';
+import { EditStudentAdminComponent } from './admin/edit-student-admin/edit-student-admin.component';
+import { EditSubjectAdminComponent } from './admin/edit-subject-admin/edit-subject-admin.component';
 import { EventAdminComponent } from './admin/event-admin/event-admin.component';
 import { HomeAdminComponent } from './admin/home-admin/home-admin.component';
 import { IngredientAdminComponent } from './admin/ingredient-admin/ingredient-admin.component';
@@ -11,14 +17,19 @@ import { SubjectAdminComponent } from './admin/subject-admin/subject-admin.compo
 
 const appRoutes: Routes = [
   { path: '', component: HomeAdminComponent },
-  { path: 'professors', component: ProfessorAdminComponent },
-  { path: 'professors/:ra', component: ProfessorAdminComponent },
-  { path: 'students', component: StudentAdminComponent },
-  { path: 'subjects', component: SubjectAdminComponent },
-  { path: 'classes', component: ClassAdminComponent },
-  { path: 'recipes', component: RecipeAdminComponent },
-  { path: 'ingredients', component: IngredientAdminComponent },
-  { path: 'events', component: EventAdminComponent },
+  { path: 'professores/:ra', component: EditProfessorAdminComponent },
+  { path: 'professores', component: ProfessorAdminComponent },
+  { path: 'alunos/:ra', component: EditStudentAdminComponent },
+  { path: 'alunos', component: StudentAdminComponent },
+  { path: 'materia/:id', component: EditSubjectAdminComponent },
+  { path: 'materias', component: SubjectAdminComponent },
+  { path: 'turma/:id', component: EditClassAdminComponent },
+  { path: 'turmas', component: ClassAdminComponent },
+  { path: 'receita/:id', component: EditRecipeAdminComponent },
+  { path: 'receitas', component: RecipeAdminComponent },
+  { path: 'ingredientes', component: IngredientAdminComponent },
+  { path: 'evento/:id', component: EditEventAdminComponent },
+  { path: 'eventos', component: EventAdminComponent },
 ];
 
 @NgModule({
