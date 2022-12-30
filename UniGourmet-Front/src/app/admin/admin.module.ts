@@ -22,6 +22,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { AppRoutingModule } from '../app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from '../shared-components/file-upload/file-upload.component';
+import { ButtonComponent } from '../shared-components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FileUploadComponent } from '../shared-components/file-upload/file-uploa
     AdminComponent,
     HeaderAdmComponent,
     FileUploadComponent,
+    ButtonComponent
   ],
   imports: [
     CommonModule,

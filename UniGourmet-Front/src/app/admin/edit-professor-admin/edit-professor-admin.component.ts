@@ -63,6 +63,10 @@ export class EditProfessorAdminComponent implements OnInit {
   @ViewChild('specialtyInput', { static: false })
   specialtyInput: ElementRef<HTMLInputElement>;
 
+  //form submit button start
+  btnText: string = 'Salvar';
+  //form submit button end
+
   constructor(
     private globalStatesService: GlobalStatesServiceService,
     private professorService: ProfessorService,
@@ -91,6 +95,7 @@ export class EditProfessorAdminComponent implements OnInit {
       })
     );
   }
+
 
   ngOnInit() {
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
