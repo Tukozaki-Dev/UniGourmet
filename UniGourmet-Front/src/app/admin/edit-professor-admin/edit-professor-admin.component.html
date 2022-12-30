@@ -81,7 +81,7 @@
                 </mat-form-field>
             </div>
             <div class="col-lg-6 order-lg-last col-md-6 order-md-last col-12 text-center bottom-spacing">
-                <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+                <app-button [text]="btnText" (btnClickEvent)="onSubmit()"></app-button>
             </div>
         </div>
     </form>
