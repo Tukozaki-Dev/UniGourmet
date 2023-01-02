@@ -9,54 +9,72 @@
     <button mat-icon-button [matMenuTriggerFor]="management" routerLinkActive="active">
         <span class="color-white">Administrar</span>
         <mat-menu #management="matMenu" class="bg-color">
+          <a routerLink="/professores" class="subicon-color subicon-position">
             <button mat-menu-item>
                 <fa-icon [icon]="faGraduationCap" class="subicon-color"></fa-icon>
-                <a routerLink="/professores" class="subicon-color subicon-position">Professores</a>
+                Professores
             </button>
+          </a>
+          <a routerLink="/alunos" class="subicon-color subicon-position">
             <button mat-menu-item>
                 <fa-icon [icon]="faUserGroup" class="subicon-color"></fa-icon>
-                <a routerLink="/alunos" class="subicon-color subicon-position">Alunos</a>
+                Alunos
             </button>
+          </a>
+          <a routerLink="/materias" class="subicon-color subicon-position">
             <button mat-menu-item>
                 <fa-icon [icon]="faList" class="subicon-color"></fa-icon>
-                <a routerLink="/materias" class="subicon-color subicon-position">Matérias</a>
+                Matérias
             </button>
+          </a>
+          <a routerLink="/turmas" class="subicon-color subicon-position">
             <button mat-menu-item>
                 <fa-icon [icon]="faChalkboardUser" class="subicon-color"></fa-icon>
-                <a routerLink="/turmas" class="subicon-color subicon-position">Turmas</a>
+                Turmas
             </button>
+          </a>
         </mat-menu>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="recipes" routerLinkActive="active">
         <span class="color-white">Receitas</span>
         <mat-menu #recipes="matMenu">
+          <a routerLink="/receitas" class="subicon-color subicon-position">
             <button mat-menu-item>
                 <fa-icon [icon]="faBook" class="subicon-color"></fa-icon>
-                <a routerLink="/receitas" class="subicon-color subicon-position">Receitas</a>
+                Receitas
             </button>
+          </a>
+          <a routerLink="/ingredientes" class="subicon-color subicon-position">
             <button mat-menu-item>
                 <fa-icon [icon]="faBasketShopping" class="subicon-color"></fa-icon>
-                <a routerLink="/ingredientes" class="subicon-color subicon-position">Ingredientes</a>
+                Ingredientes
             </button>
+          </a>
         </mat-menu>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="events" routerLinkActive="active">
         <span class="color-white">Eventos</span>
         <mat-menu #events="matMenu">
+          <a routerLink="/calendario" class="subicon-color subicon-position">
             <button mat-menu-item>
                 <fa-icon [icon]="faCalendar" class="subicon-color"></fa-icon>
-                <a routerLink="/calendario" class="subicon-color subicon-position">Calendário</a>
+                Calendário
             </button>
+          </a>
+          <a routerLink="/eventos" class="subicon-color subicon-position">
             <button mat-menu-item>
                 <fa-icon [icon]="faNoteSticky" class="subicon-color"></fa-icon>
-                <a routerLink="/eventos" class="subicon-color subicon-position">Eventos</a>
+                Eventos
             </button>
+          </a>
         </mat-menu>
     </button>
+    <a routerLink="/login" class="subicon-position">
     <button mat-icon-button routerLinkActive="active">
         <fa-icon [icon]="faUser"></fa-icon>
-        <a routerLink="/login" class="subicon-position">{{login}}</a>
+        {{login}}
     </button>
+  </a>
 </mat-toolbar>
 <!-- Mobile Menu -->
 <mat-toolbar color="primary" class="header-mobile" *ngIf="isMobileMenu">
@@ -66,64 +84,64 @@
     <button mat-icon-button class="bg-color icon-position" [matMenuTriggerFor]="management">
         <mat-icon class="icon-color">school</mat-icon>
         <mat-menu #management="matMenu" class="bg-color">
+          <a routerLink="/professores" class="subicon-color subicon-position">
             <button mat-menu-item>
-              <a routerLink="/professores" class="subicon-color subicon-position">
                 <fa-icon [icon]="faGraduationCap" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Professores</span>
-              </a>
             </button>
+          </a>
+          <a routerLink="/alunos" class="subicon-color subicon-position">
             <button mat-menu-item>
-              <a routerLink="/alunos" class="subicon-color subicon-position">
                 <fa-icon [icon]="faUserGroup" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Alunos</span>
-              </a>
             </button>
+          </a>
+          <a routerLink="/materias" class="subicon-color subicon-position">
             <button mat-menu-item>
-              <a routerLink="/materias" class="subicon-color subicon-position">
                 <fa-icon [icon]="faList" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Matérias</span>
-              </a>
             </button>
+          </a>
+          <a routerLink="/turmas" class="subicon-color subicon-position">
             <button mat-menu-item>
-              <a routerLink="/turmas" class="subicon-color subicon-position">
                 <fa-icon [icon]="faChalkboardUser" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Turmas</span>
-              </a>
             </button>
+          </a>
         </mat-menu>
     </button>
     <button mat-icon-button class="bg-color icon-position" [matMenuTriggerFor]="recipes">
         <mat-icon class="icon-color">library_books</mat-icon>
         <mat-menu #recipes="matMenu">
+          <a routerLink="/receitas" class="subicon-color subicon-position">
             <button mat-menu-item>
-              <a routerLink="/receitas" class="subicon-color subicon-position">
                 <fa-icon [icon]="faBook" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Receitas</span>
-              </a>
             </button>
+          </a>
+          <a routerLink="/ingredientes" class="subicon-color subicon-position">
             <button mat-menu-item>
-              <a routerLink="/ingredientes" class="subicon-color subicon-position">
                 <fa-icon [icon]="faBasketShopping" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Ingredientes</span>
-              </a>
             </button>
+          </a>
         </mat-menu>
     </button>
     <button mat-icon-button class="bg-color icon-position" [matMenuTriggerFor]="events">
         <mat-icon class="icon-color">summarize</mat-icon>
         <mat-menu #events="matMenu">
+          <a routerLink="/calendario" class="subicon-color subicon-position">
             <button mat-menu-item>
-              <a routerLink="/calendario" class="subicon-color subicon-position">
                 <fa-icon [icon]="faCalendar" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Calendário</span>
-              </a>
             </button>
+          </a>
+          <a routerLink="/eventos" class="subicon-color subicon-position">
             <button mat-menu-item>
-              <a routerLink="/eventos" class="subicon-color subicon-position">
                 <fa-icon [icon]="faNoteSticky" class="subicon-color"></fa-icon>
                 <span class="subicon-color subicon-position">Eventos</span>
-              </a>
             </button>
+          </a>
         </mat-menu>
     </button>
 

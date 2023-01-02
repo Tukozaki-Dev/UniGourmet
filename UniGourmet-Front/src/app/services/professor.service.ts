@@ -64,9 +64,9 @@ export class ProfessorService {
     return this.professors;
   }
 
-  /* 
+  /*
   código para quando for utilizar o BD
-  
+
   async getProfessors(): Observable<string[]> {
     const response = new Observable();
     this.professors;
