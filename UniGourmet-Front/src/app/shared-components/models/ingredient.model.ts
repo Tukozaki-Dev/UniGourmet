@@ -1,7 +1,9 @@
 export class Ingredient {
+  id: string;
   name: string;
   unity: Unity;
-  constructor(name: string, unity: Unity) {
+  constructor(id: string, name: string, unity: Unity) {
+    this.id = id;
     this.name = name;
     this.unity = unity;
   }
@@ -14,7 +16,7 @@ export enum Unity {
   ramo = 'ramo',
   pitada = 'pitada',
   cabeça = 'cabeça',
-  unidades = 'unidades',
+  unidade = 'unidade',
   fatia = 'fatia',
   talo = 'talo',
   folha = 'folha',
