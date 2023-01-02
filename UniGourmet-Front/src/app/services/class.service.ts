@@ -6,30 +6,144 @@ import { StudentClass } from '../shared-components/models/student-class.model';
 })
 export class ClassService {
 
-  //studentClasses = ["Turma a", "Turma b", "Turma c", "Turma abc"];
+  private semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  private classesCategories = ["Presencial", "EAD", "Semi-Presencial"];
+
+  private shifts = ["Manhã","Tarde","Noite"];
 
   private studentClasses: StudentClass[] = [
     new StudentClass(
       'Turma abc',
+      1,
       4,
       'Manhã',
-      "Culinária clássica"
+      "Presencial",
+      [
+        {
+          name: 'Cozinha das Américas',
+          registerCode: 'Sub123453',
+          semester: 4,
+          numberOfClasses: 20,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+      ]
     ),
     new StudentClass(
       'Turma a',
       1,
-      'Tarde',
-      "Culinária moderna"
-    ),new StudentClass(
-      'Turma b',
       4,
       'Manhã',
-      "Panificação"
-    ),new StudentClass(
+      "Presencial",
+      [
+        {
+          name: 'Cozinha das Américas',
+          registerCode: 'Sub123453',
+          semester: 4,
+          numberOfClasses: 20,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+      ]
+    ),
+    new StudentClass(
+      'Turma b',
+      1,
+      4,
+      'Manhã',
+      "Presencial",
+      [
+        {
+          name: 'Cozinha das Américas',
+          registerCode: 'Sub123453',
+          semester: 4,
+          numberOfClasses: 20,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+      ]
+    ),
+    new StudentClass(
       'Turma c',
-      2,
-      'Noite',
-      "Cozinha Francesa"
+      1,
+      4,
+      'Manhã',
+      "Presencial",
+      [
+        {
+          name: 'Cozinha das Américas',
+          registerCode: 'Sub123453',
+          semester: 4,
+          numberOfClasses: 20,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+      ]
     ),
 
   ];
@@ -38,5 +152,23 @@ export class ClassService {
 
   getClasses() {
     return this.studentClasses;
+  }
+
+  getClass(ra: number) {
+    return this.studentClasses.find((studentClass) => {
+      return studentClass.class_code == ra;
+    });
+  }
+
+  getSemesters(){
+    return this.semesters;
+  }
+
+  getClassesCategories(){
+    return this.classesCategories;
+  }
+
+  getShifts(){
+    return this.shifts;
   }
 }

@@ -54,14 +54,14 @@ export class EditStudentAdminComponent implements OnInit {
     });
 
     //get the semesters from StudentService
-    this.semesters = this.studentService.getSemesters();
+    this.semesters = this.classService.getSemesters();
 
     //get all classes from ClassService
     let allClasses = this.classService.getClasses();
 
     //map all Studant Class object and return a array with all the classes code
     this.studentClasses = allClasses.map((classes)=>{
-       return classes.class_code;
+       return classes.class_name;
     })
 
     //Gets the Student Register (RA) param to edit the professor
@@ -120,7 +120,5 @@ export class EditStudentAdminComponent implements OnInit {
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
-
-
 
 }
