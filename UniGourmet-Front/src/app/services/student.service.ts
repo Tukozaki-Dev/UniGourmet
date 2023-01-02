@@ -8,6 +8,8 @@ import { Student } from '../shared-components/models/student.model';
 export class StudentService {
   studentsChanged = new Subject<Student[]>();
 
+  private semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+
   private students: Student[] = [
     new Student(
       'Graziely Tukozaki',
@@ -28,6 +30,10 @@ export class StudentService {
 
   getStudents() {
     return this.students;
+  }
+
+  getSemesters(){
+    return this.semesters;
   }
 
   /*

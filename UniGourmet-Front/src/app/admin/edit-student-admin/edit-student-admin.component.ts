@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { map } from 'rxjs';
 import { ClassService } from 'src/app/services/class.service';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 import { StudentService } from 'src/app/services/student.service';
@@ -24,10 +25,8 @@ export class EditStudentAdminComponent implements OnInit {
   editMode: boolean = false;
   selectedStudent: Student;
 
-  //temporary mock semester and class, need to edit to get data from service
-
-  semesters = [1, 2, 3, 4, 5, 6, 7, 8];
-  studentClasses = ["Turma a", "Turma b", "Turma c", "Turma abc"];
+  semesters = [];
+  studentClasses = [];
 
   studentForm = new FormGroup({
     imagePath: new FormControl(''),
@@ -53,6 +52,18 @@ export class EditStudentAdminComponent implements OnInit {
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
     });
+
+    //get the semesters from StudentService
+    this.semesters = this.studentService.getSemesters();
+
+    //get all classes from ClassService
+    let allClasses = this.classService.getClasses();
+
+    //map all Studant Class object and return a array with all the classes code
+    this.studentClasses = allClasses.map((classes)=>{
+       return classes.class_code;
+    })
+
     //Gets the Student Register (RA) param to edit the professor
     let ra = this.route.snapshot.paramMap.get('ra');
 
@@ -60,7 +71,6 @@ export class EditStudentAdminComponent implements OnInit {
       this.editMode = true;
       //Search the student Register at StudentService
       this.selectedStudent = this.studentService.getStudent(ra);
-      console.log(this.selectedStudent);
       if (this.selectedStudent) {
         //updates the form with the student previus data
         this.studentForm.setValue({
