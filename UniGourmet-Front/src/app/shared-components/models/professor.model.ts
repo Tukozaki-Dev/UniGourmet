@@ -4,7 +4,7 @@ import { Specialty } from './specialty.model';
 export class Professor {
   name: string;
   registerCode: string;
-  imagePath: string;
+  imagePath?: string;
   subjects: Discipline[];
   specialties: Specialty[];
 

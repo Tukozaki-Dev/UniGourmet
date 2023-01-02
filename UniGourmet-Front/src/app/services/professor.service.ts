@@ -26,6 +26,18 @@ export class ProfessorService {
           semester: 2,
           numberOfClasses: 24,
         },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
+        {
+          name: 'Cozinha Regional Brasileira',
+          registerCode: 'Sub123457',
+          semester: 2,
+          numberOfClasses: 24,
+        },
       ],
       [
         { specialtyName: 'Carne', id: 2 },
