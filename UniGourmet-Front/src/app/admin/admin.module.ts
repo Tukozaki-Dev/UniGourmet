@@ -23,6 +23,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from '../shared-components/file-upload/file-upload.component';
 import { ButtonComponent } from '../shared-components/button/button.component';
+import { IconButtonComponent } from '../shared-components/icon-button/icon-button.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ButtonComponent } from '../shared-components/button/button.component';
     AdminComponent,
     HeaderAdmComponent,
     FileUploadComponent,
-    ButtonComponent
+    ButtonComponent,
+    IconButtonComponent
   ],
   imports: [
     CommonModule,

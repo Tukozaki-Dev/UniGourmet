@@ -1,1 +1,21 @@
-<p>icon-button works!</p>
+<div class="btn-container">
+    <button mat-mini-fab color="primary" aria-label="edit button with icon" (click)="iconBtnClick('edit')">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-mini-fab color="warn" aria-label="delete button with icon" (click)="iconBtnClick('delete')">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>
+
+<!-- how to use in parent component html -->
+<!-- <app-icon-button (iconBtnEvent)="onClick($event)"></app-icon-button> -->
+
+<!-- how to use in parent component ts -->
+<!-- onClick(event: string) {
+  if(event === 'edit') {
+    console.log('editando');
+  }
+  if(event === 'delete') {
+    console.log('deletando');
+  }
+} -->
