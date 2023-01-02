@@ -1,19 +1,21 @@
-import { StudentClass } from './student-class.model';
 
 export class Student {
   name: string;
   registerCode: string;
+  imagePath: string;
   semester: number;
-  studantClass: StudentClass;
+  studentClass: string;
   constructor(
     name: string,
     registerCode: string,
+    imagePath: string,
     semester: number,
-    studantClass: StudentClass
+    studentClass: string
   ) {
     this.name = name;
     this.registerCode = registerCode;
+    this.imagePath = imagePath;
     this.semester = semester;
-    this.studantClass = studantClass;
+    this.studentClass = studentClass;
   }
 }

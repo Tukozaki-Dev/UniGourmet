@@ -22,13 +22,13 @@ import { SpecialtyService } from 'src/app/services/specialty.service';
 export class EditProfessorAdminComponent implements OnInit {
   public isMobileMenu: boolean;
 
-  editProfessor = 'Edite as informações do professor abaixo.';
+  btnText = "Salvar"
+  editProfessor = "";
   addProfessor =
     'Você está no modo cadastro de professor, preencha todos os dados abaixo corretamente.';
   faImage = faImage;
 
   editMode: boolean = false;
-  professorRegister = '';
   selectedProfessor: Professor;
   subjects: Discipline[] = [];
   specialties: Specialty[] = [];
@@ -63,10 +63,6 @@ export class EditProfessorAdminComponent implements OnInit {
   @ViewChild('specialtyInput', { static: false })
   specialtyInput: ElementRef<HTMLInputElement>;
 
-  //form submit button start
-  btnText: string = 'Salvar';
-  //form submit button end
-
   constructor(
     private globalStatesService: GlobalStatesServiceService,
     private professorService: ProfessorService,
@@ -96,31 +92,31 @@ export class EditProfessorAdminComponent implements OnInit {
     );
   }
 
-
   ngOnInit() {
+    this.editProfessor = `Edite as informações do professor ${this.professorForm.value.name} abaixo.`
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
     });
+    let ra = this.professorForm.value.registerCode;
 
     //Gets the Professor Register (RA) param to edit the professor
-    this.professorRegister = this.route.snapshot.paramMap.get('ra');
+    ra = this.route.snapshot.paramMap.get('ra');
 
-    if (!!this.professorRegister) {
+    if (ra) {
       this.editMode = true;
       //Search the Professor at ProfessorService
       this.selectedProfessor = this.professorService.getProfessor(
-        this.professorRegister
+        ra
       );
-      if (!!this.selectedProfessor) {
-        const imagePath = this.selectedProfessor.imagePath;
+      if (this.selectedProfessor) {
         this.subjects = this.selectedProfessor.subjects;
         this.specialties = this.selectedProfessor.specialties;
         this.imagePath = this.selectedProfessor.imagePath;
         //updates the form with the professor previus data
         this.professorForm.patchValue({
-          registerCode: this.professorRegister,
+          registerCode: ra,
           name: this.selectedProfessor.name,
-          imagePath: imagePath,
+          imagePath: this.selectedProfessor.imagePath,
           specialties: this.selectedProfessor.specialties,
           subjects: this.selectedProfessor.subjects,
         });
@@ -137,7 +133,7 @@ export class EditProfessorAdminComponent implements OnInit {
   //method to edit professor through the Professor Service
   onUpdate() {
     this.professorService.updateProfessor(
-      this.professorRegister,
+      this.professorForm.value.registerCode,
       this.professorForm.getRawValue()
     );
   }
