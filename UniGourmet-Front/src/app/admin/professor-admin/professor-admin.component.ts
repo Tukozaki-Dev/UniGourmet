@@ -5,6 +5,10 @@ import { ProfessorService } from 'src/app/services/professor.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
+
 
 @Component({
   selector: 'app-professor-admin',
@@ -27,7 +31,11 @@ export class ProfessorAdminComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private professorService: ProfessorService) {}
+  constructor(
+    private professorService: ProfessorService,
+    private router: Router,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit() {
     const professors = this.professorService.getProfessors();
@@ -54,10 +62,23 @@ export class ProfessorAdminComponent implements OnInit {
   onClick(event: string) {
     if(event === 'edit') {
       console.log('editando');
+      this.router.navigate([
+        '/professor',
+        'RA123456' //encaminha para a pagina /conversor
+      ]);
       
     }
     if(event === 'delete') {
       console.log('deletando');
+      this.openDialog('0ms', '0ms');
     }
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 }
