@@ -7,9 +7,10 @@ import { AdminModule } from './admin/admin.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DialogComponent } from './shared-components/dialog/dialog.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
