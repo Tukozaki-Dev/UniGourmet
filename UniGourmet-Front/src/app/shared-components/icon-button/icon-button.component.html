@@ -1,11 +1,7 @@
-<div class="btn-container">
-    <button mat-mini-fab color="primary" aria-label="edit button with icon" (click)="iconBtnClick('edit')">
-      <mat-icon>edit</mat-icon>
+    <button mat-mini-fab color="{{btnColor}}" aria-label="edit button with icon" (click)="iconBtnClick()">
+      <mat-icon>{{ btnIcon }}</mat-icon>
     </button>
-    <button mat-mini-fab color="warn" aria-label="delete button with icon" (click)="iconBtnClick('delete')">
-        <mat-icon>delete</mat-icon>
-    </button>
-</div>
+
 
 <!-- how to use in parent component html -->
 <!-- <app-icon-button (iconBtnEvent)="onClick($event)"></app-icon-button> -->

@@ -21,6 +21,12 @@ export class IngredientAdminComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'unity', 'actions'];
   dataSource: MatTableDataSource<Ingredient>;
 
+  editBtnColor: string = 'primary';
+  editBtnIcon: string = 'edit';
+
+  deleteBtnColor: string = 'warn';
+  deleteBtnIcon: string = 'delete';
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -28,8 +34,7 @@ export class IngredientAdminComponent implements AfterViewInit {
     private ingredientService: IngredientService,
     private router: Router,
     public dialog: MatDialog,
-  ) {
-  }
+  ) {}
   
   ngOnInit() {
     
@@ -61,18 +66,17 @@ export class IngredientAdminComponent implements AfterViewInit {
     console.log('enviar para a pagina de cadastro');
   }
 
-  onClick(event: string, id: string) {
-    if(event === 'edit') {
+  onClickEdit(id: string) {
       //enviar para rota de edição (/ingrediente) com id como parametro
       this.router.navigate([
         '/ingrediente',
         id,
       ]);
-    }
+  }
 
-    if(event === 'delete') {
-      this.openDialog(id);
-    }
+  onClickDelete(id: string) {
+    //abre modal
+    this.openDialog(id);
   }
 
   //dialog (modal) start
@@ -92,7 +96,7 @@ export class IngredientAdminComponent implements AfterViewInit {
     });
   }
   //dialog (modal) end
-  
+
   onDeleteIngredient(id: string) {
     this.ingredientService.deleteIngredient(id);
   }

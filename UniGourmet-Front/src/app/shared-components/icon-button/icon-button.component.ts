@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-icon-button',
@@ -6,6 +6,9 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./icon-button.component.css']
 })
 export class IconButtonComponent implements OnInit {
+  @Input() btnIcon: string = '';
+  @Input() btnColor: string = '';
+
   @Output() iconBtnEvent = new EventEmitter<string>();
 
   constructor() { }
@@ -13,8 +16,8 @@ export class IconButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  iconBtnClick(value: string) {
-    this.iconBtnEvent.emit(value);
+  iconBtnClick() {
+    this.iconBtnEvent.emit();
   }
 
 }
