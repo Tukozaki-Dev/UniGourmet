@@ -15,6 +15,9 @@ export class IngredientService {
     new Ingredient('3', 'tomate', Unity.unidade),
     new Ingredient('4', 'feijão', Unity.gramas),
     new Ingredient('5', 'gergelim', Unity.gramas),
+    new Ingredient('6', 'farinha de trigo', Unity.gramas),
+    new Ingredient('7', 'berinjela', Unity.gramas),
+    new Ingredient('8', 'abobrinha', Unity.gramas),
   ];
 
   constructor() {}
@@ -47,11 +50,15 @@ export class IngredientService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  updateingredient(id: string, editedingredient: Ingredient) {
+  updateIngredient(id: string, editedingredient: Ingredient) {
     const index = this.ingredients.findIndex((ingredient) => {
       return id === ingredient.id;
     });
     this.ingredients[index] = editedingredient;
     this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  deleteIngredient(id: string) {
+    console.log('deletando ingrediente com id: ', id);
   }
 }

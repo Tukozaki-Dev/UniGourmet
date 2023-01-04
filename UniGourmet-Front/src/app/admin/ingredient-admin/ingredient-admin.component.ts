@@ -4,6 +4,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Ingredient } from 'src/app/shared-components/models/ingredient.model';
+import { Router } from '@angular/router';
+import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
 
 
 @Component({
@@ -12,6 +16,7 @@ import { Ingredient } from 'src/app/shared-components/models/ingredient.model';
   styleUrls: ['./ingredient-admin.component.css']
 })
 export class IngredientAdminComponent implements AfterViewInit {
+  btnText: string = 'Adicionar Novo Ingrediente';
 
   displayedColumns: string[] = ['id', 'name', 'unity', 'actions'];
   dataSource: MatTableDataSource<Ingredient>;
@@ -19,10 +24,16 @@ export class IngredientAdminComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private ingredientService: IngredientService) {
+  constructor(
+    private ingredientService: IngredientService,
+    private router: Router,
+    public dialog: MatDialog,
+  ) {
   }
+  
   ngOnInit() {
-    // Create 100 users
+    
+    // get ingredients from the service
     const ingredients = this.ingredientService.getIngredients();
     
     // Assign the data to the data source for the table to render
@@ -45,13 +56,45 @@ export class IngredientAdminComponent implements AfterViewInit {
     }
   }
 
-  onClick(event: string) {
+  goToCreateNew() {
+    //enviar para a pagina de cadastro
+    console.log('enviar para a pagina de cadastro');
+  }
+
+  onClick(event: string, id: string) {
     if(event === 'edit') {
-      console.log('editando');
-      
+      //enviar para rota de edição (/ingrediente) com id como parametro
+      this.router.navigate([
+        '/ingrediente',
+        id,
+      ]);
     }
+
     if(event === 'delete') {
-      console.log('deletando');
+      this.openDialog(id);
     }
   }
+
+  //dialog (modal) start
+  openDialog(id: string) {
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Deletar',
+      dialogContent: 'Tem certeza que deseja deletar?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onDeleteIngredient(id);
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
+  }
+  //dialog (modal) end
+  
+  onDeleteIngredient(id: string) {
+    this.ingredientService.deleteIngredient(id);
+  }
+
 }
