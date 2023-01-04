@@ -1,3 +1,4 @@
+import { EditIngredientAdminComponent } from './admin/edit-ingredient-admin/edit-ingredient-admin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClassAdminComponent } from './admin/class-admin/class-admin.component';
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'turmas', component: ClassAdminComponent },
   { path: 'receita/:id', component: EditRecipeAdminComponent },
   { path: 'receitas', component: RecipeAdminComponent },
+  { path: 'ingrediente/:id', component: EditIngredientAdminComponent },
   { path: 'ingredientes', component: IngredientAdminComponent },
   { path: 'evento/:id', component: EditEventAdminComponent },
   { path: 'eventos', component: EventAdminComponent },

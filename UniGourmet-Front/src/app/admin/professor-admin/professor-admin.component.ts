@@ -59,12 +59,12 @@ export class ProfessorAdminComponent implements OnInit {
     }
   }
 
-  onClick(event: string) {
+  onClick(event: string, id: string) {
     if(event === 'edit') {
       console.log('editando');
       this.router.navigate([
         '/professor',
-        'RA123456' //encaminha para a pagina /conversor
+        id 
       ]);
       
     }
