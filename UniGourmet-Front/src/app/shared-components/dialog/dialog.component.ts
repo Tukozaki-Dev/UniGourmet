@@ -1,5 +1,5 @@
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogInterface } from './dialog.interface';
 
@@ -22,6 +22,7 @@ export class DialogComponent implements OnInit {
 
   handleDialogSubmit() {
     this.dialogData.callbackMethod();
+    console.log('testando funcao handleDialogSubmit no component dialog');
   }
 
 }
