@@ -21,7 +21,7 @@ export class IngredientAdminComponent implements OnInit {
 
   //table columns to display 
   displayedColumns: string[] = ['id', 'name', 'unity', 'actions'];
-
+  ingredients:Ingredient[] = []; //agora os ingredientes são consultados pelo pai, e o pai passa esses dados pra tabela 
   constructor(
     private router: Router,
     private tableFiltering: TableFilteringComponent,
@@ -29,7 +29,7 @@ export class IngredientAdminComponent implements OnInit {
   ) {}
   
   ngOnInit() {
-
+    this.ingredients = this.ingredientService.getIngredients();
   }
 
   goToCreateNew() {
@@ -45,14 +45,14 @@ export class IngredientAdminComponent implements OnInit {
       ]);
   }
 
-  onClickDelete(id: string) {
+ /* onClickDelete(id: string) {
     console.log('abrindo modal');
     this.tableFiltering.openDialog(id);
-  }
+  }não precisa disso, pois o pai não tem que saber qual q interação entre a tabela e o dialog. O pai nem deve saber que o dialog existe, ele só se importa com a confirmação de delete  */
 
   onDeleteIngredient(id: string) {
-    this.ingredientService.deleteIngredient(id);
     console.log('output do callback deu certo');
+    this.ingredients = this.ingredientService.deleteIngredient(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
+    
   }
-
 }

@@ -3,5 +3,5 @@ export interface DialogInterface {
     confirmButtonLabel: string;
     dialogHeader: string;
     dialogContent: string;
-    callbackMethod: () => void;
+    callbackMethod: () => any | void;
 }

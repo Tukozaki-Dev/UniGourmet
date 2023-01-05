@@ -60,5 +60,8 @@ export class IngredientService {
 
   deleteIngredient(id: string) {
     console.log('deletando ingrediente com id: ', id);
+
+    this.ingredients = this.ingredients.filter((i)=>{ return i.id !== id});
+    return this.ingredients;
   }
 }

@@ -21,8 +21,8 @@ export class DialogComponent implements OnInit {
   }
 
   handleDialogSubmit() {
-    this.dialogData.callbackMethod();
     console.log('testando funcao handleDialogSubmit no component dialog');
+    this.dialogData.callbackMethod();
   }
 
 }

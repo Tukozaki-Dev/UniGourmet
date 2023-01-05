@@ -9,8 +9,8 @@
   </div>
   <app-table-filtering
   [displayedColumns]="displayedColumns"
+  [data]="ingredients"
   (onClickEditEvent)="onClickEdit($event)"
-  (onClickDeleteEvent)="onClickDelete($event)"
   (callbackMethodEvent)="onDeleteIngredient($event)"
   ></app-table-filtering>
 </div>

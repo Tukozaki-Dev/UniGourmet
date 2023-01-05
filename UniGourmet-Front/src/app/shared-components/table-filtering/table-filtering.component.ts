@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild, EventEmitter, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -22,30 +22,36 @@ export class TableFilteringComponent implements OnInit {
   deleteBtnIcon: string = 'delete'; 
 
   @Input() displayedColumns: string[] = [];
+  @Input() data: any[] = []; //agora vc recebe os dados do pai. Podendo ser ingrediente, ou qlquer outro tipo de item vindo das outras telas 
   
   dataSource: MatTableDataSource<any>;
 
   @Output() onClickEditEvent: EventEmitter<string> = new EventEmitter();
 
-  @Output() onClickDeleteEvent: EventEmitter<string> = new EventEmitter();
+ // @Output() onClickDeleteEvent: EventEmitter<string> = new EventEmitter(); Não precisa disso
 
-  @Output() callbackMethodEvent: EventEmitter<string> = new EventEmitter();
+  @Output() callbackMethodEvent = new EventEmitter<string>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private ingredientService: IngredientService,
+    //private ingredientService: IngredientService, a tabela não é responsável pelos dados ou pela lógica, para assim ser reutilizavel
     private router: Router,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
      // get ingredients from the service
-     const ingredients = this.ingredientService.getIngredients();
+     //const ingredients = this.ingredientService.getIngredients(); essa parte é o parent que fica responsável
     
      // Assign the data to the data source for the table to render
-     this.dataSource = new MatTableDataSource(ingredients);
+     this.dataSource = new MatTableDataSource(this.data);
+  }
+
+  /* tem q ter o ngOnChange pra detectar que os itens foram modificados no service  */ 
+  ngOnChanges() {
+    this.dataSource = new MatTableDataSource(this.data);
   }
 
   ngAfterViewInit() {
@@ -68,7 +74,7 @@ export class TableFilteringComponent implements OnInit {
   }
 
   onClickDelete(id: string) {
-    this.onClickDeleteEvent.emit(id);
+    this.openDialog(id);
   }
 
   //dialog (modal) start
@@ -79,9 +85,10 @@ export class TableFilteringComponent implements OnInit {
       cancelButtonLabel: 'Cancelar',
       confirmButtonLabel: 'Sim',
       callbackMethod: () => {
+        console.log('1chamando callback do dialog, sendSubmit no component tableFiltering', id);
         this.sendSubmit(id);
         // this.ingredientService.deleteIngredient(id);
-        console.log('chamando callback do dialog, sendSubmit no component tableFiltering', id);
+        
       },
     };
     this.dialog.open(DialogComponent, {
@@ -93,7 +100,7 @@ export class TableFilteringComponent implements OnInit {
   
   sendSubmit(id: string) {
     this.callbackMethodEvent.emit(id);
-    console.log('emissao do evento callbackMethodEvent')
+    console.log('2emissao do evento callbackMethodEvent id:', id)
   }
 
   
