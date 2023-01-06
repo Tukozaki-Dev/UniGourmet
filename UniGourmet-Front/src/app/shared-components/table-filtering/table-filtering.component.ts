@@ -1,13 +1,10 @@
-import { Component, Input, OnInit, Output, ViewChild, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { IngredientService } from 'src/app/services/ingredient.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogInterface } from '../dialog/dialog.interface';
-import { Ingredient } from '../models/ingredient.model';
 
 @Component({
   selector: 'app-table-filtering',
@@ -16,19 +13,22 @@ import { Ingredient } from '../models/ingredient.model';
 })
 export class TableFilteringComponent implements OnInit {
 
+  //variables used for property binding coming from icon-button component (btnColor and btnIcon)
   editBtnColor: string = 'primary';
   editBtnIcon: string = 'edit'; 
   deleteBtnColor: string = 'warn';
   deleteBtnIcon: string = 'delete'; 
 
+  //defining Input() to receive from parent the name of table's colunms in a string array
   @Input() displayedColumns: string[] = [];
-  @Input() data: any[] = []; //agora vc recebe os dados do pai. Podendo ser ingrediente, ou qlquer outro tipo de item vindo das outras telas 
+
+  //defining Input() to receive from parent the data to populate the table
+  @Input() tableData: any[] = []; 
   
+  //creating variable of type MatTableDataSource. This variable will receive tableData later
   dataSource: MatTableDataSource<any>;
 
   @Output() onClickEditEvent: EventEmitter<string> = new EventEmitter();
-
- // @Output() onClickDeleteEvent: EventEmitter<string> = new EventEmitter(); Não precisa disso
 
   @Output() callbackMethodEvent = new EventEmitter<string>();
 
@@ -36,22 +36,17 @@ export class TableFilteringComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    //private ingredientService: IngredientService, a tabela não é responsável pelos dados ou pela lógica, para assim ser reutilizavel
-    private router: Router,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-     // get ingredients from the service
-     //const ingredients = this.ingredientService.getIngredients(); essa parte é o parent que fica responsável
-    
-     // Assign the data to the data source for the table to render
-     this.dataSource = new MatTableDataSource(this.data);
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(this.tableData);
   }
 
-  /* tem q ter o ngOnChange pra detectar que os itens foram modificados no service  */ 
+  //detect when itens are modified in service and then "update" table data source
   ngOnChanges() {
-    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource = new MatTableDataSource(this.tableData);
   }
 
   ngAfterViewInit() {
@@ -68,11 +63,12 @@ export class TableFilteringComponent implements OnInit {
     }
   }
   
-
+  //emit a event when user clicks on edit button
   onClickEdit(id: string) {
     this.onClickEditEvent.emit(id);
   }
 
+  //open dialog(modal) when user clicks on delete button
   onClickDelete(id: string) {
     this.openDialog(id);
   }
@@ -85,10 +81,7 @@ export class TableFilteringComponent implements OnInit {
       cancelButtonLabel: 'Cancelar',
       confirmButtonLabel: 'Sim',
       callbackMethod: () => {
-        console.log('1chamando callback do dialog, sendSubmit no component tableFiltering', id);
         this.sendSubmit(id);
-        // this.ingredientService.deleteIngredient(id);
-        
       },
     };
     this.dialog.open(DialogComponent, {
@@ -98,11 +91,9 @@ export class TableFilteringComponent implements OnInit {
   }
   //dialog (modal) end
   
+  //emit an event when dialog's callbackMethod function is called
   sendSubmit(id: string) {
     this.callbackMethodEvent.emit(id);
-    console.log('2emissao do evento callbackMethodEvent id:', id)
   }
-
-  
 
 }

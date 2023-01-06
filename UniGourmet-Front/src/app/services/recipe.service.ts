@@ -7,7 +7,7 @@ import { Recipe } from '../shared-components/models/recipe.model';
   providedIn: 'root'
 })
 export class RecipeService {
-  // recipesChanged = new Subject<Recipe[]>();
+  recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -25,11 +25,11 @@ export class RecipeService {
       '1h30',
       3,
       [
-        {ingredient: {name: 'Lentilha', unity: Unity.gramas}, quantity: 100},
-        {ingredient: {name: 'Arroz', unity: Unity.gramas}, quantity: 200},
-        {ingredient: {name: 'Feijão', unity: Unity.gramas}, quantity: 300},
-        {ingredient: {name: 'Macarrão', unity: Unity.gramas}, quantity: 400},
-        {ingredient: {name: 'Ervilha', unity: Unity.gramas}, quantity: 500},
+        {ingredient: {id: 'A123', name: 'Lentilha', unity: Unity.gramas}, quantity: 100},
+        {ingredient: {id: 'B123', name: 'Arroz', unity: Unity.gramas}, quantity: 200},
+        {ingredient: {id: 'C123', name: 'Feijão', unity: Unity.gramas}, quantity: 300},
+        {ingredient: {id: 'D123', name: 'Macarrão', unity: Unity.gramas}, quantity: 400},
+        {ingredient: {id: 'E123', name: 'Ervilha', unity: Unity.gramas}, quantity: 500},
         
       ],
       [
@@ -73,11 +73,11 @@ export class RecipeService {
       '1h30',
       3,
       [
-        {ingredient: {name: 'Lentilha', unity: Unity.gramas}, quantity: 100},
-        {ingredient: {name: 'Arroz', unity: Unity.gramas}, quantity: 200},
-        {ingredient: {name: 'Feijão', unity: Unity.gramas}, quantity: 300},
-        {ingredient: {name: 'Macarrão', unity: Unity.gramas}, quantity: 400},
-        {ingredient: {name: 'Ervilha', unity: Unity.gramas}, quantity: 500},
+        {ingredient: {id: 'A123', name: 'Lentilha', unity: Unity.gramas}, quantity: 100},
+        {ingredient: {id: 'B123', name: 'Arroz', unity: Unity.gramas}, quantity: 200},
+        {ingredient: {id: 'C123', name: 'Feijão', unity: Unity.gramas}, quantity: 300},
+        {ingredient: {id: 'D123', name: 'Macarrão', unity: Unity.gramas}, quantity: 400},
+        {ingredient: {id: 'E123', name: 'Ervilha', unity: Unity.gramas}, quantity: 500},
       ],
       [
           {instruction_name: 'Massa', 

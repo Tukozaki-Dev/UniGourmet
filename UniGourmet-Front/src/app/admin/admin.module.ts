@@ -27,6 +27,7 @@ import { IconButtonComponent } from '../shared-components/icon-button/icon-butto
 import { DialogComponent } from '../shared-components/dialog/dialog.component';
 import { TableExpandableRowsComponent } from '../shared-components/table-expandable-rows/table-expandable-rows.component';
 import { TableFilteringComponent } from '../shared-components/table-filtering/table-filtering.component';
+import { TableHeaderComponent } from '../shared-components/table-header/table-header.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { TableFilteringComponent } from '../shared-components/table-filtering/ta
     IconButtonComponent,
     DialogComponent, 
     TableExpandableRowsComponent, 
-    TableFilteringComponent
+    TableFilteringComponent,
+    TableHeaderComponent
   ],
   imports: [
     CommonModule,

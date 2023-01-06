@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [TableFilteringComponent],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

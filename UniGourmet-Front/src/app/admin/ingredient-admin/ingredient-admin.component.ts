@@ -1,15 +1,7 @@
-import { TableFilteringComponent } from './../../shared-components/table-filtering/table-filtering.component';
 import { IngredientService } from './../../services/ingredient.service';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { Ingredient } from 'src/app/shared-components/models/ingredient.model';
 import { Router } from '@angular/router';
-import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
-
 
 @Component({
   selector: 'app-ingredient-admin',
@@ -17,42 +9,43 @@ import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interfa
   styleUrls: ['./ingredient-admin.component.css']
 })
 export class IngredientAdminComponent implements OnInit {
+  //button text - assigned to Input() [text] coming from component 'table-header'
   btnText: string = 'Adicionar Novo Ingrediente';
 
-  //table columns to display 
+  ////used in header <h1> - assigned to Input() [tableType] coming from component 'table-header'
+  tableType: string = 'ingrediente';
+
+  //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
   displayedColumns: string[] = ['id', 'name', 'unity', 'actions'];
-  ingredients:Ingredient[] = []; //agora os ingredientes são consultados pelo pai, e o pai passa esses dados pra tabela 
+  
+  //variable created to later receive ingredients from the service
+  ingredients: Ingredient[] = [];
+  
   constructor(
     private router: Router,
-    private tableFiltering: TableFilteringComponent,
     private ingredientService: IngredientService,
   ) {}
   
   ngOnInit() {
+    //assign to variable ingredients all ingredients (calling ingredient service)
     this.ingredients = this.ingredientService.getIngredients();
   }
 
+  //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
-    //enviar para a pagina de cadastro
-    console.log('enviar para a pagina de cadastro');
+    //send to 'cadastro' route
     // this.router.navigate(['/ingrediente/cadastro']);
+    console.log('enviar para a pagina de cadastro');
   }
 
-  onClickEdit(id) {
-    this.router.navigate([
-        '/ingrediente',
-        id
-      ]);
+  //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
+  onClickEdit(id: string) {
+    //send to 'editar' route, with id parameter
+    this.router.navigate(['/ingrediente', id]);
   }
 
- /* onClickDelete(id: string) {
-    console.log('abrindo modal');
-    this.tableFiltering.openDialog(id);
-  }não precisa disso, pois o pai não tem que saber qual q interação entre a tabela e o dialog. O pai nem deve saber que o dialog existe, ele só se importa com a confirmação de delete  */
-
+  //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
   onDeleteIngredient(id: string) {
-    console.log('output do callback deu certo');
     this.ingredients = this.ingredientService.deleteIngredient(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
-    
   }
 }

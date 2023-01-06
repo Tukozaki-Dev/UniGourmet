@@ -1,6 +1,6 @@
 import { Unity } from './../shared-components/models/ingredient.model';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared-components/models/ingredient.model';
 
 @Injectable({
