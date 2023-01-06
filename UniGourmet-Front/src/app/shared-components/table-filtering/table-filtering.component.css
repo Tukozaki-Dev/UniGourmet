@@ -13,4 +13,5 @@ table {
     
 td, th {
   width: 25%;
+  padding-right: 10px !important;
 }
