@@ -137,7 +137,7 @@ export class EditClassAdminComponent implements OnInit {
   }
 
   //method to add a new class through the ClassService
-   onAddStudent() {
+   onAddClass() {
     this.classService.addClass(this.classForm.getRawValue());
   }
 
@@ -146,7 +146,7 @@ export class EditClassAdminComponent implements OnInit {
     if (this.editMode) {
       this.onUpdate();
     } else {
-      this.onAddStudent();
+      this.onAddClass();
     }
     this.onCancel();
   }
