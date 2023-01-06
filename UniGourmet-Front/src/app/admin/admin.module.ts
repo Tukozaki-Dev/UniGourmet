@@ -1,3 +1,4 @@
+import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
@@ -52,7 +53,8 @@ import { TableHeaderComponent } from '../shared-components/table-header/table-he
     IconButtonComponent,
     TableExpandableRowsComponent,
     TableFilteringComponent,
-    TableHeaderComponent
+    TableHeaderComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

@@ -108,9 +108,9 @@ export class RecipeService {
   ];
   constructor() { }
 
-  // getRecipes() {
-  //   return this.recipes;
-  // }
+  getRecipes() {
+    return this.recipes;
+  }
 
   /* 
   código para quando for utilizar o BD
@@ -120,23 +120,30 @@ export class RecipeService {
     this.recipes;
   }*/
 
-  // getRecipe(rc: string) {
-  //   return this.recipes.find((recipe) => {
-  //     return recipe.registerCode == rc;
-  //   });
-  // }
+  getRecipe(rc: string) {
+    return this.recipes.find((recipe) => {
+      return recipe.id == rc;
+    });
+  }
 
-  // addRecipe(newRecipe: Recipe) {
-  //   this.recipes.push(newRecipe);
-  //   this.recipesChanged.next(this.recipes.slice());
-  // }
+  addRecipe(newRecipe: Recipe) {
+    this.recipes.push(newRecipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
-  // updateRecipe(rc: string, editedRecipe: Recipe) {
-  //   const index = this.recipes.findIndex((recipe) => {
-  //     return rc === recipe.registerCode;
-  //   });
-  //   this.recipes[index] = editedRecipe;
-  //   this.recipesChanged.next(this.recipes.slice());
-  // }
+  updateRecipe(id: string, editedRecipe: Recipe) {
+    const index = this.recipes.findIndex((recipe) => {
+      return id === recipe.id;
+    });
+    this.recipes[index] = editedRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(id: string) {
+    console.log('deletando ingrediente com id: ', id);
+
+    this.recipes = this.recipes.filter((i)=>{ return i.id !== id});
+    return this.recipes;
+  }
 
 }

@@ -3,7 +3,7 @@ import { Ingredient } from './ingredient.model';
 
 export class Recipe {
   name: string;
-  registerCode: string;
+  id: string;
   imagePath: string;
   description: string;
   discipline: Discipline;
@@ -18,7 +18,7 @@ export class Recipe {
   harmonization?: string[];
   constructor(
     name: string,
-    registerCode: string,
+    id: string,
     imagePath: string,
     description: string,
     discipline: Discipline,
@@ -33,7 +33,7 @@ export class Recipe {
     harmonization?: string[]
   ) {
     this.name = name;
-    this.registerCode = registerCode;
+    this.id = id;
     this.imagePath = imagePath;
     this.description = description;
     this.discipline = discipline;

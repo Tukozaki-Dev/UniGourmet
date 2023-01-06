@@ -16,7 +16,7 @@ export class IngredientAdminComponent implements OnInit {
   tableType: string = 'ingrediente';
 
   //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
-  displayedColumns: string[] = ['id', 'name', 'unity', 'actions'];
+  displayedColumns: string[] = ['id', 'nome', 'unidade', 'actions'];
   
   //variable created to later receive ingredients from the service
   ingredients: Ingredient[] = [];
@@ -34,14 +34,13 @@ export class IngredientAdminComponent implements OnInit {
   //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
     //send to 'cadastro' route
-    // this.router.navigate(['/ingrediente/cadastro']);
-    console.log('enviar para a pagina de cadastro');
+    this.router.navigate(['ingrediente/cadastro']);
   }
 
   //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
   onClickEdit(id: string) {
     //send to 'editar' route, with id parameter
-    this.router.navigate(['/ingrediente', id]);
+    this.router.navigate(['ingrediente', id]);
   }
 
   //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted

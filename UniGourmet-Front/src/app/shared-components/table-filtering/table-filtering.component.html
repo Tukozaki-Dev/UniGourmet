@@ -16,18 +16,18 @@
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- First Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ displayedColumns[0] | uppercase }}</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ displayedColumns[0]| uppercase }}</th>
           <td mat-cell *matCellDef="let row">{{ row.id }}</td>
         </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
+        <!-- Second Column -->
+        <ng-container matColumnDef="nome">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ displayedColumns[1] | uppercase }}</th>
           <td mat-cell *matCellDef="let row">{{ row.name }}</td>
         </ng-container>
 
-        <!-- Fruit Column -->
-        <ng-container matColumnDef="unity">
+        <!-- Third Column -->
+        <ng-container matColumnDef="unidade">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ displayedColumns[2] | uppercase }}</th>
           <td mat-cell *matCellDef="let row">{{ row.unity }}</td>
         </ng-container>

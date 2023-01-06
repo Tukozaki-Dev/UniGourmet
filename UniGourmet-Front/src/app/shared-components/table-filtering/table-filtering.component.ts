@@ -21,6 +21,8 @@ export class TableFilteringComponent implements OnInit {
 
   //defining Input() to receive from parent the name of table's colunms in a string array
   @Input() displayedColumns: string[] = [];
+  
+  columnsToDisplay: string[] = this.displayedColumns.slice();
 
   //defining Input() to receive from parent the data to populate the table
   @Input() tableData: any[] = []; 
