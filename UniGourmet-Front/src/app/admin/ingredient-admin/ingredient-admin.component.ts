@@ -1,104 +1,51 @@
 import { IngredientService } from './../../services/ingredient.service';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { Ingredient } from 'src/app/shared-components/models/ingredient.model';
 import { Router } from '@angular/router';
-import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
-
 
 @Component({
   selector: 'app-ingredient-admin',
   templateUrl: './ingredient-admin.component.html',
   styleUrls: ['./ingredient-admin.component.css']
 })
-export class IngredientAdminComponent implements AfterViewInit {
+export class IngredientAdminComponent implements OnInit {
+  //button text - assigned to Input() [text] coming from component 'table-header'
   btnText: string = 'Adicionar Novo Ingrediente';
 
+  ////used in header <h1> - assigned to Input() [tableType] coming from component 'table-header'
+  tableType: string = 'ingrediente';
+
+  //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
   displayedColumns: string[] = ['id', 'name', 'unity', 'actions'];
-  dataSource: MatTableDataSource<Ingredient>;
-
-  editBtnColor: string = 'primary';
-  editBtnIcon: string = 'edit';
-
-  deleteBtnColor: string = 'warn';
-  deleteBtnIcon: string = 'delete';
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
+  
+  //variable created to later receive ingredients from the service
+  ingredients: Ingredient[] = [];
+  
   constructor(
-    private ingredientService: IngredientService,
     private router: Router,
-    public dialog: MatDialog,
+    private ingredientService: IngredientService,
   ) {}
   
   ngOnInit() {
-    
-    // get ingredients from the service
-    const ingredients = this.ingredientService.getIngredients();
-    
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(ingredients);
-
-  }
-  
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    console.log(this.dataSource);
-  }
-  
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    //assign to variable ingredients all ingredients (calling ingredient service)
+    this.ingredients = this.ingredientService.getIngredients();
   }
 
+  //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
-    //enviar para a pagina de cadastro
+    //send to 'cadastro' route
+    // this.router.navigate(['/ingrediente/cadastro']);
     console.log('enviar para a pagina de cadastro');
   }
 
+  //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
   onClickEdit(id: string) {
-      //enviar para rota de edição (/ingrediente) com id como parametro
-      this.router.navigate([
-        '/ingrediente',
-        id,
-      ]);
+    //send to 'editar' route, with id parameter
+    this.router.navigate(['/ingrediente', id]);
   }
 
-  onClickDelete(id: string) {
-    //abre modal
-    this.openDialog(id);
-  }
-
-  //dialog (modal) start
-  openDialog(id: string) {
-    const dialogInterface: DialogInterface = {
-      dialogHeader: 'Deletar',
-      dialogContent: 'Tem certeza que deseja deletar?',
-      cancelButtonLabel: 'Cancelar',
-      confirmButtonLabel: 'Sim',
-      callbackMethod: () => {
-        this.onDeleteIngredient(id);
-      },
-    };
-    this.dialog.open(DialogComponent, {
-      width: '300px',
-      data: dialogInterface,
-    });
-  }
-  //dialog (modal) end
-
+  //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
   onDeleteIngredient(id: string) {
-    this.ingredientService.deleteIngredient(id);
+    this.ingredients = this.ingredientService.deleteIngredient(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
   }
-
 }

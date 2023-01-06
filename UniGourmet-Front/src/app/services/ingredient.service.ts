@@ -1,6 +1,6 @@
 import { Unity } from './../shared-components/models/ingredient.model';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared-components/models/ingredient.model';
 
 @Injectable({
@@ -60,5 +60,8 @@ export class IngredientService {
 
   deleteIngredient(id: string) {
     console.log('deletando ingrediente com id: ', id);
+
+    this.ingredients = this.ingredients.filter((i)=>{ return i.id !== id});
+    return this.ingredients;
   }
 }

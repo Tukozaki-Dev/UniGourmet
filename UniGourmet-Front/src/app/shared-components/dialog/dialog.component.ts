@@ -1,4 +1,3 @@
-import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogInterface } from './dialog.interface';
@@ -8,13 +7,14 @@ import { DialogInterface } from './dialog.interface';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
+
+
 export class DialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public dialogData: DialogInterface,
-    public globalStatesService: GlobalStatesServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -27,14 +27,14 @@ export class DialogComponent implements OnInit {
 }
 
 //how to use in parent component example:
-// openDialog(id: string) {
+// openDialog() {
 //   const dialogInterface: DialogInterface = {
 //     dialogHeader: 'Deletar',
 //     dialogContent: 'Tem certeza que deseja deletar?',
 //     cancelButtonLabel: 'Cancelar',
 //     confirmButtonLabel: 'Sim',
 //     callbackMethod: () => {
-//       this.dialogSubmitDelete(id);  --> this function most be created, according to needs (in this case is a function with a id parameter)
+//       this.anyFunction();  --> function to call when click event in dialog is emitted
 //     },
 //   };
 //   this.dialog.open(DialogComponent, {

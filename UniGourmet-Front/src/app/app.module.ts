@@ -1,3 +1,4 @@
+import { TableFilteringComponent } from './shared-components/table-filtering/table-filtering.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -7,10 +8,9 @@ import { AdminModule } from './admin/admin.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { DialogComponent } from './shared-components/dialog/dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

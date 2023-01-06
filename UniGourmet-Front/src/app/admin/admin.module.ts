@@ -24,7 +24,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from '../shared-components/file-upload/file-upload.component';
 import { ButtonComponent } from '../shared-components/button/button.component';
 import { IconButtonComponent } from '../shared-components/icon-button/icon-button.component';
-import { SelectWithButtonComponent } from '../shared-components/select-with-button/select-with-button.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,6 @@ import { SelectWithButtonComponent } from '../shared-components/select-with-butt
     FileUploadComponent,
     ButtonComponent,
     IconButtonComponent,
-    SelectWithButtonComponent
   ],
   imports: [
     CommonModule,
