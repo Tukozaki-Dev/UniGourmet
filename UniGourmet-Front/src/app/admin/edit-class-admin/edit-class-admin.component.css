@@ -50,6 +50,18 @@ a {
   width: 115pt;
 }
 
+.input-width-large{
+  width: 185pt;
+}
+
+.input-width-large-2{
+  width: 155pt;
+}
+
+.input-width-small{
+  width: 95pt;
+}
+
 @media (max-width: 540px) {
   .left-space-mobile {
     padding-left: 20pt;

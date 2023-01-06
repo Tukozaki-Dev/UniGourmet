@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <form [formGroup]="professorForm">
+    <form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
         <div class="row">
 
             <div class="col-lg-6 order-lg-1 col-md-6 order-md-1 col-12 text-center bottom-spacing-2">
@@ -81,7 +81,7 @@
                 </mat-form-field>
             </div>
             <div class="col-lg-6 order-lg-last col-md-6 order-md-last col-12 text-center bottom-spacing">
-                <app-button [text]="btnText" (btnClickEvent)="onSubmit()"></app-button>
+                <app-button [text]="btnText" type="submit"></app-button>
             </div>
         </div>
     </form>

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { StudentClass } from '../shared-components/models/student-class.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassService {
+
+  classChanged = new Subject<StudentClass[]>();
 
   private semesters = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -33,14 +36,14 @@ export class ClassService {
           numberOfClasses: 24,
         },
         {
-          name: 'Cozinha Regional Brasileira',
-          registerCode: 'Sub123457',
+          name: 'Cozinha Asiática',
+          registerCode: 'Sub123452',
           semester: 2,
           numberOfClasses: 24,
         },
         {
-          name: 'Cozinha Regional Brasileira',
-          registerCode: 'Sub123457',
+          name: 'Cozinha Italiana',
+          registerCode: 'Sub123455',
           semester: 2,
           numberOfClasses: 24,
         },
@@ -154,9 +157,9 @@ export class ClassService {
     return this.studentClasses;
   }
 
-  getClass(ra: number) {
+  getClass(id: number) {
     return this.studentClasses.find((studentClass) => {
-      return studentClass.class_code == ra;
+      return studentClass.classCode == id;
     });
   }
 
@@ -171,4 +174,19 @@ export class ClassService {
   getShifts(){
     return this.shifts;
   }
+
+  addClass(newClass: StudentClass) {
+    this.studentClasses.push(newClass);
+    this.classChanged.next(this.studentClasses.slice());
+  }
+
+  updateClass(id: number, editedClass: StudentClass) {
+    const index = this.studentClasses.findIndex((selectedClass) => {
+      return id === selectedClass.classCode;
+    });
+    this.studentClasses[index] = editedClass;
+    this.classChanged.next(this.studentClasses.slice());
+  }
+
+
 }
