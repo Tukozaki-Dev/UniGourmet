@@ -53,7 +53,7 @@ export class EditProfessorAdminComponent implements OnInit {
 
   filteredSpecialties: Observable<Specialty[]>;
 
-  allSubjects = this.disciplineService.discipline;
+  allSubjects = this.disciplineService.disciplines;
 
   allSpecialties = this.specialtyService.specialty;
 
@@ -102,13 +102,13 @@ export class EditProfessorAdminComponent implements OnInit {
     //Gets the Professor Register (RA) param to edit the professor
     ra = this.route.snapshot.paramMap.get('ra');
 
-    if (ra) {
+    if(ra) {
       this.editMode = true;
       //Search the Professor at ProfessorService
       this.selectedProfessor = this.professorService.getProfessor(
         ra
       );
-      if (this.selectedProfessor) {
+      if(this.selectedProfessor) {
         this.subjects = this.selectedProfessor.subjects;
         this.specialties = this.selectedProfessor.specialties;
         this.imagePath = this.selectedProfessor.imagePath;
@@ -120,12 +120,13 @@ export class EditProfessorAdminComponent implements OnInit {
           specialties: this.selectedProfessor.specialties,
           subjects: this.selectedProfessor.subjects,
         });
-      } else {
+      }else {
         //The register code don't exists will throw an error
         alert('Esse professor não existe!');
         this.router.navigate(['../'], { relativeTo: this.route });
       }
-    } else {
+    }
+    if(!ra) {
       this.editMode = false;
     }
   }
@@ -153,7 +154,7 @@ export class EditProfessorAdminComponent implements OnInit {
     this.onCancel();
   }
   onCancel() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(['/professores']);
   }
 
   //method  to remove the selected subject chip from the list (array)

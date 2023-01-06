@@ -18,20 +18,28 @@ import { SubjectAdminComponent } from './admin/subject-admin/subject-admin.compo
 
 const appRoutes: Routes = [
   { path: '', component: HomeAdminComponent },
+  { path: 'professor/cadastro', component: EditProfessorAdminComponent },
   { path: 'professor/:ra', component: EditProfessorAdminComponent },
   { path: 'professores', component: ProfessorAdminComponent },
+  { path: 'aluno/cadastro', component: EditStudentAdminComponent },
   { path: 'aluno/:ra', component: EditStudentAdminComponent },
   { path: 'alunos', component: StudentAdminComponent },
+  { path: 'materia/cadastro', component: EditSubjectAdminComponent },
   { path: 'materia/:id', component: EditSubjectAdminComponent },
   { path: 'materias', component: SubjectAdminComponent },
+  { path: 'turma/cadastro', component: EditClassAdminComponent },
   { path: 'turma/:id', component: EditClassAdminComponent },
   { path: 'turmas', component: ClassAdminComponent },
+  { path: 'receita/cadastro', component: EditRecipeAdminComponent },
   { path: 'receita/:id', component: EditRecipeAdminComponent },
   { path: 'receitas', component: RecipeAdminComponent },
+  { path: 'ingrediente/cadastro', component: EditIngredientAdminComponent },
   { path: 'ingrediente/:id', component: EditIngredientAdminComponent },
   { path: 'ingredientes', component: IngredientAdminComponent },
+  { path: 'evento/cadastro', component: EditEventAdminComponent },
   { path: 'evento/:id', component: EditEventAdminComponent },
   { path: 'eventos', component: EventAdminComponent },
+  { path: '**', component: HomeAdminComponent}
 ];
 
 @NgModule({

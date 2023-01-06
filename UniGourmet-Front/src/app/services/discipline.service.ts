@@ -5,7 +5,7 @@ import { Discipline } from '../shared-components/models/discipline.model';
   providedIn: 'root',
 })
 export class DisciplineService {
-  discipline: Discipline[] = [
+  disciplines: Discipline[] = [
     new Discipline('Buffet e Restauração', 'Sub123450', 4, 20),
     new Discipline('Confeitaria', 'Sub123451', 2, 24),
     new Discipline('Cozinha Asiática', 'Sub123452', 2, 24),
@@ -19,4 +19,8 @@ export class DisciplineService {
     new Discipline('Técnicas Clássicas', 'Sub123410', 2, 24),
   ];
   constructor() {}
+
+  getDisciplines(){
+    return this.disciplines;
+  }
 }
