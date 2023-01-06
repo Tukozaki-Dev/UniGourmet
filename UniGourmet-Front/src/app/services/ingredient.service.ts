@@ -9,19 +9,26 @@ import { Ingredient } from '../shared-components/models/ingredient.model';
 export class IngredientService {
   ingredientsChanged = new Subject<Ingredient[]>();
 
+  unities = [
+    'Quilo','Litro','Dente','Ramo','Pitada','Cabeça','Unidade','Fatia','Talo','Folha','Pedaço','Gramas','ml'
+    ];
+
   private ingredients: Ingredient[] = [
-    new Ingredient('1', 'batata', Unity.gramas),
-    new Ingredient('2', 'arroz', Unity.gramas),
-    new Ingredient('3', 'tomate', Unity.unidade),
-    new Ingredient('4', 'feijão', Unity.gramas),
-    new Ingredient('5', 'gergelim', Unity.gramas),
-    new Ingredient('6', 'farinha de trigo', Unity.gramas),
-    new Ingredient('7', 'berinjela', Unity.gramas),
-    new Ingredient('8', 'abobrinha', Unity.gramas),
+    new Ingredient('1', 'Batata', Unity.gramas),
+    new Ingredient('2', 'Arroz', Unity.gramas),
+    new Ingredient('3', 'Tomate', Unity.unidade),
+    new Ingredient('4', 'Feijão', Unity.gramas),
+    new Ingredient('5', 'Gergelim', Unity.gramas),
+    new Ingredient('6', 'Farinha de trigo', Unity.gramas),
+    new Ingredient('7', 'Berinjela', Unity.gramas),
+    new Ingredient('8', 'Abobrinha', Unity.gramas),
   ];
 
   constructor() {}
 
+  getUnities(){
+    return this.unities;
+  }
   getIngredients() {
     return this.ingredients;
   }
@@ -31,17 +38,17 @@ export class IngredientService {
   //   return ingredients;
   // }
 
-  /* 
+  /*
   código para quando for utilizar o BD
-  
+
   async getIngredients(): Observable<string[]> {
     const response = new Observable();
     this.ingredients;
   }*/
 
-  getIngredient(name: string) {
+  getIngredient(id: string) {
     return this.ingredients.find((ingredient) => {
-      return ingredient.name == name;
+      return ingredient.id == id;
     });
   }
 

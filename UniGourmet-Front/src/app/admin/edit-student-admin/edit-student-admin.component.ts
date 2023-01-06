@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
-import { map } from 'rxjs';
 import { ClassService } from 'src/app/services/class.service';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 import { StudentService } from 'src/app/services/student.service';
