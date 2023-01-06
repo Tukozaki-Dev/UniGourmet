@@ -24,11 +24,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from '../shared-components/file-upload/file-upload.component';
 import { ButtonComponent } from '../shared-components/button/button.component';
 import { IconButtonComponent } from '../shared-components/icon-button/icon-button.component';
-import { DialogComponent } from '../shared-components/dialog/dialog.component';
-import { TableExpandableRowsComponent } from '../shared-components/table-expandable-rows/table-expandable-rows.component';
-import { TableFilteringComponent } from '../shared-components/table-filtering/table-filtering.component';
-import { TableHeaderComponent } from '../shared-components/table-header/table-header.component';
-
 
 @NgModule({
   declarations: [
@@ -52,10 +47,6 @@ import { TableHeaderComponent } from '../shared-components/table-header/table-he
     FileUploadComponent,
     ButtonComponent,
     IconButtonComponent,
-    DialogComponent, 
-    TableExpandableRowsComponent, 
-    TableFilteringComponent,
-    TableHeaderComponent
   ],
   imports: [
     CommonModule,

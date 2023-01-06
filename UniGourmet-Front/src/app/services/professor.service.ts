@@ -27,14 +27,14 @@ export class ProfessorService {
           numberOfClasses: 24,
         },
         {
-          name: 'Cozinha Regional Brasileira',
-          registerCode: 'Sub123457',
+          name: 'Cozinha Asiática',
+          registerCode: 'Sub123452',
           semester: 2,
           numberOfClasses: 24,
         },
         {
-          name: 'Cozinha Regional Brasileira',
-          registerCode: 'Sub123457',
+          name: 'Cozinha Italiana',
+          registerCode: 'Sub123455',
           semester: 2,
           numberOfClasses: 24,
         },

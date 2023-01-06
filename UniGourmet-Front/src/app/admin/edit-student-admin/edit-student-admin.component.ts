@@ -32,7 +32,7 @@ export class EditStudentAdminComponent implements OnInit {
     imagePath: new FormControl(''),
     name: new FormControl('', Validators.required),
     registerCode: new FormControl('', Validators.required),
-    semester: new FormControl(0, Validators.required),
+    semester: new FormControl(+'', Validators.required),
     studentClass: new FormControl('', Validators.required),
   });
 
@@ -54,17 +54,17 @@ export class EditStudentAdminComponent implements OnInit {
     });
 
     //get the semesters from StudentService
-    this.semesters = this.studentService.getSemesters();
+    this.semesters = this.classService.getSemesters();
 
     //get all classes from ClassService
     let allClasses = this.classService.getClasses();
 
-    //map all Studant Class object and return a array with all the classes code
+    //map all Student Class object and return an array with all the classes code
     this.studentClasses = allClasses.map((classes)=>{
-       return classes.class_code;
+       return classes.className;
     })
 
-    //Gets the Student Register (RA) param to edit the professor
+    //Gets the Student Register (RA) param to edit the student
     let ra = this.route.snapshot.paramMap.get('ra');
 
     if(ra){
@@ -85,7 +85,7 @@ export class EditStudentAdminComponent implements OnInit {
         alert('Esse aluno não existe!');
         this.router.navigate(['../'], { relativeTo: this.route });
       }
-    } else {
+    } if(!ra) {
       this.editMode = false;
     }
   }
@@ -118,9 +118,8 @@ export class EditStudentAdminComponent implements OnInit {
     this.onCancel();
   }
   onCancel() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(['/alunos']);
   }
-
 
 
 }
