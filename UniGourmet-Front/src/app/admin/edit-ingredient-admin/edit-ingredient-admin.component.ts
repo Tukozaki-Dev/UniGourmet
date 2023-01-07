@@ -16,8 +16,8 @@ export class EditIngredientAdminComponent implements OnInit {
   public isMobileMenu: boolean;
 
   btnText = "Salvar"
-  editStudent = "";
-  addStudent =
+  editIngredient = "";
+  addIngredient =
     'Você está no modo cadastro de ingrediente, preencha todos os dados abaixo corretamente.';
   faImage = faImage;
   editMode: boolean = false;
@@ -41,7 +41,7 @@ export class EditIngredientAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editStudent = `Edite as informações do ingrediente ${this.ingredientForm.value.name} abaixo.`
+    this.editIngredient = `Edite as informações do ingrediente ${this.ingredientForm.value.name} abaixo.`
 
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
@@ -83,7 +83,7 @@ export class EditIngredientAdminComponent implements OnInit {
   }
 
   //method to add a new ingredient through the IngredientService
-   onAddStudent() {
+   onAddIngredient() {
     this.ingredientService.addIngredient(this.ingredientForm.getRawValue());
   }
 
@@ -92,7 +92,7 @@ export class EditIngredientAdminComponent implements OnInit {
     if (this.editMode) {
       this.onUpdate();
     } else {
-      this.onAddStudent();
+      this.onAddIngredient();
     }
     this.onCancel();
   }

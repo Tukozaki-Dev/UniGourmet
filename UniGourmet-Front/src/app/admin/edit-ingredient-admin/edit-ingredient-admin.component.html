@@ -3,12 +3,12 @@
       <div class="col-12 col-md-12 col-lg-12 left-space top-spacing bottom-spacing">
           <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
               <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
-                  {{ editStudent }}
+                  {{ editIngredient }}
               </p>
           </div>
           <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
               <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="!editMode">
-                  {{ addStudent }}
+                  {{ addIngredient }}
               </p>
           </div>
       </div>
@@ -16,20 +16,20 @@
   <form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()">
       <div class="row">
           <div class="col-12 text-center">
-              <mat-form-field appearance="fill" color="primary" class="width-large">
+              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">
                   <mat-label>Nome</mat-label>
                   <input matInput placeholder="Insira o nome do aluno aqui" formControlName="name">
               </mat-form-field>
           </div>
           <!-- Exibir esse campo apenas no modo edição -->
           <div class="col-12 text-center">
-              <mat-form-field appearance="fill" color="primary" class="width-large">
+              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'" *ngIf="editMode">
                   <mat-label>Id do ingrediente:</mat-label>
-                  <input matInput formControlName="id" [disabled]="true">
+                  <input matInput formControlName="id">
               </mat-form-field>
           </div>
           <div class="col-12 text-center">
-            <mat-form-field class="btn-margin width-large" appearance="fill">
+            <mat-form-field class="btn-margin" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">
               <mat-label>Unidade de medida</mat-label>
               <mat-select formControlName="unity" [(value)]="ingredientForm.value.unity">
                   <mat-option *ngFor="let myUnity of unity | keyvalue" [value]="myUnity.value">
