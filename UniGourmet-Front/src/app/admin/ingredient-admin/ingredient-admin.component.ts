@@ -12,11 +12,11 @@ export class IngredientAdminComponent implements OnInit {
   //button text - assigned to Input() [text] coming from component 'table-header'
   btnText: string = 'Adicionar Novo Ingrediente';
 
-  ////used in header <h1> - assigned to Input() [tableType] coming from component 'table-header'
+  //used in header <h1> - assigned to Input() [tableType] coming from component 'table-header'
   tableType: string = 'ingrediente';
 
-  //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
-  displayedColumns: string[] = ['id', 'nome', 'unidade', 'actions'];
+    //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
+  displayedColumns: string[] = ['id', 'name', 'unity', 'actions']
   
   //variable created to later receive ingredients from the service
   ingredients: Ingredient[] = [];

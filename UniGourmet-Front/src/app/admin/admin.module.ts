@@ -28,6 +28,7 @@ import { IconButtonComponent } from '../shared-components/icon-button/icon-butto
 import { TableExpandableRowsComponent } from '../shared-components/table-expandable-rows/table-expandable-rows.component';
 import { TableFilteringComponent } from '../shared-components/table-filtering/table-filtering.component';
 import { TableHeaderComponent } from '../shared-components/table-header/table-header.component';
+import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { TableHeaderComponent } from '../shared-components/table-header/table-he
     AngularMaterialModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    CdkTableModule
   ],
   exports: [AdminComponent],
 })

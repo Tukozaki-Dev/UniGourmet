@@ -1,15 +1,14 @@
 <div class="container my-5">
-  <app-table-header 
-    [btnText]="btnText" 
+  <app-table-header
+    [btnText]="btnText"
     [tableType]="tableType"
     (goToCreateNewEvent)="goToCreateNew()"
   ></app-table-header>
 
   <app-table-filtering
-  [displayedColumns]="displayedColumns"
-  [tableData]="ingredients"
-  (onClickEditEvent)="onClickEdit($event)"
-  (callbackMethodEvent)="onDeleteIngredient($event)"
+    [displayedColumns]="displayedColumns"
+    [tableData]="ingredients"
+    (onClickEditEvent)="onClickEdit($event)"
+    (callbackMethodEvent)="onDeleteIngredient($event)"
   ></app-table-filtering>
 </div>
-  

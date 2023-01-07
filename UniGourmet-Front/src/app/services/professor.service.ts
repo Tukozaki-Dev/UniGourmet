@@ -102,4 +102,11 @@ export class ProfessorService {
     this.professors[index] = editedProfessor;
     this.professorsChanged.next(this.professors.slice());
   }
+
+  deleteProfessor(ra: string) {
+    console.log('deletando ingrediente com id: ', ra);
+
+    this.professors = this.professors.filter((i)=>{ return i.registerCode !== ra});
+    return this.professors;
+  }
 }
