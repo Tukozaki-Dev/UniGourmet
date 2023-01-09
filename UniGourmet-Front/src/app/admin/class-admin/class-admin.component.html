@@ -1,1 +1,14 @@
-<app-edit-class-admin></app-edit-class-admin>
+<div class="container my-5">
+    <app-table-header 
+      [btnText]="btnText" 
+      [tableType]="tableType"
+      (goToCreateNewEvent)="goToCreateNew()"
+    ></app-table-header>
+  
+    <app-table-expandable-rows
+      [columnsToDisplay]="columnsToDisplay"
+      [tableData]="studentClasses"
+      (onClickEditEvent)="onClickEdit($event)"
+      (callbackMethodEvent)="onDeleteClass($event)"
+    ></app-table-expandable-rows>
+  </div>
