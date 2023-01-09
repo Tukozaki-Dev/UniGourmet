@@ -44,7 +44,7 @@ export class RecipeAdminComponent implements OnInit {
   }
 
   //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
-  onDeleteIngredient(id: string) {
+  onDeleteRecipe(id: string) {
     this.recipes = this.recipeService.deleteRecipe(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
   }
 
