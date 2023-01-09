@@ -50,7 +50,7 @@
                 <div class="example-element-detail"
                      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                   <div class="row">
-                      <div class="example-element-description col-12" *ngFor="let item of element | keyvalue">
+                      <div [hidden]="isExpandable(item.key)" class="example-element-description col-12" *ngFor="let item of element | keyvalue">
                           <p> {{ translateKey(item.key) | uppercase }}</p>
                           <div class="example-element-description-attribution" *ngIf="!isObj(item.value)">
                             <span>{{ item.value }}</span>

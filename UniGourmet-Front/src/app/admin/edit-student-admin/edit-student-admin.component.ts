@@ -61,7 +61,7 @@ export class EditStudentAdminComponent implements OnInit {
 
     //map all Student Class object and return an array with all the classes code
     this.studentClasses = allClasses.map((classes)=>{
-       return classes.className;
+       return classes.name;
     })
 
     //Gets the Student Register (RA) param to edit the student
