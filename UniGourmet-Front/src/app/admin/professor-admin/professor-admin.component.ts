@@ -1,84 +1,53 @@
 import { Professor } from './../../shared-components/models/professor.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
 import { ProfessorService } from 'src/app/services/professor.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
 
 
 @Component({
   selector: 'app-professor-admin',
   templateUrl: './professor-admin.component.html',
   styleUrls: ['./professor-admin.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+
 })
 export class ProfessorAdminComponent implements OnInit {
-  dataSource: MatTableDataSource<Professor>;
-  columnsToDisplay = ['name', 'registerCode', 'actions'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement: Professor | null;
+   //button text - assigned to Input() [text] coming from component 'table-header'
+   btnText: string = 'Adicionar Novo Professor';
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+   ////used in header <h1> - assigned to Input() [tableType] coming from component 'table-header'
+   tableType: string = 'professor(a)';
+
+   //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
+   columnsToDisplay: string[] = ['name', 'registerCode', 'actions'];
+  
+  //variable created to later receive ingredients from the service
+  professors: Professor[] = [];
 
   constructor(
-    private professorService: ProfessorService,
     private router: Router,
-    public dialog: MatDialog,
+    private professorService: ProfessorService,
   ) {}
 
   ngOnInit() {
-    const professors = this.professorService.getProfessors();
-    this.dataSource = new MatTableDataSource(professors);
-    // this.dataSource = this.professorService.getProfessors();
-    // console.log(this.dataSource[0].subjects[0].name);
+    //assign to variable professors all professors (calling professor service)
+    this.professors = this.professorService.getProfessors();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    console.log(this.dataSource);
+  //function called when btnClickEvent (coming from component 'button') is emitted
+  goToCreateNew() {
+    //send to 'cadastro' route
+    this.router.navigate(['professor/cadastro']);
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
+  onClickEdit(id: string) {
+    //send to 'editar' route, with id parameter
+    this.router.navigate(['professor', id]);
   }
 
-  onClick(event: string, id: string) {
-    if(event === 'edit') {
-      console.log('editando');
-      this.router.navigate([
-        '/professor',
-        id 
-      ]);
-      
-    }
-    if(event === 'delete') {
-      console.log('deletando');
-      this.openDialog('0ms', '0ms');
-    }
+  //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
+  onDeleteProfessor(id: string) {
+    this.professors = this.professorService.deleteProfessor(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DialogComponent, {
-      width: '250px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-  }
 }

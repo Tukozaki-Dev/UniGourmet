@@ -12,11 +12,11 @@ export class RecipeAdminComponent implements OnInit {
   //button text - assigned to Input() [text] coming from component 'table-header'
   btnText: string = 'Adicionar Nova Receita';
 
-  ////used in header <h1> - assigned to Input() [tableType] coming from component 'table-header'
+  //used in header <h1> - assigned to Input() [tableType] coming from component 'table-header'
   tableType: string = 'receita';
 
   //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
-  displayedColumns: string[] = ['id', 'nome', 'actions'];
+  displayedColumns: object = {'id':'id', 'name':'nome', 'actions':''}
   
   //variable created to later receive ingredients from the service
   recipes: Recipe[] = [];

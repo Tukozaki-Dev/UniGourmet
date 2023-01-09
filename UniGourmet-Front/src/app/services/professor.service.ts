@@ -40,9 +40,9 @@ export class ProfessorService {
         },
       ],
       [
-        { specialtyName: 'Carne', id: 2 },
-        { specialtyName: 'Peixe', id: 8 },
-        { specialtyName: 'Massa', id: 7 },
+        { name: 'Carne', id: 2 },
+        { name: 'Peixe', id: 8 },
+        { name: 'Massa', id: 7 },
       ]
     ),
     new Professor(
@@ -64,9 +64,9 @@ export class ProfessorService {
         },
       ],
       [
-        { specialtyName: 'Carne', id: 2 },
-        { specialtyName: 'Peixe', id: 8 },
-        { specialtyName: 'Conservas', id: 3 },
+        { name: 'Carne', id: 2 },
+        { name: 'Peixe', id: 8 },
+        { name: 'Conservas', id: 3 },
       ]
     ),
   ];
@@ -101,5 +101,12 @@ export class ProfessorService {
     });
     this.professors[index] = editedProfessor;
     this.professorsChanged.next(this.professors.slice());
+  }
+
+  deleteProfessor(ra: string) {
+    console.log('deletando professor com id: ', ra);
+
+    this.professors = this.professors.filter((i)=>{ return i.registerCode !== ra});
+    return this.professors;
   }
 }

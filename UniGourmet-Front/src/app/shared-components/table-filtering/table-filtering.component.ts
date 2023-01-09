@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogInterface } from '../dialog/dialog.interface';
 
+
 @Component({
   selector: 'app-table-filtering',
   templateUrl: './table-filtering.component.html',
@@ -20,9 +21,8 @@ export class TableFilteringComponent implements OnInit {
   deleteBtnIcon: string = 'delete'; 
 
   //defining Input() to receive from parent the name of table's colunms in a string array
-  @Input() displayedColumns: string[] = [];
-  
-  columnsToDisplay: string[] = this.displayedColumns.slice();
+  @Input() displayedColumns: object = {};
+  objectKeys = Object.keys;
 
   //defining Input() to receive from parent the data to populate the table
   @Input() tableData: any[] = []; 
@@ -46,12 +46,15 @@ export class TableFilteringComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.tableData);
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   //detect when itens are modified in service and then "update" table data source
   ngOnChanges() {
     this.dataSource = new MatTableDataSource(this.tableData);
-  }
-
-  ngAfterViewInit() {
+    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

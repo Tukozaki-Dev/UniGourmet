@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Discipline } from '../shared-components/models/discipline.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DisciplineService {
+  disciplinesChanged = new Subject<Discipline[]>();
+
   disciplines: Discipline[] = [
     new Discipline('Buffet e Restauração', 'Sub123450', 4, 20),
     new Discipline('Confeitaria', 'Sub123451', 2, 24),
@@ -21,6 +24,40 @@ export class DisciplineService {
   constructor() {}
 
   getDisciplines(){
+    return this.disciplines;
+  }
+
+  /*
+  código para quando for utilizar o BD
+
+  async getStudents(): Observable<string[]> {
+    const response = new Observable();
+    this.disciplines;
+  }*/
+
+  getDiscipline(ra: string) {
+    return this.disciplines.find((discipline) => {
+      return discipline.registerCode == ra;
+    });
+  }
+
+  addDiscipline(newStudent: Discipline) {
+    this.disciplines.push(newStudent);
+    this.disciplinesChanged.next(this.disciplines.slice());
+  }
+
+  updateDiscipline(ra: string, editedStudent: Discipline) {
+    const index = this.disciplines.findIndex((discipline) => {
+      return ra === discipline.registerCode;
+    });
+    this.disciplines[index] = editedStudent;
+    this.disciplinesChanged.next(this.disciplines.slice());
+  }
+
+  deleteDiscipline(ra: string) {
+    console.log('deletando disciplina com id: ', ra);
+
+    this.disciplines = this.disciplines.filter((i)=>{ return i.registerCode !== ra});
     return this.disciplines;
   }
 }

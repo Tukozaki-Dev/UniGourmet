@@ -65,7 +65,7 @@
                     <mat-chip-list #specialtyChipList aria-label="Specialty" class="specialtyCtrl">
                         <mat-chip *ngFor="let specialty of specialties"
                             (removed)="removeSpecialty(specialty.id.toString())">
-                            {{specialty.specialtyName}}
+                            {{specialty.name}}
                             <button matChipRemove>
                                 <mat-icon>cancel</mat-icon>
                             </button>
@@ -76,7 +76,7 @@
                     </mat-chip-list>
                     <mat-autocomplete #autoSpecialty="matAutocomplete" (optionSelected)="selectedSpecialty($event)">
                         <mat-option *ngFor="let specialty of filteredSpecialties | async" [value]="specialty">
-                            {{specialty.specialtyName}}
+                            {{specialty.name}}
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
