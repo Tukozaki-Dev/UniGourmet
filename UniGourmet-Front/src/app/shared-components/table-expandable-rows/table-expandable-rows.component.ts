@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogInterface } from '../dialog/dialog.interface';
 
@@ -36,6 +37,8 @@ import { DialogInterface } from '../dialog/dialog.interface';
   ],
 })
 export class TableExpandableRowsComponent implements OnInit {
+  public isMobileMenu: boolean;
+
   //variables used for property binding coming from icon-button component (btnColor and btnIcon)
   editBtnColor: string = 'primary';
   editBtnIcon: string = 'edit';
@@ -62,15 +65,21 @@ export class TableExpandableRowsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    private globalStatesService: GlobalStatesServiceService,
+    public dialog: MatDialog
+  ) {
+    this.isMobileMenu = this.globalStatesService.mobileMenu;
+  }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.tableData);
 
     this.columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
 
-    // this.expandedContent = this.columnsToDisplay.slice(-1);
-    // console.log(this.expandedContent);
+    this.globalStatesService.mobileMenuChanges.subscribe((val) => {
+      this.isMobileMenu = val;
+    });
   }
 
   ngAfterViewInit() {
