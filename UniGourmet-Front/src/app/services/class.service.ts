@@ -18,7 +18,7 @@ export class ClassService {
   private studentClasses: StudentClass[] = [
     new StudentClass(
       'Turma abc',
-      1,
+      '1AEDRC',
       4,
       'Manhã',
       "Presencial",
@@ -51,7 +51,7 @@ export class ClassService {
     ),
     new StudentClass(
       'Turma a',
-      1,
+      '1ASVSD',
       4,
       'Manhã',
       "Presencial",
@@ -84,7 +84,7 @@ export class ClassService {
     ),
     new StudentClass(
       'Turma b',
-      1,
+      '1ASBFE',
       4,
       'Manhã',
       "Presencial",
@@ -117,7 +117,7 @@ export class ClassService {
     ),
     new StudentClass(
       'Turma c',
-      1,
+      '1SAFGJ',
       4,
       'Manhã',
       "Presencial",
@@ -157,9 +157,9 @@ export class ClassService {
     return this.studentClasses;
   }
 
-  getClass(id: number) {
+  getClass(id: string) {
     return this.studentClasses.find((studentClass) => {
-      return studentClass.classCode == id;
+      return studentClass.registerCode == id;
     });
   }
 
@@ -180,18 +180,18 @@ export class ClassService {
     this.classChanged.next(this.studentClasses.slice());
   }
 
-  updateClass(id: number, editedClass: StudentClass) {
+  updateClass(id: string, editedClass: StudentClass) {
     const index = this.studentClasses.findIndex((selectedClass) => {
-      return id === selectedClass.classCode;
+      return id === selectedClass.registerCode;
     });
     this.studentClasses[index] = editedClass;
     this.classChanged.next(this.studentClasses.slice());
   }
 
-  deleteProfessor(ra: number) {
+  deleteClass(ra: string) {
     console.log('deletando turma com id: ', ra);
 
-    this.studentClasses = this.studentClasses.filter((i)=>{ return i.classCode !== ra});
+    this.studentClasses = this.studentClasses.filter((i)=>{ return i.registerCode !== ra});
     return this.studentClasses;
   }
 

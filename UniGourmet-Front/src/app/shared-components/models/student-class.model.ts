@@ -1,23 +1,23 @@
 import { Discipline } from './discipline.model';
 
 export class StudentClass {
-  className: string;
-  classCode: number;
+  name: string;
+  registerCode: string;
   semester: number;
   shift: string;
   category: string;
   disciplines: Discipline[];
 
   constructor(
-    className: string,
-    classCode: number,
+    name: string,
+    registerCode: string,
     semester: number,
     shift: string,
     category: string,
     disciplines: Discipline[],
   ) {
-    this.className = className;
-    this.classCode = classCode;
+    this.name = name;
+    this.registerCode = registerCode;
     this.semester = semester;
     this.shift = shift;
     this.category = category;

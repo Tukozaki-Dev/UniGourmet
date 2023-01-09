@@ -21,14 +21,14 @@
               <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-large':'width-large'">
                 <mat-label>Nome da turma:</mat-label>
                 <input matInput placeholder="Digite o nome da turma"
-                formControlName="className" #className [value]="classForm.value.className">
+                formControlName="name" #name [value]="classForm.value.name">
               </mat-form-field>
             </div>
             <div class="col-6 text-end bottom-spacing-2">
                 <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-small':'input-width-large-2'">
                     <mat-label>Código da turma:</mat-label>
                     <input matInput placeholder="Digite o código da turma"
-                    formControlName="classCode" #classCode [value]="classForm.value.classCode">
+                    formControlName="registerCode" #registerCode [value]="classForm.value.registerCode">
                 </mat-form-field>
             </div>
             <div class="col-6 bottom-spacing-2">

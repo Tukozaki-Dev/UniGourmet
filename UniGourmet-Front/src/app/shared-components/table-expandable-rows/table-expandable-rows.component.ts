@@ -118,6 +118,21 @@ export class TableExpandableRowsComponent implements OnInit {
       case 'numberOfClasses':
         return 'Quantidade de Aulas/Semestre';
         break;
+      case 'className':
+        return 'nome';
+        break;
+      case 'classCode':
+        return 'código de registro';
+        break;
+      case 'shift':
+        return 'turno';
+        break;
+      case 'disciplines':
+        return 'matérias';
+        break;
+      case 'category':
+        return 'modalidade';
+        break;
       default:
         return '';
     }
@@ -125,6 +140,26 @@ export class TableExpandableRowsComponent implements OnInit {
 
   isObj(val): boolean {
     return typeof val === 'object';
+  }
+
+  isExpandable(val) {
+    if (val == 'imagePath') {
+      return true;
+    }
+    if (val == 'name') {
+      return true;
+    }
+    if (val == 'registerCode') {
+      return true;
+    }
+    if (val == 'shift') {
+      return true;
+    }
+    if (val == 'category') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   //emit a event when user clicks on edit button

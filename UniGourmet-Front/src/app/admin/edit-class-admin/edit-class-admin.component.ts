@@ -36,8 +36,8 @@ export class EditClassAdminComponent implements OnInit {
   classesCategories = [];
 
   classForm = this.fb.group({
-    className: ['', Validators.required],
-    classCode: [+'', Validators.required],
+    name: ['', Validators.required],
+    registerCode: ['', Validators.required],
     semester: [+'', Validators.required],
     shift: ['', Validators.required],
     category: ['', Validators.required],
@@ -57,7 +57,7 @@ export class EditClassAdminComponent implements OnInit {
 
   ngOnInit() {
     this.addClass ='Você está no modo cadastro de turma, preencha todos os dados abaixo corretamente.';
-    this.editClass = `Edite as informações da turma ${this.classForm.value.className} abaixo.`;
+    this.editClass = `Edite as informações da turma ${this.classForm.value.name} abaixo.`;
 
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
@@ -82,15 +82,15 @@ export class EditClassAdminComponent implements OnInit {
     if(id){
       this.editMode = true;
       //Search the Class Code at ClassService
-      this.selectedClass = this.classService.getClass(+id);
+      this.selectedClass = this.classService.getClass(id);
       this.selectedClass.disciplines.forEach(()=>{
         this.onAddDiscipline();
       });
       if (this.selectedClass) {
         //updates the form with the class previus data
         this.classForm.setValue({
-          className: this.selectedClass.className,
-          classCode: this.selectedClass.classCode,
+          name: this.selectedClass.name,
+          registerCode: this.selectedClass.registerCode,
           semester: this.selectedClass.semester,
           shift: this.selectedClass.shift,
           category: this.selectedClass.category,
@@ -125,9 +125,9 @@ export class EditClassAdminComponent implements OnInit {
   //method to edit class through the ClassService
    onUpdate() {
     this.classService.updateClass(
-      this.classForm.value.classCode,{
-        className: this.classForm.value.className,
-        classCode: this.classForm.value.classCode,
+      this.classForm.value.registerCode,{
+        name: this.classForm.value.name,
+        registerCode: this.classForm.value.registerCode,
         semester: this.classForm.value.semester,
         shift: this.classForm.value.shift,
         category: this.classForm.value.category,
