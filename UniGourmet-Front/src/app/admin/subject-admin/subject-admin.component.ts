@@ -44,7 +44,7 @@ export class SubjectAdminComponent implements OnInit {
   }
 
   //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
-  onDeleteProfessor(id: string) {
+  onDeleteDiscipline(id: string) {
     this.disciplines = this.disciplineService.deleteDiscipline(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
   }
 
