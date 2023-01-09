@@ -16,7 +16,7 @@ export class IngredientAdminComponent implements OnInit {
   tableType: string = 'ingrediente';
 
     //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
-  displayedColumns: string[] = ['id', 'name', 'unity', 'actions']
+  displayedColumns: object = {'id':'id', 'name':'nome', 'unity':'unidade', 'actions':''}
   
   //variable created to later receive ingredients from the service
   ingredients: Ingredient[] = [];

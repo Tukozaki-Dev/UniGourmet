@@ -218,7 +218,7 @@ export class EditProfessorAdminComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.allSpecialties.filter((specialty) =>
-      specialty.specialtyName.toLowerCase().includes(filterValue)
+      specialty.name.toLowerCase().includes(filterValue)
     );
   }
 }

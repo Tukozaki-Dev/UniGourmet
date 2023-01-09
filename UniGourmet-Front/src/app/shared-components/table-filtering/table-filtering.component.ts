@@ -21,7 +21,8 @@ export class TableFilteringComponent implements OnInit {
   deleteBtnIcon: string = 'delete'; 
 
   //defining Input() to receive from parent the name of table's colunms in a string array
-  @Input() displayedColumns: string[] = [];
+  @Input() displayedColumns: object = {};
+  objectKeys = Object.keys;
 
   //defining Input() to receive from parent the data to populate the table
   @Input() tableData: any[] = []; 

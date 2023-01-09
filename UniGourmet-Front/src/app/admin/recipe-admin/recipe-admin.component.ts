@@ -16,7 +16,7 @@ export class RecipeAdminComponent implements OnInit {
   tableType: string = 'receita';
 
   //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
-  displayedColumns: string[] = ['id', 'name', 'actions'];
+  displayedColumns: object = {'id':'id', 'name':'nome', 'actions':''}
   
   //variable created to later receive ingredients from the service
   recipes: Recipe[] = [];

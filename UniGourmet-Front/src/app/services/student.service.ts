@@ -56,4 +56,11 @@ export class StudentService {
     this.students[index] = editedStudent;
     this.studentsChanged.next(this.students.slice());
   }
+
+  deleteStudent(ra: string) {
+    console.log('deletando aluno com id: ', ra);
+
+    this.students = this.students.filter((i)=>{ return i.registerCode !== ra});
+    return this.students;
+  }
 }

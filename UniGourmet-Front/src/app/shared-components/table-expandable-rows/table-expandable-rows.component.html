@@ -14,7 +14,7 @@
             >
         
             <ng-container matColumnDef={{column}} *ngFor="let column of columnsToDisplay">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="column == 'actions' ? true : false"> {{ column | uppercase }} </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="column == 'actions' ? true : false"> {{ translateKey(column) | uppercase }} </th>
 
               <ng-container *ngIf="column !== 'actions'">
                 <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
@@ -24,12 +24,12 @@
                 <app-icon-button
                 [btnColor]="editBtnColor"
                 [btnIcon]="editBtnIcon"
-                (iconBtnEvent)="onClickEdit(element.id)"
+                (iconBtnEvent)="onClickEdit(element.registerCode)"
               ></app-icon-button>
               <app-icon-button
                 [btnColor]="deleteBtnColor"
                 [btnIcon]="deleteBtnIcon"
-                (iconBtnEvent)="onClickDelete(element.id)"
+                (iconBtnEvent)="onClickDelete(element.registerCode)"
               ></app-icon-button>
               </td>
             </ng-container>
@@ -50,11 +50,16 @@
                 <div class="example-element-detail"
                      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                   <div class="row">
-                      <div class="example-element-description col-12" *ngFor="let title of expandedContentTitle">
-                          <p> {{ title | uppercase }}</p>
-                          <span class="example-element-description-attribution" *ngFor="let subject of element.subjects">
-                            {{subject.name}} | 
-                          </span>
+                      <div class="example-element-description col-12" *ngFor="let item of element | keyvalue">
+                          <p> {{ translateKey(item.key) | uppercase }}</p>
+                          <div class="example-element-description-attribution" *ngIf="!isObj(item.value)">
+                            <span>{{ item.value }}</span>
+                          </div>
+                          <div class="example-element-description-attribution" *ngIf="isObj(item.value)">
+                            <span *ngFor="let item of item.value | keyvalue">
+                              {{ item.value['name'] }}
+                            </span>
+                          </div>
                       </div>
                   </div>
                 </div>

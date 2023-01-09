@@ -1,1 +1,14 @@
-<app-edit-subject-admin></app-edit-subject-admin>
+<div class="container my-5">
+  <app-table-header
+    [btnText]="btnText"
+    [tableType]="tableType"
+    (goToCreateNewEvent)="goToCreateNew()"
+  ></app-table-header>
+
+  <app-table-expandable-rows
+    [columnsToDisplay]="columnsToDisplay"
+    [tableData]="disciplines"
+    (onClickEditEvent)="onClickEdit($event)"
+    (callbackMethodEvent)="onDeleteProfessor($event)"
+  ></app-table-expandable-rows>
+</div>

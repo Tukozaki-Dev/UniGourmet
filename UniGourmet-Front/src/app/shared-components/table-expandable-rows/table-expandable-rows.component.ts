@@ -1,5 +1,18 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,36 +26,34 @@ import { DialogInterface } from '../dialog/dialog.interface';
   styleUrls: ['./table-expandable-rows.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
     ]),
   ],
 })
 export class TableExpandableRowsComponent implements OnInit {
-
   //variables used for property binding coming from icon-button component (btnColor and btnIcon)
   editBtnColor: string = 'primary';
-  editBtnIcon: string = 'edit'; 
+  editBtnIcon: string = 'edit';
   deleteBtnColor: string = 'warn';
   deleteBtnIcon: string = 'delete';
 
   //defining Input() to receive from parent the name of table's colunms in a string array
   @Input() columnsToDisplay: string[] = [];
-  // columnsToDisplay: string[] = ['name', 'registerCode', 'actions'];
-  
+
   //defining Input() to receive from parent the data to populate the table
-  @Input() tableData: any[] = []; 
-  
+  @Input() tableData: any[] = [];
+
   columnsToDisplayWithExpand: [...string[], string];
 
-  @Input() expandedContentTitle: string[] = [];
-  
   //creating variable of type MatTableDataSource. This variable will receive tableData later
   dataSource: MatTableDataSource<any>;
-  
-  expandedElement: any | null;
 
+  expandedElement: any | null;
 
   @Output() onClickEditEvent: EventEmitter<string> = new EventEmitter();
 
@@ -51,9 +62,7 @@ export class TableExpandableRowsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-    public dialog: MatDialog,
-  ) { }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.tableData);
@@ -85,7 +94,39 @@ export class TableExpandableRowsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
+  translateKey(key) {
+    switch (key) {
+      case 'name':
+        return 'nome';
+        break;
+      case 'registerCode':
+        return 'código de registro';
+        break;
+      case 'specialties':
+        return 'especialidades';
+        break;
+      case 'subjects':
+        return 'matérias';
+        break;
+      case 'semester':
+        return 'semestre';
+        break;
+      case 'studentClass':
+        return 'Turma';
+        break;
+      case 'numberOfClasses':
+        return 'Quantidade de Aulas/Semestre';
+        break;
+      default:
+        return '';
+    }
+  }
+
+  isObj(val): boolean {
+    return typeof val === 'object';
+  }
+
   //emit a event when user clicks on edit button
   onClickEdit(id: string) {
     this.onClickEditEvent.emit(id);
@@ -118,5 +159,4 @@ export class TableExpandableRowsComponent implements OnInit {
   sendSubmit(id: string) {
     this.callbackMethodEvent.emit(id);
   }
-
 }

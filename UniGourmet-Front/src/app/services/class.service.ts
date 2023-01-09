@@ -188,5 +188,12 @@ export class ClassService {
     this.classChanged.next(this.studentClasses.slice());
   }
 
+  deleteProfessor(ra: number) {
+    console.log('deletando turma com id: ', ra);
+
+    this.studentClasses = this.studentClasses.filter((i)=>{ return i.classCode !== ra});
+    return this.studentClasses;
+  }
+
 
 }
