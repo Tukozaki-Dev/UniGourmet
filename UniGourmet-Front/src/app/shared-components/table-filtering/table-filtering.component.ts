@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogInterface } from '../dialog/dialog.interface';
 
@@ -13,6 +14,7 @@ import { DialogInterface } from '../dialog/dialog.interface';
   styleUrls: ['./table-filtering.component.css']
 })
 export class TableFilteringComponent implements OnInit {
+  public isMobileMenu: boolean;
 
   //variables used for property binding coming from icon-button component (btnColor and btnIcon)
   editBtnColor: string = 'primary';
@@ -38,12 +40,19 @@ export class TableFilteringComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    private globalStatesService: GlobalStatesServiceService,
     public dialog: MatDialog,
-  ) { }
+  ) { 
+    this.isMobileMenu = this.globalStatesService.mobileMenu;
+  }
 
   ngOnInit(): void {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.tableData);
+
+    this.globalStatesService.mobileMenuChanges.subscribe((val) => {
+      this.isMobileMenu = val;
+    });
   }
 
   ngAfterViewInit() {
