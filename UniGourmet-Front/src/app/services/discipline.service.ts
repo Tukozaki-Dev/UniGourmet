@@ -1,30 +1,58 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Discipline } from '../shared-components/models/discipline.model';
+import { DisciplineWithClasses } from '../shared-components/models/DisciplineWithClasses.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DisciplineService {
-  disciplinesChanged = new Subject<Discipline[]>();
+  disciplineWithClassesChanged = new Subject<DisciplineWithClasses[]>();
 
   disciplines: Discipline[] = [
-    new Discipline('Buffet e Restauração', 'Sub123450', 4, 20),
-    new Discipline('Confeitaria', 'Sub123451', 2, 24),
-    new Discipline('Cozinha Asiática', 'Sub123452', 2, 24),
-    new Discipline('Cozinha das Américas', 'Sub123453', 2, 24),
-    new Discipline('Cozinha Francesa', 'Sub123454', 2, 24),
-    new Discipline('Cozinha Italiana', 'Sub123455', 2, 24),
-    new Discipline('Cozinha Mediterrânea', 'Sub123456', 2, 24),
-    new Discipline('Cozinha Regional Brasileira', 'Sub123457', 2, 24),
-    new Discipline('Panificação', 'Sub123458', 2, 24),
-    new Discipline('Princípios e Fundamentos da Cozinha', 'Sub123459', 2, 24),
-    new Discipline('Técnicas Clássicas', 'Sub123410', 2, 24),
+    new Discipline('Buffet e Restauração', 'Sub123450', 4, 16),
+    new Discipline('Confeitaria', 'Sub123451', 2, 32),
+    new Discipline('Cozinha Asiática', 'Sub123452', 2, 48),
+    new Discipline('Cozinha das Américas', 'Sub123453', 2, 16),
+    new Discipline('Cozinha Francesa', 'Sub123454', 2, 32),
+    new Discipline('Cozinha Italiana', 'Sub123455', 2, 48),
+    new Discipline('Cozinha Mediterrânea', 'Sub123456', 2, 32),
+    new Discipline('Cozinha Regional Brasileira', 'Sub123457', 2, 32),
+    new Discipline('Panificação', 'Sub123458', 2, 16),
+    new Discipline('Princípios e Fundamentos da Cozinha', 'Sub123459', 2, 32),
+    new Discipline('Técnicas Clássicas', 'Sub123410', 2, 16),
   ];
+
+  disciplineWithClasses: DisciplineWithClasses[] = [
+    new DisciplineWithClasses (new Discipline ('Cozinha Mediterrânea', 'Sub123456', 2, 32),
+    [
+      {recipeName: 'Mjadra', recipeId: 'CM0032'},
+      {recipeName: 'Tajine', recipeId: 'CM0033'},
+    ]),
+  ]
+
+  private semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+  private numberOfClasses = [16, 32, 48];
+
+
   constructor() {}
 
+  getNumberOfClasses(){
+    return this.numberOfClasses;
+  }
+
+  getSemesters(){
+    return this.semesters;
+  }
+
+  //get all displines without classes
   getDisciplines(){
     return this.disciplines;
+  }
+
+  //get all displines with classes
+  getDisciplinesWithClasses(){
+    return this.disciplineWithClasses;
   }
 
   /*
@@ -35,28 +63,34 @@ export class DisciplineService {
     this.disciplines;
   }*/
 
+  //get one displines without classes
   getDiscipline(ra: string) {
-    return this.disciplines.find((discipline) => {
-      return discipline.registerCode == ra;
+    return this.disciplines.find((disciplines) => {
+      return disciplines.registerCode == ra;
     });
   }
 
-  addDiscipline(newStudent: Discipline) {
-    this.disciplines.push(newStudent);
-    this.disciplinesChanged.next(this.disciplines.slice());
+  //get one displine with classes
+  getDisciplineWithClasses(ra: string) {
+    return this.disciplineWithClasses.find((disciplineWithClasses) => {
+      return disciplineWithClasses.subject.registerCode == ra;
+    });
   }
 
-  updateDiscipline(ra: string, editedStudent: Discipline) {
-    const index = this.disciplines.findIndex((discipline) => {
-      return ra === discipline.registerCode;
+  addDisciplineWithClasses(newDiscipline: DisciplineWithClasses) {
+    this.disciplineWithClasses.push(newDiscipline);
+    this.disciplineWithClassesChanged.next(this.disciplineWithClasses.slice());
+  }
+
+  updateDisciplineWithClasses(ra: string, editedDispline: DisciplineWithClasses) {
+    const index = this.disciplineWithClasses.findIndex((discipline) => {
+      return ra === discipline.subject.registerCode;
     });
-    this.disciplines[index] = editedStudent;
-    this.disciplinesChanged.next(this.disciplines.slice());
+    this.disciplineWithClasses[index] = editedDispline;
+    this.disciplineWithClassesChanged.next(this.disciplineWithClasses.slice());
   }
 
   deleteDiscipline(ra: string) {
-    console.log('deletando disciplina com id: ', ra);
-
     this.disciplines = this.disciplines.filter((i)=>{ return i.registerCode !== ra});
     return this.disciplines;
   }
