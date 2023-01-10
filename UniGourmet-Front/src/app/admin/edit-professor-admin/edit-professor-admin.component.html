@@ -1,6 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12 left-space top-spacing">
+          <a routerLink="../../professores">
+            <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
+          </a>
             <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
                 <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
                     {{ editProfessor }}
@@ -15,13 +18,12 @@
     </div>
     <form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
         <div class="row">
-
             <div class="col-lg-6 order-lg-1 col-md-6 order-md-1 col-12 text-center bottom-spacing-2">
                 <div class="square-container" *ngIf="!editMode">
                     <app-file-upload></app-file-upload>
                 </div>
                 <div class="img-container" *ngIf="editMode">
-                    <img [src]="imagePath" class="img-responsive img-size" class="imagePath">
+                    <img [src]="imagePath" class="img-responsive img-size imagePath">
                 </div>
             </div>
             <div class="col-lg-6 order-lg-3 col-md-6 order-md-3 col-12 text-center">

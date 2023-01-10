@@ -6,7 +6,10 @@ import { DisciplineService } from 'src/app/services/discipline.service';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 import { DisciplineWithClasses } from 'src/app/shared-components/models/DisciplineWithClasses.model';
 
-
+export interface lesson {
+  recipeName: string,
+  recipeId: string,
+}
 
 @Component({
   selector: 'app-edit-subject-admin',
@@ -22,6 +25,7 @@ export class EditSubjectAdminComponent implements OnInit {
   deleteBtnColor: string = 'warn';
   deleteBtnIcon: string = 'delete';
   btnText = "Salvar";
+  addRecipeText = "Adicionar Receita";
   editSubject ="";
   addSubject = "";
   addDisciplineIcon = '+';
@@ -29,22 +33,19 @@ export class EditSubjectAdminComponent implements OnInit {
   editMode = false;
   selectedSubject: DisciplineWithClasses;
 
-  allLessons = [{
-    recipeName: "",
-    recipeId: "",
-  }];
+  allLessons:lesson[] = [];
 
   semesters = [];
   numberOfClasses = [];
 
   subjectForm = this.fb.group({
-    subject: {
+    subject: this.fb.group({
       name: ['', Validators.required],
       registerCode: ['', Validators.required],
-      semester: ['', Validators.required],
-      numberOfClasses: ['', Validators.required],
-    },
-    lessons: this.fb.array(this.allLessons, Validators.required),
+      semester: [0, Validators.required],
+      numberOfClasses: [0, Validators.required],
+    }),
+    lessons: this.fb.array([this.allLessons], Validators.required),
   });
 
   constructor(
@@ -73,27 +74,26 @@ export class EditSubjectAdminComponent implements OnInit {
 
     //get all lessons Object from DisciplineService
 
-    this.allLessons = this.allLessons.map((lessons => {
-      let lesson = {
-        recipeName: lessons.recipeName,
-        recipeId: lessons.recipeId
-      }
-      return lesson
-    }))
+   /*  this.allLessons = this.disciplineService.getDisciplinesWithClasses().map((disciplinesWithClasses => {
+
+      return disciplinesWithClasses.lessons.push()
+    }))  */
+
+    console.log(this.allLessons)
 
     //Gets the Subject Id param to edit the Subject
-    let id = this.route.snapshot.paramMap.get('id');
+    let ra = this.route.snapshot.paramMap.get('id');
 
-    if(id){
+    if(ra){
       this.editMode = true;
       //Search the Subject Id at SubjectService
-      this.selectedSubject.subject = this.disciplineService.getDiscipline(id);
+      this.selectedSubject = this.disciplineService.getDisciplineWithClasses(ra);
       this.selectedSubject.lessons.forEach(()=>{
         this.onAddLesson();
       });
-      if (this.selectedSubject) {
+      if(this.selectedSubject.subject.registerCode) {
         //updates the form with the subject previus data
-        /* this.subjectForm.setValue({
+         this.subjectForm.setValue({
           subject: {
             name: this.selectedSubject.subject.name,
             registerCode: this.selectedSubject.subject.registerCode,
@@ -101,13 +101,13 @@ export class EditSubjectAdminComponent implements OnInit {
             numberOfClasses: this.selectedSubject.subject.numberOfClasses,
           },
           lessons: this.selectedSubject.lessons,
-        }); */
+        });
       } else {
-        //The register code don't exists will throw an error
+        //If the Subject Id don't exists will throw an error
         alert('Essa matéria não existe!');
         this.router.navigate(['../'], { relativeTo: this.route });
       }
-    } if(!id) {
+    } if(!ra) {
       this.editMode = false;
     }
   }
@@ -118,10 +118,13 @@ export class EditSubjectAdminComponent implements OnInit {
 
   onAddLesson(){
     //creates a new select box each time that add button is called
-    const lessonName = new FormControl();
+    const lessonForm = this.fb.group({
+      lessonName:'',
+      lessonId: '',
+    });
 
     //add the new select box to the formgroup
-    this.lessons.push(lessonName);
+    this.lessons.push(lessonForm);
   }
 
   onDeleteDiscipline(lessonIndex: number) {
@@ -130,20 +133,25 @@ export class EditSubjectAdminComponent implements OnInit {
 
   //method to edit class through the ClassService
    onUpdate() {
-    /* this.disciplineService.updateDiscipline(
+      this.disciplineService.updateDisciplineWithClasses(
       this.subjectForm.value.subject.registerCode,{
+        subject:{
         name: this.subjectForm.value.subject.name,
         registerCode: this.subjectForm.value.subject.registerCode,
         semester: this.subjectForm.value.subject.semester,
-        numberOfClasses: this.subjectForm.value.subject.numberOfClasses,
+        numberOfClasses: this.subjectForm.value.subject.numberOfClasses},
         lessons: this.subjectForm.value.lessons
       }
-    ); */
+    );
+  }
+
+  onAddRecipe(){
+
   }
 
   //method to add a new class through the ClassService
    onAddDiscipline() {
-  //  this.disciplineService.addDiscipline(this.subjectForm.getRawValue());
+    this.disciplineService.addDisciplineWithClasses(this.subjectForm.getRawValue());
   }
 
   //check if you are in edit or add mode and send updates
@@ -159,8 +167,5 @@ export class EditSubjectAdminComponent implements OnInit {
     this.router.navigate(['/materias']);
   }
 
-  compareByRegisterCode(f1: DisciplineWithClasses, f2: DisciplineWithClasses): boolean {
-    return f1 && f2 && f1.lessons[0] === f2.lessons[0];
-}
 
 }

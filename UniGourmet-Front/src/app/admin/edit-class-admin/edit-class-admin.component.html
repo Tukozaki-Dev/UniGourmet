@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
       <div class="col-12 col-md-12 col-lg-12 left-space top-spacing">
+        <a routerLink="../../turmas">
+          <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
+        </a>
           <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
               <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
                   {{ editClass }}

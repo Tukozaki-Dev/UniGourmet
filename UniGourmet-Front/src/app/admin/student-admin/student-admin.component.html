@@ -1,6 +1,6 @@
 <div class="container my-5">
-  <app-table-header 
-    [btnText]="btnText" 
+  <app-table-header
+    [btnText]="btnText"
     [tableType]="tableType"
     (goToCreateNewEvent)="goToCreateNew()"
   ></app-table-header>
@@ -9,6 +9,6 @@
     [columnsToDisplay]="columnsToDisplay"
     [tableData]="students"
     (onClickEditEvent)="onClickEdit($event)"
-    (callbackMethodEvent)="onDeleteProfessor($event)"
+    (callbackMethodEvent)="onDeleteStudent($event)"
   ></app-table-expandable-rows>
 </div>
