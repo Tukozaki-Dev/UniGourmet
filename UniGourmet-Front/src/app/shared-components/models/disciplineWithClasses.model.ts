@@ -2,15 +2,21 @@ import { Discipline } from "./discipline.model";
 
 export class DisciplineWithClasses {
   subject: Discipline;
-  lessons: {
-    recipeName: string,
-    recipeId: string
-  }[]
+  lessons: Lesson[]
   constructor(
     subject: Discipline,
-    lessons: { recipeName: string, recipeId: string}[]
+    lessons: Lesson[]
   ) {
     this.subject = subject;
     this.lessons = lessons;
   }
+}
+
+export interface Lesson {
+  recipeLessons: RecipeLesson [];
+}
+
+export interface RecipeLesson {
+  recipeName: string,
+  recipeId: string,
 }
