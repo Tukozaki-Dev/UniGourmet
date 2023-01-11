@@ -31,6 +31,11 @@
                 [btnIcon]="deleteBtnIcon"
                 (iconBtnEvent)="onClickDelete(element.registerCode)"
               ></app-icon-button>
+              <app-icon-button
+              [btnColor]="detailsBtnColor"
+              [btnIcon]="detailsBtnIcon"
+              (iconBtnEvent)="onClickDetails(element.registerCode)"
+            ></app-icon-button>
               </td>
             </ng-container>
           

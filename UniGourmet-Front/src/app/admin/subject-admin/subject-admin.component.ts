@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DisciplineService } from 'src/app/services/discipline.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { Discipline } from 'src/app/shared-components/models/discipline.model';
 
 @Component({
@@ -22,7 +23,7 @@ export class SubjectAdminComponent implements OnInit {
  disciplines: Discipline[] = [];
 
   constructor(
-    private router: Router,
+    private sharedService: SharedService,
     private disciplineService: DisciplineService,
   ) { }
 
@@ -34,18 +35,23 @@ export class SubjectAdminComponent implements OnInit {
   //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
     //send to 'cadastro' route
-    this.router.navigate(['materia/cadastro']);
+    this.sharedService.sendTo('materia/cadastro');
   }
 
   //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
   onClickEdit(id: string) {
     //send to 'editar' route, with id parameter
-    this.router.navigate(['materia', id]);
+    this.sharedService.sendToId('materia', id);
   }
 
   //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
   onDeleteDiscipline(id: string) {
     this.disciplines = this.disciplineService.deleteDiscipline(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
+  }
+
+  onDetailsDiscipline(id: string) {
+    //send to 'editar' route, with id parameter
+    this.sharedService.sendToId('materia', id);
   }
 
 }
