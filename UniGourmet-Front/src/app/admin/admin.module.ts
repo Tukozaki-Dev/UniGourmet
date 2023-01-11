@@ -29,6 +29,12 @@ import { TableExpandableRowsComponent } from '../shared-components/table-expanda
 import { TableFilteringComponent } from '../shared-components/table-filtering/table-filtering.component';
 import { TableHeaderComponent } from '../shared-components/table-header/table-header.component';
 import { CdkTableModule } from '@angular/cdk/table';
+import { StudentDetailsAdminComponent } from './student-details-admin/student-details-admin.component';
+import { ProfessorDetailsAdminComponent } from './professor-details-admin/professor-details-admin.component';
+import { IngredientDetailsAdminComponent } from './ingredient-details-admin/ingredient-details-admin.component';
+import { RecipeDetailsAdminComponent } from './recipe-details-admin/recipe-details-admin.component';
+import { ClassDetailsAdminComponent } from './class-details-admin/class-details-admin.component';
+import { SubjectDetailsAdminComponent } from './subject-details-admin/subject-details-admin.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +61,13 @@ import { CdkTableModule } from '@angular/cdk/table';
     TableExpandableRowsComponent,
     TableFilteringComponent,
     TableHeaderComponent,
-    DialogComponent
+    DialogComponent,
+    StudentDetailsAdminComponent,
+    ProfessorDetailsAdminComponent,
+    IngredientDetailsAdminComponent,
+    RecipeDetailsAdminComponent,
+    ClassDetailsAdminComponent,
+    SubjectDetailsAdminComponent
   ],
   imports: [
     CommonModule,

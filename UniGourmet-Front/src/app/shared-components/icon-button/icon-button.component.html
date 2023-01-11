@@ -1,5 +1,5 @@
-    <button mat-mini-fab color="{{btnColor}}" aria-label="edit button with icon" (click)="iconBtnClick()">
-      <mat-icon>{{ btnIcon }}</mat-icon>
+    <button [ngClass]="isMobileMenu?'button-size':''" mat-mini-fab color="{{btnColor}}" aria-label="edit button with icon" (click)="iconBtnClick()">
+      <mat-icon [ngClass]="isMobileMenu?'icon-size':''">{{ btnIcon }}</mat-icon>
     </button>
 
 

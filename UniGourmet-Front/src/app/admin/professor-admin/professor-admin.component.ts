@@ -2,6 +2,7 @@ import { Professor } from './../../shared-components/models/professor.model';
 import { Component, OnInit } from '@angular/core';
 import { ProfessorService } from 'src/app/services/professor.service';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class ProfessorAdminComponent implements OnInit {
   professors: Professor[] = [];
 
   constructor(
-    private router: Router,
+    private sharedService: SharedService,
     private professorService: ProfessorService,
   ) {}
 
@@ -36,18 +37,23 @@ export class ProfessorAdminComponent implements OnInit {
   //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
     //send to 'cadastro' route
-    this.router.navigate(['professor/cadastro']);
+    this.sharedService.sendTo('professor');
   }
 
   //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
   onClickEdit(id: string) {
     //send to 'editar' route, with id parameter
-    this.router.navigate(['professor', id]);
+    this.sharedService.sendToId('professor', id);
   }
 
   //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
   onDeleteProfessor(id: string) {
     this.professors = this.professorService.deleteProfessor(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
+  }
+
+  onDetailsProfessor(id: string) {
+    //send to 'ver' route, with id parameter
+    this.sharedService.sendToId('professor', id);
   }
 
 }

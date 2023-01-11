@@ -1,3 +1,9 @@
+import { ClassDetailsAdminComponent } from './admin/class-details-admin/class-details-admin.component';
+import { SubjectDetailsAdminComponent } from './admin/subject-details-admin/subject-details-admin.component';
+import { StudentDetailsAdminComponent } from './admin/student-details-admin/student-details-admin.component';
+import { ProfessorDetailsAdminComponent } from './admin/professor-details-admin/professor-details-admin.component';
+import { RecipeDetailsAdminComponent } from './admin/recipe-details-admin/recipe-details-admin.component';
+import { IngredientDetailsAdminComponent } from './admin/ingredient-details-admin/ingredient-details-admin.component';
 import { EditIngredientAdminComponent } from './admin/edit-ingredient-admin/edit-ingredient-admin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -19,21 +25,27 @@ import { SubjectAdminComponent } from './admin/subject-admin/subject-admin.compo
 const appRoutes: Routes = [
   { path: '', component: HomeAdminComponent },
   { path: 'professor/cadastro', component: EditProfessorAdminComponent },
+  { path: 'professor/ver/:id', component: ProfessorDetailsAdminComponent },
   { path: 'professor/:ra', component: EditProfessorAdminComponent },
   { path: 'professores', component: ProfessorAdminComponent },
   { path: 'aluno/cadastro', component: EditStudentAdminComponent },
+  { path: 'aluno/ver/:id', component: StudentDetailsAdminComponent },
   { path: 'aluno/:ra', component: EditStudentAdminComponent },
   { path: 'alunos', component: StudentAdminComponent },
   { path: 'materia/cadastro', component: EditSubjectAdminComponent },
+  { path: 'materia/ver/:id', component: SubjectDetailsAdminComponent },
   { path: 'materia/:id', component: EditSubjectAdminComponent },
   { path: 'materias', component: SubjectAdminComponent },
   { path: 'turma/cadastro', component: EditClassAdminComponent },
+  { path: 'turma/ver/:id', component: ClassDetailsAdminComponent },
   { path: 'turma/:id', component: EditClassAdminComponent },
   { path: 'turmas', component: ClassAdminComponent },
   { path: 'receita/cadastro', component: EditRecipeAdminComponent },
+  { path: 'receita/ver/:id', component: RecipeDetailsAdminComponent },
   { path: 'receita/:id', component: EditRecipeAdminComponent },
   { path: 'receitas', component: RecipeAdminComponent },
   { path: 'ingrediente/cadastro', component: EditIngredientAdminComponent },
+  { path: 'ingrediente/ver/:id', component: IngredientDetailsAdminComponent },
   { path: 'ingrediente/:id', component: EditIngredientAdminComponent },
   { path: 'ingredientes', component: IngredientAdminComponent },
   { path: 'evento/cadastro', component: EditEventAdminComponent },

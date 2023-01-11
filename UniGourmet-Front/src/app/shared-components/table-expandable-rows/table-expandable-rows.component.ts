@@ -44,6 +44,8 @@ export class TableExpandableRowsComponent implements OnInit {
   editBtnIcon: string = 'edit';
   deleteBtnColor: string = 'warn';
   deleteBtnIcon: string = 'delete';
+  detailsBtnColor: string = 'tertiary'; 
+  detailsBtnIcon: string = 'add';
 
   //defining Input() to receive from parent the name of table's colunms in a string array
   @Input() columnsToDisplay: string[] = [];
@@ -61,6 +63,8 @@ export class TableExpandableRowsComponent implements OnInit {
   @Output() onClickEditEvent: EventEmitter<string> = new EventEmitter();
 
   @Output() callbackMethodEvent = new EventEmitter<string>();
+
+  @Output() onClickDetailsEvent: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -202,5 +206,10 @@ export class TableExpandableRowsComponent implements OnInit {
   //emit an event when dialog's callbackMethod function is called
   sendSubmit(id: string) {
     this.callbackMethodEvent.emit(id);
+  }
+
+  //emit a event when user clicks on button
+  onClickDetails(id: string) {
+    this.onClickDetailsEvent.emit(id);
   }
 }
