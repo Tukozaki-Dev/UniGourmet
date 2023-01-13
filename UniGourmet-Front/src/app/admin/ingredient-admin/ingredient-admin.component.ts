@@ -2,6 +2,7 @@ import { IngredientService } from './../../services/ingredient.service';
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from 'src/app/shared-components/models/ingredient.model';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-ingredient-admin',
@@ -22,8 +23,8 @@ export class IngredientAdminComponent implements OnInit {
   ingredients: Ingredient[] = [];
   
   constructor(
-    private router: Router,
     private ingredientService: IngredientService,
+    private sharedService: SharedService
   ) {}
   
   ngOnInit() {
@@ -34,17 +35,23 @@ export class IngredientAdminComponent implements OnInit {
   //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
     //send to 'cadastro' route
-    this.router.navigate(['ingrediente/cadastro']);
+    this.sharedService.sendTo('ingrediente/cadastro');
   }
 
   //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
   onClickEdit(id: string) {
     //send to 'editar' route, with id parameter
-    this.router.navigate(['ingrediente', id]);
+    this.sharedService.sendToId('ingrediente', id);
   }
 
   //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
   onDeleteIngredient(id: string) {
     this.ingredients = this.ingredientService.deleteIngredient(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
   }
+
+  onDetailsIngredient(id: string) {
+    //send to 'ver' route, with id parameter
+    this.sharedService.sendToId('ingrediente/ver', id);
+  }
+
 }

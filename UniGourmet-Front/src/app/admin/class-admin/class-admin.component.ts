@@ -1,7 +1,7 @@
 import { StudentClass } from './../../shared-components/models/student-class.model';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ClassService } from 'src/app/services/class.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-class-admin',
@@ -22,8 +22,8 @@ export class ClassAdminComponent implements OnInit {
  studentClasses: StudentClass[] = [];
 
   constructor(
-    private router: Router,
     private classService: ClassService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -34,18 +34,23 @@ export class ClassAdminComponent implements OnInit {
   //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
     //send to 'cadastro' route
-    this.router.navigate(['turma/cadastro']);
+    this.sharedService.sendTo('turma/cadastro');
   }
 
   //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
   onClickEdit(id: string) {
     //send to 'editar' route, with id parameter
-    this.router.navigate(['turma', id]);
+    this.sharedService.sendToId('turma', id);
   }
 
   //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
   onDeleteClass(id: string) {
     this.studentClasses = this.classService.deleteClass(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
+  }
+
+  //function called when onClickDetailsEvent (coming from component 'table-filtering') is emitted
+  onDetailsClass(id: string) {
+    this.sharedService.sendToId('turma/ver', id);
   }
 
 }
