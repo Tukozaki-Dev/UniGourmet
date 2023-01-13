@@ -3,9 +3,9 @@
     <p class="bottom-spacing">
       {{ dialogData.dialogContent }}
     </p>
-    <mat-form-field color="primary" appearance="fill" class="width-large">
-      <mat-label>{{ dialogData.dialogChipLabel }}</mat-label>
-      <mat-chip-list #chipList aria-label="chip" class="chipCtrl">
+    <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">
+      <mat-label [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">{{ dialogData.dialogChipLabel }}</mat-label>
+      <mat-chip-list #chipList aria-label="chip">
           <mat-chip *ngFor="let chip of dialogData.dialogChipsContent"
               (removed)="removeChip(chip)">
               {{chip.name}}

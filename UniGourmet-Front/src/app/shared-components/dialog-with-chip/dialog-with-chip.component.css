@@ -13,3 +13,23 @@ button {
 .bottom-spacing-2 {
   padding-bottom: 20pt;
 }
+
+.width-large {
+  width: 250pt;
+}
+
+.input-width{
+  width: 115pt;
+}
+
+.input-width-large{
+  width: 185pt;
+}
+
+.input-width-large-2{
+  width: 155pt;
+}
+
+.input-width-small{
+  width: 95pt;
+}

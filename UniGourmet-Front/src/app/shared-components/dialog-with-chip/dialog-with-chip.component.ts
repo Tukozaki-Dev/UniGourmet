@@ -5,6 +5,7 @@ import { DialogWithChipInterface } from './dialog-with-chip.interface';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl, Validators } from '@angular/forms';
 import { startWith, map, Observable } from 'rxjs';
+import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 
 @Component({
   selector: 'app-dialog-with-chip',
@@ -12,6 +13,8 @@ import { startWith, map, Observable } from 'rxjs';
   styleUrls: ['./dialog-with-chip.component.css']
 })
 export class DialogWithChipComponent implements OnInit {
+
+  public isMobileMenu: boolean;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   chipCtrl = new FormControl('', Validators.required);
@@ -21,6 +24,7 @@ export class DialogWithChipComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogWithChipComponent>,
     @Inject(MAT_DIALOG_DATA)
     public dialogData: DialogWithChipInterface,
+    private globalStatesService: GlobalStatesServiceService,
   ) {
     this.filteredChips = this.chipCtrl.valueChanges.pipe(
       startWith(null),
@@ -30,9 +34,13 @@ export class DialogWithChipComponent implements OnInit {
           : this.dialogData.allChips.slice();
       })
     );
+    this.isMobileMenu = this.globalStatesService.mobileMenu;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.globalStatesService.mobileMenuChanges.subscribe((val) => {
+      this.isMobileMenu = val;
+    });
   }
 
   //method  to remove the selected chip from the list (array)
