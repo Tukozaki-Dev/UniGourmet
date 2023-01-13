@@ -1,6 +1,12 @@
 a {
   text-decoration: none;
 }
+
+button {
+  border-radius: 50px;
+  padding: 2px 30px;
+}
+
 .primary-color {
   color: var(--sys--light--primary);
 }
