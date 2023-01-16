@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DisciplineService } from 'src/app/services/discipline.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { Discipline } from 'src/app/shared-components/models/discipline.model';
+import { DisciplineWithClasses } from 'src/app/shared-components/models/disciplineWithClasses.model';
 
 @Component({
   selector: 'app-subject-admin',
@@ -18,7 +19,7 @@ export class SubjectAdminComponent implements OnInit {
 
   //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
   columnsToDisplay: string[] = ['name', 'registerCode', 'actions'];
- 
+
  //variable created to later receive ingredients from the service
  disciplines: Discipline[] = [];
 
@@ -28,8 +29,10 @@ export class SubjectAdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //assign to variable professors all professors (calling professor service)
-    this.disciplines = this.disciplineService.getDisciplines();
+    //assign to variable professors all disciplines (calling discipline service)
+    this.disciplines = this.disciplineService.getDisciplinesWithClasses().map((displine=>{
+      return displine.subject
+    }));
   }
 
   //function called when btnClickEvent (coming from component 'button') is emitted

@@ -16,8 +16,8 @@
           </div>
       </div>
   </div>
-  <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
-      <div class="row">
+    <div class="row">
+      <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
         <div class="col-lg-6 col-12">
           <div class="row" formGroupName="subject">
             <div class="col-12 text-center bottom-spacing-2">
@@ -28,14 +28,14 @@
               </mat-form-field>
             </div>
             <div class="col-6 text-end bottom-spacing-2">
-                <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-small':'input-width-large-2'">
+                <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-small':'input-width'">
                     <mat-label>Código da matéria:</mat-label>
                     <input matInput placeholder="Digite o código da matéria"
                     formControlName="registerCode" [value]="subjectForm.value.subject.registerCode">
                 </mat-form-field>
             </div>
             <div class="col-6 bottom-spacing-2">
-              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width-large-2'">
+              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width'">
                 <mat-label>Semestre</mat-label>
                 <mat-select formControlName="semester" [(value)]="subjectForm.value.subject.semester">
                     <mat-option *ngFor="let semester of semesters" [value]="semester">
@@ -45,9 +45,9 @@
               </mat-form-field>
             </div>
             <div class="col-6 text-end bottom-spacing-2">
-              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width-large-2'">
+              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width'">
                 <mat-label>Nº de aulas no semestre</mat-label>
-                <mat-select formControlName="numberOfClasses" [(value)]="subjectForm.value.subject.numberOfClasses">
+                <mat-select formControlName="numberOfClasses" [(value)]="subjectForm.value.subject.numberOfClasses" (ngModelChange)="updateNumberOfClasses($event)">
                     <mat-option *ngFor="let classNumber of numberOfClasses" [value]="classNumber">
                       {{classNumber}}
                     </mat-option>
@@ -56,28 +56,36 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-12 text-center bottom-spacing-1">
-          <p>Aulas da matéria:</p>
+        <div class="col-12 text-center bottom-spacing-1">
+          <h3 class="primary-color font-size-title-medium bottom-spacing-2 text-start">Aulas da matéria:</h3>
           <div class="row">
             <div class="col-12">
               <ng-container formArrayName="lessons">
-                <ng-container *ngFor="let lessonForm of lessons.controls; let i = index">
-                    <div class="d-flex align-items-start justify-content-center">
-                      <div *ngFor="let lesson of allLessons; let j = index;" class="bottom-spacing-1">
-                        <p>Aula {{j}}: {{lesson.recipeName}}</p>
-                        <app-button [text]="addRecipeText" (btnClickEvent)="onAddRecipe()"></app-button>
-                      </div>
-                    </div>
-                </ng-container>
+                <div *ngFor="let class of arraryNumberOfClasses" class="bottom-spacing-2 d-flex align-items-center justify-content-between">
+                  <ng-template [ngIf]="allLessons[class]" [ngIfElse]="emptyLesson" >
+                    <h4 class="primary-color">Aula {{class + 1}}:
+                      <b *ngFor="let recipe of allLessons[class].recipeLessons">
+                          {{recipe.recipeName }},
+                      </b>
+                      </h4>
+                      <app-button [text]="addRecipeText" (btnClickEvent)="onAddRecipe(allLessons[class].recipeLessons, class)"></app-button>
+                  </ng-template>
+                  <ng-template #emptyLesson>
+                    <h4 class="primary-color">Aula {{class + 1}}:
+                      <b>Nenhuma receita cadastrada</b>
+                    </h4>
+                    <app-button [text]="addRecipeText" (btnClickEvent)="onAddRecipe([], class)"></app-button>
+                  </ng-template>
+                </div>
               </ng-container>
             </div>
           </div>
           <div class="col-12 bottom-spacing text-center">
-            <app-button [text]="btnText" type="submit"></app-button>
-        </div>
+            <button mat-raised-button color="primary" type="submit">{{btnText}}</button>
+          </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
 
 

@@ -7,9 +7,10 @@ import { AdminModule } from './admin/admin.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DialogWithChipComponent } from './shared-components/dialog-with-chip/dialog-with-chip.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DialogWithChipComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
