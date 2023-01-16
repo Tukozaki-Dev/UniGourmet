@@ -5,6 +5,11 @@ a {
   color: var(--sys--light--primary);
 }
 
+button {
+  border-radius: 50px;
+  padding: 2px 30px;
+}
+
 .font-size-title-medium {
   font-size: var(--title--medium);
   line-height: var(--title--medium);

@@ -35,8 +35,12 @@ import { IngredientDetailsAdminComponent } from './ingredient-details-admin/ingr
 import { RecipeDetailsAdminComponent } from './recipe-details-admin/recipe-details-admin.component';
 import { ClassDetailsAdminComponent } from './class-details-admin/class-details-admin.component';
 import { SubjectDetailsAdminComponent } from './subject-details-admin/subject-details-admin.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+  ],
   declarations: [
     HomeAdminComponent,
     EditRecipeAdminComponent,
