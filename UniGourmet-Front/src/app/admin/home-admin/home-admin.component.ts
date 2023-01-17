@@ -17,7 +17,7 @@ import { GlobalStatesServiceService } from 'src/app/services/global-states-servi
   styleUrls: ['./home-admin.component.css'],
 })
 export class HomeAdminComponent implements OnInit {
-  name = 'Grazi';
+  name = 'Administrador';
   //fontAwesome Icons
   faChalkboardUser = faChalkboardUser;
   faGraduationCap = faGraduationCap;

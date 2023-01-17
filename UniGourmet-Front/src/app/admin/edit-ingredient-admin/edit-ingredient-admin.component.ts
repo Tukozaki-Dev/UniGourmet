@@ -5,6 +5,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
 import { IngredientService } from 'src/app/services/ingredient.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
+import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
 
 @Component({
   selector: 'app-edit-ingredient-admin',
@@ -32,6 +35,7 @@ export class EditIngredientAdminComponent implements OnInit {
   });
 
   constructor(
+    public dialog: MatDialog,
     private globalStatesService: GlobalStatesServiceService,
     private ingredientService: IngredientService,
     private route: ActivatedRoute,
@@ -74,13 +78,14 @@ export class EditIngredientAdminComponent implements OnInit {
   //method to edit ingredient through the IngredientService
    onUpdate() {
     this.ingredientService.updateIngredient(
-      this.ingredientForm.value.id,{
-        id: this.ingredientForm.value.id,
+      this.selectedIngredient.id,{
+        id: this.selectedIngredient.id,
         name: this.ingredientForm.value.name,
         unity: this.ingredientForm.value.unity
       }
     );
   }
+
 
   //method to add a new ingredient through the IngredientService
    onAddIngredient() {
@@ -89,7 +94,7 @@ export class EditIngredientAdminComponent implements OnInit {
 
   //check if you are in edit or add mode and send updates
   onSubmit() {
-    if (this.editMode) {
+    if(this.editMode) {
       this.onUpdate();
     } else {
       this.onAddIngredient();

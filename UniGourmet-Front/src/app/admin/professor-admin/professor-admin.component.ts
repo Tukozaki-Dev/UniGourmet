@@ -20,7 +20,7 @@ export class ProfessorAdminComponent implements OnInit {
 
    //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
    columnsToDisplay: string[] = ['name', 'registerCode', 'actions'];
-  
+
   //variable created to later receive ingredients from the service
   professors: Professor[] = [];
 
@@ -37,7 +37,7 @@ export class ProfessorAdminComponent implements OnInit {
   //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
     //send to 'cadastro' route
-    this.sharedService.sendTo('professor');
+    this.sharedService.sendTo('professor/cadastro');
   }
 
   //function called when onClickEditEvent (coming from component 'table-filtering') is emitted

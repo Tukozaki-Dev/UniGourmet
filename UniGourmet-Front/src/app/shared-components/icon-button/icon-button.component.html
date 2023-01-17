@@ -1,4 +1,4 @@
-    <button [ngClass]="isMobileMenu?'button-size':''" mat-mini-fab color="{{btnColor}}" aria-label="edit button with icon" (click)="iconBtnClick()">
+    <button [ngClass]="isMobileMenu?'button-size':''" mat-mini-fab color="{{btnColor}}" aria-label="edit button with icon" (click)="iconBtnClick()" type="button">
       <mat-icon [ngClass]="isMobileMenu?'icon-size':''">{{ btnIcon }}</mat-icon>
     </button>
 
@@ -7,7 +7,7 @@
 <!-- <app-icon-button (iconBtnEvent)="onClick($event)"></app-icon-button> -->
 
 <!-- how to use in parent component ts -->
-<!-- 
+<!--
   onClick(event: string) {
   if(event === 'edit') {
     console.log('editando');
@@ -15,5 +15,5 @@
   if(event === 'delete') {
     console.log('deletando');
   }
-} 
+}
 -->
