@@ -29,15 +29,16 @@ export class HeaderAdmComponent implements OnInit {
   faCalendar = faCalendar;
   faUser = faUser;
   //fontAwesome Icons
-  login = 'Logout';
+  login = '';
 
   public isMobileMenu: boolean;
 
   constructor(private globalStatesService: GlobalStatesServiceService) {
-    this.isMobileMenu = this.globalStatesService.mobileMenu;
+
   }
 
   ngOnInit() {
+    this.isMobileMenu = this.globalStatesService.mobileMenu;
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
     });
