@@ -33,6 +33,7 @@ export class EditStudentAdminComponent implements OnInit {
   studentForm = new FormGroup({
     imagePath: new FormControl(''),
     name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     registerCode: new FormControl('', Validators.required),
     semester: new FormControl(+'', Validators.required),
     studentClass: new FormControl('', Validators.required),
@@ -79,6 +80,7 @@ export class EditStudentAdminComponent implements OnInit {
         this.studentForm.setValue({
           registerCode: ra,
           name: this.selectedStudent.name,
+          email: this.selectedStudent.email,
           imagePath: this.selectedStudent.imagePath,
           semester: this.selectedStudent.semester,
           studentClass: this.selectedStudent.studentClass
@@ -99,6 +101,7 @@ export class EditStudentAdminComponent implements OnInit {
       this.studentForm.value.registerCode,{
         registerCode: this.studentForm.value.registerCode,
         name: this.studentForm.value.name,
+        email: this.studentForm.value.email,
         imagePath: this.studentForm.value.imagePath,
         semester: this.studentForm.value.semester,
         studentClass: this.studentForm.value.studentClass
@@ -128,7 +131,7 @@ export class EditStudentAdminComponent implements OnInit {
   backLastPageDialog(){
     const dialogInterface: DialogInterface = {
       dialogHeader: 'Voltar',
-      dialogContent: 'Você tem certeza que deseja voltar sem que a alterações sejam salvas?',
+      dialogContent: 'Você tem certeza que deseja voltar sem que as alterações sejam salvas?',
       cancelButtonLabel: 'Cancelar',
       confirmButtonLabel: 'Sim',
       callbackMethod: () => {

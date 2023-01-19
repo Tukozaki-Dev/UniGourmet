@@ -43,6 +43,7 @@ export class EditProfessorAdminComponent implements OnInit {
   professorForm = new FormGroup({
     imagePath: new FormControl(''),
     name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     registerCode: new FormControl('', Validators.required),
     subjects: new FormControl([], Validators.required),
     specialties: new FormControl([], Validators.required),
@@ -120,6 +121,7 @@ export class EditProfessorAdminComponent implements OnInit {
         this.professorForm.patchValue({
           registerCode: ra,
           name: this.selectedProfessor.name,
+          email: this.selectedProfessor.email,
           imagePath: this.selectedProfessor.imagePath,
           specialties: this.selectedProfessor.specialties,
           subjects: this.selectedProfessor.subjects,
@@ -165,7 +167,7 @@ export class EditProfessorAdminComponent implements OnInit {
   backLastPageDialog(){
     const dialogInterface: DialogInterface = {
       dialogHeader: 'Voltar',
-      dialogContent: 'Você tem certeza que deseja voltar sem que a alterações sejam salvas?',
+      dialogContent: 'Você tem certeza que deseja voltar sem que as alterações sejam salvas?',
       cancelButtonLabel: 'Cancelar',
       confirmButtonLabel: 'Sim',
       callbackMethod: () => {

@@ -11,6 +11,7 @@ export class ProfessorService {
   private professors: Professor[] = [
     new Professor(
       'Graziely Tukozaki',
+      'email@email.com',
       'RA123456',
       '../../assets/img/LogoQuadrado.png',
       [
@@ -47,6 +48,7 @@ export class ProfessorService {
     ),
     new Professor(
       'Izabela Soares',
+      'email@email.com',
       'RA123457',
       '../../assets/img/LogoQuadrado.png',
       [

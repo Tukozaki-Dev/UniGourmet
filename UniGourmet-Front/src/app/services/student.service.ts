@@ -11,6 +11,7 @@ export class StudentService {
   private students: Student[] = [
     new Student(
       'Graziely Tukozaki',
+      'email@email.com',
       'RA123456',
       '../../assets/img/LogoQuadrado.png',
       4,
@@ -18,6 +19,7 @@ export class StudentService {
     ),
     new Student(
       'Thiago Tukozaki',
+      'email@email.com',
       'RA654321',
       '../../assets/img/LogoQuadrado.png',
       4,
