@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { EventService } from 'src/app/services/event.service';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
+import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
+import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
 import { EventNote } from 'src/app/shared-components/models/event.model';
 
 @Component({
@@ -37,6 +40,7 @@ export class EditEventAdminComponent implements OnInit {
   });
 
   constructor(
+    public dialog: MatDialog,
     private globalStatesService: GlobalStatesServiceService,
     private eventService: EventService,
     private route: ActivatedRoute,
@@ -111,14 +115,48 @@ export class EditEventAdminComponent implements OnInit {
   //check if you are in edit or add mode and send updates
   onSubmit() {
     if (this.editMode) {
-      this.onUpdate();
+      this.saveEditDialog();
     } else {
       this.onAddStudent();
+      this.onCancel();
     }
-    this.onCancel();
   }
+
   onCancel() {
     this.router.navigate(['/eventos']);
+  }
+
+  backLastPageDialog(){
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Voltar',
+      dialogContent: 'Você tem certeza que deseja voltar sem que a alterações sejam salvas?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onCancel();
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
+  }
+
+  saveEditDialog() {
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Salvar edições',
+      dialogContent: 'Salvar as edições feitas?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onUpdate();
+        this.onCancel();
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
   }
 
 }
