@@ -58,16 +58,14 @@ export class IngredientService {
   }
 
   updateIngredient(id: string, editedingredient: Ingredient) {
-    const index = this.ingredients.findIndex((ingredient) => {
-      return id === ingredient.id;
+    const index = this.ingredients.findIndex((selectedIngredient) => {
+      return id === selectedIngredient.id;
     });
     this.ingredients[index] = editedingredient;
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
   deleteIngredient(id: string) {
-    console.log('deletando ingrediente com id: ', id);
-
     this.ingredients = this.ingredients.filter((i)=>{ return i.id !== id});
     return this.ingredients;
   }

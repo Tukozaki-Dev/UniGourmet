@@ -1,10 +1,10 @@
-<button mat-raised-button color="primary" (click)="btnClick()"><span [class.icon-padding]="!btnWithIcon">{{icon}}</span>{{text}}</button>
+<button mat-raised-button color="primary" (click)="btnClick()" type="button"><span [class.icon-padding]="!btnWithIcon">{{icon}}</span>{{text}}</button>
 
 <!-- how to use in parent component html -->
 <!-- <app-button [icon]="btnIcon" [text]="btnText" (btnClickEvent)="onSubmit()"></app-button> -->
 
 <!-- how to use in parent component ts -->
-<!-- 
+<!--
     //button start
     btnIcon: string = '';
     btnText: string = 'Salvar';

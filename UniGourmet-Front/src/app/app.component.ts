@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { GlobalStatesServiceService } from './services/global-states-service.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { GlobalStatesServiceService } from './services/global-states-service.ser
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private globalStatesService: GlobalStatesServiceService) {}
   //See the window size, and if its mobile, change de "mobile menu" var to true
   @HostListener('window:resize') onResize() {
@@ -16,4 +16,13 @@ export class AppComponent {
       this.globalStatesService.changeMobileMenu(false);
     }
   }
+
+  ngOnInit() {
+    if (window.screen.width <= 540) {
+      this.globalStatesService.changeMobileMenu(true);
+    } else {
+      this.globalStatesService.changeMobileMenu(false);
+    }
+  }
+
 }

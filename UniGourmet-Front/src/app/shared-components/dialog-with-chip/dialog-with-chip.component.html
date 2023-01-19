@@ -1,0 +1,30 @@
+<div>
+  <div mat-dialog-content>
+    <p class="bottom-spacing">
+      {{ dialogData.dialogContent }}
+    </p>
+    <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">
+      <mat-label [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">{{ dialogData.dialogChipLabel }}</mat-label>
+      <mat-chip-list #chipList aria-label="chip">
+          <mat-chip *ngFor="let chip of dialogData.dialogChipsContent"
+              (removed)="removeChip(chip)">
+              {{chip.name}}
+              <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+              </button>
+          </mat-chip>
+          <input [placeholder]="dialogData.dialogChipPlaceholder" #chipInput
+              [matAutocomplete]="autoChip" [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+      </mat-chip-list>
+      <mat-autocomplete #autoChip="matAutocomplete" (optionSelected)="selectedChip($event)">
+          <mat-option *ngFor="let chip of filteredChips | async" [value]="chip">
+              {{chip.name}}
+          </mat-option>
+      </mat-autocomplete>
+  </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="handleDialogSubmit()"> {{ dialogData.confirmSaveLabel }} </button>
+  </div>
+</div>

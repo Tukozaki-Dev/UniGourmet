@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
       <div class="col-12 col-md-12 col-lg-12 left-space top-spacing">
-        <a routerLink="../../alunos">
+        <a (click)="backLastPageDialog()">
           <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
         </a>
           <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
@@ -16,7 +16,7 @@
           </div>
       </div>
   </div>
-  <form [formGroup]="studentForm">
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
       <div class="row">
 
           <div class="col-lg-12 order-lg-1 col-md-6 order-md-1 col-12 text-center bottom-spacing-2">
@@ -62,7 +62,7 @@
             </mat-form-field>
           </div>
           <div class="col-lg-12 order-lg-last col-md-6 order-md-last col-12 bottom-spacing text-center">
-              <app-button [text]="btnText" (btnClickEvent)="onSubmit()"></app-button>
+            <button mat-raised-button color="primary" type="submit">{{btnText}}</button>
           </div>
       </div>
   </form>

@@ -20,7 +20,7 @@ export class ProfessorAdminComponent implements OnInit {
 
    //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
    columnsToDisplay: string[] = ['name', 'registerCode', 'actions'];
-  
+
   //variable created to later receive ingredients from the service
   professors: Professor[] = [];
 

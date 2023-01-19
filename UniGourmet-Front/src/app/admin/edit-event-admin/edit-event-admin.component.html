@@ -1,1 +1,81 @@
-<p>edit-event-admin works!</p>
+<div class="container">
+  <div class="row">
+      <div class="col-12 col-md-12 col-lg-12 left-space top-spacing">
+        <a (click)="backLastPageDialog()">
+          <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
+        </a>
+          <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+              <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
+                  {{ editEvent }}
+              </p>
+          </div>
+          <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+              <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="!editMode">
+                  {{ addEvent }}
+              </p>
+          </div>
+      </div>
+  </div>
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+          <div class="col-12 col-lg-6" [ngClass]="isMobileMenu?'text-center':'text-end'">
+            <mat-form-field color='primary' class="bottom-spacing-2" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'input-width'">
+              <mat-label>Escolha uma data</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="eventDate">
+              <mat-hint>DD/MM/AAAA</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancelar</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>Salvar</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-lg-6" [ngClass]="isMobileMenu?'text-center':'text-start'">
+            <mat-form-field class="btn-margin bottom-spacing-2" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'input-width'">
+              <mat-label>Tipo do evento</mat-label>
+              <mat-select formControlName="eventType" [(value)]="eventForm.value.eventType">
+                  <mat-option *ngFor="let eventType of eventTypes" [value]="eventType">
+                    {{ eventType }}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center bottom-spacing-2">
+            <p class="primary-color bottom-spacing-2">
+              Caso queira adicionar uma nota, escreva abaixo:
+            </p>
+            <mat-form-field appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">
+              <mat-label>Escreva sua nota</mat-label>
+              <textarea matInput rows="5" cols="40" placeholder="Adicione sua nota aqui" formControlName="notes"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-lg-6" [ngClass]="isMobileMenu?'text-center':'text-end'">
+            <mat-form-field class="btn-margin bottom-spacing-2" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'input-width'">
+              <mat-label>Quem receberá o evento</mat-label>
+              <mat-select formControlName="profile" [(value)]="eventForm.value.profile">
+                  <mat-option *ngFor="let profile of profiles" [value]="profile">
+                    {{ profile }}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-lg-6" [ngClass]="isMobileMenu?'text-center':'text-start'">
+            <mat-form-field class="btn-margin bottom-spacing-2" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'input-width'">
+              <mat-label>Categoria do evento</mat-label>
+              <mat-select formControlName="category" [(value)]="eventForm.value.category">
+                  <mat-option *ngFor="let category of categories" [value]="category">
+                    {{ category }}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 bottom-spacing-1 text-center">
+            <button mat-raised-button color="primary" type="submit">{{btnText}}</button>
+          </div>
+      </div>
+  </form>
+</div>
+
+

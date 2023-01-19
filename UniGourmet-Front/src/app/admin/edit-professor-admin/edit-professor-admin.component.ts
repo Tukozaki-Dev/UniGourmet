@@ -13,6 +13,9 @@ import { Specialty } from 'src/app/shared-components/models/specialty.model';
 import { Discipline } from 'src/app/shared-components/models/discipline.model';
 import { DisciplineService } from 'src/app/services/discipline.service';
 import { SpecialtyService } from 'src/app/services/specialty.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
+import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
 
 @Component({
   selector: 'app-edit-professor-admin',
@@ -64,6 +67,7 @@ export class EditProfessorAdminComponent implements OnInit {
   specialtyInput: ElementRef<HTMLInputElement>;
 
   constructor(
+    public dialog: MatDialog,
     private globalStatesService: GlobalStatesServiceService,
     private professorService: ProfessorService,
     private route: ActivatedRoute,
@@ -147,14 +151,48 @@ export class EditProfessorAdminComponent implements OnInit {
   //check if you are in edit or add mode and send updates
   onSubmit() {
     if (this.editMode) {
-      this.onUpdate();
+      this.saveEditDialog();
     } else {
       this.onAddProfessor();
+      this.onCancel();
     }
-    this.onCancel();
   }
+
   onCancel() {
     this.router.navigate(['/professores']);
+  }
+
+  backLastPageDialog(){
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Voltar',
+      dialogContent: 'Você tem certeza que deseja voltar sem que a alterações sejam salvas?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onCancel();
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
+  }
+
+  saveEditDialog() {
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Salvar edições',
+      dialogContent: 'Salvar as edições feitas?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onUpdate();
+        this.onCancel();
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
   }
 
   //method  to remove the selected subject chip from the list (array)

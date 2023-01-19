@@ -1,17 +1,23 @@
-export class Event {
-  type: string; //eu acho que o type tem que ser um Enum, analisar depois
+export class EventNote {
+  eventID: number;
+  eventDate: Date;
+  eventType: string;
   notes: string;
   profile: string;
-  isPrivate: boolean;
+  category: string;
   constructor(
-    type: string,
+    eventID: number,
+    eventDate: Date,
+    eventType: string,
     notes: string,
     profile: string,
-    isPrivate: boolean
+    category: string
   ) {
-    this.type = type;
+    this.eventID = eventID;
+    this.eventDate = eventDate;
+    this.eventType = eventType;
     this.notes = notes;
     this.profile = profile;
-    this.isPrivate = isPrivate;
+    this.category = category;
   }
 }
