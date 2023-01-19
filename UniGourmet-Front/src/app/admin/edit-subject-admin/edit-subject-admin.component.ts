@@ -8,6 +8,8 @@ import { GlobalStatesServiceService } from 'src/app/services/global-states-servi
 import { RecipeService } from 'src/app/services/recipe.service';
 import { DialogWithChipComponent } from 'src/app/shared-components/dialog-with-chip/dialog-with-chip.component';
 import { DialogWithChipInterface } from 'src/app/shared-components/dialog-with-chip/dialog-with-chip.interface';
+import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
+import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
 import { DisciplineWithClasses, Lesson, RecipeLesson } from 'src/app/shared-components/models/disciplineWithClasses.model';
 import { Recipe } from 'src/app/shared-components/models/recipe.model';
 
@@ -148,10 +150,6 @@ export class EditSubjectAdminComponent implements OnInit {
     this.lessons.push(lessonName);
   }
 
-  onDeleteDiscipline(lessonIndex: number) {
-    this.lessons.removeAt(lessonIndex);
-  }
-
   //method to edit class through the ClassService
   onUpdate() {
     this.disciplineService.updateDisciplineWithClasses(
@@ -226,16 +224,47 @@ export class EditSubjectAdminComponent implements OnInit {
   //check if you are in edit or add mode and send updates
   onSubmit() {
     if(this.editMode) {
-      this.onUpdate();
+      this.saveEditDialog();
     }else {
       this.onAddDiscipline();
+      this.onCancel();
     }
-    this.onCancel();
   }
 
   onCancel() {
     this.router.navigate(['/materias']);
   }
 
+  backLastPageDialog(){
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Voltar',
+      dialogContent: 'Você tem certeza que deseja voltar sem que a alterações sejam salvas?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onCancel();
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
+  }
 
+  saveEditDialog() {
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Salvar edições',
+      dialogContent: 'Salvar as edições feitas?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onUpdate();
+        this.onCancel();
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
+  }
 }

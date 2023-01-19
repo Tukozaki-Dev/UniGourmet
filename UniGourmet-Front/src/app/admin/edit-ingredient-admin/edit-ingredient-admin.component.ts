@@ -95,14 +95,48 @@ export class EditIngredientAdminComponent implements OnInit {
   //check if you are in edit or add mode and send updates
   onSubmit() {
     if(this.editMode) {
-      this.onUpdate();
+      this.saveEditDialog();
     } else {
       this.onAddIngredient();
+      this.onCancel();
     }
-    this.onCancel();
   }
+
   onCancel() {
     this.router.navigate(['/ingredientes']);
+  }
+
+  backLastPageDialog(){
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Voltar',
+      dialogContent: 'Você tem certeza que deseja voltar sem que a alterações sejam salvas?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onCancel();
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
+  }
+
+  saveEditDialog() {
+    const dialogInterface: DialogInterface = {
+      dialogHeader: 'Salvar edições',
+      dialogContent: 'Salvar as edições feitas?',
+      cancelButtonLabel: 'Cancelar',
+      confirmButtonLabel: 'Sim',
+      callbackMethod: () => {
+        this.onUpdate();
+        this.onCancel();
+      },
+    };
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: dialogInterface,
+    });
   }
 
 }
