@@ -114,6 +114,10 @@ export class DisciplineService {
     return this.disciplines;
   }
 
+  getDisciplinesNames() {
+    return this.disciplines.map(disciplines => disciplines.name)
+  }
+
   //get all displines with classes
   getDisciplinesWithClasses(){
     return this.disciplineWithClasses;

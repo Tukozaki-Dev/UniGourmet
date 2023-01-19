@@ -71,7 +71,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     IngredientDetailsAdminComponent,
     RecipeDetailsAdminComponent,
     ClassDetailsAdminComponent,
-    SubjectDetailsAdminComponent
+    SubjectDetailsAdminComponent,
   ],
   imports: [
     CommonModule,
