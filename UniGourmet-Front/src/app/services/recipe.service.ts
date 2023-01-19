@@ -4,7 +4,7 @@ import { Unity } from '../shared-components/models/ingredient.model';
 import { Recipe } from '../shared-components/models/recipe.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
@@ -15,98 +15,103 @@ export class RecipeService {
       'CM0032',
       '../../assets/img/LogoQuadrado.png',
       'uma breve descrição da receita, como sua origem',
-      {
-        name: 'Cozinha Mediterrânea',
-        registerCode: 'Sub123321',
-        semester: 4,
-        numberOfClasses: 20,
-      },
+      'Cozinha Mediterrânea',
       'Europa/Mar Mediterrâneo',
       '1h30',
       3,
       [
-        {ingredient: {id: 'A123', name: 'Lentilha', unity: Unity.gramas}, quantity: 100},
-        {ingredient: {id: 'B123', name: 'Arroz', unity: Unity.gramas}, quantity: 200},
-        {ingredient: {id: 'C123', name: 'Feijão', unity: Unity.gramas}, quantity: 300},
-        {ingredient: {id: 'D123', name: 'Macarrão', unity: Unity.gramas}, quantity: 400},
-        {ingredient: {id: 'E123', name: 'Ervilha', unity: Unity.gramas}, quantity: 500},
-        
+        {
+          selectedIngredients: [
+            { name: 'Lentilha', unity: Unity.gramas, quantity: 100 },
+            { name: 'Arroz', unity: Unity.gramas, quantity: 200 },
+            { name: 'Feijão', unity: Unity.gramas, quantity: 300 },
+            { name: 'Macarrão', unity: Unity.gramas, quantity: 400 },
+            { name: 'Ervilha', unity: Unity.gramas, quantity: 500 },
+          ],
+        },
       ],
       [
-        {instruction_name: 'Massa', 
-         instruction_steps: [
-          {step: 1, description: 'Descrição passo 1'},
-          {step: 2, description: 'Descrição passo 2'},
-          {step: 3, description: 'Descrição passo 3'},
-          {step: 4, description: 'Descrição passo 4'},
-        ]},
-        {instruction_name: 'Recheio', 
-         instruction_steps: [
-          {step: 1, description: 'Descrição passo 1'},
-          {step: 2, description: 'Descrição passo 2'},
-          {step: 3, description: 'Descrição passo 3'},
-          {step: 4, description: 'Descrição passo 4'},
-        ]},
+        {
+          instructionName: 'Massa',
+          instructionSteps: [
+            { step: 1, description: 'Descrição passo 1' },
+            { step: 2, description: 'Descrição passo 2' },
+            { step: 3, description: 'Descrição passo 3' },
+            { step: 4, description: 'Descrição passo 4' },
+          ],
+        },
+        {
+          instructionName: 'Recheio',
+          instructionSteps: [
+            { step: 1, description: 'Descrição passo 1' },
+            { step: 2, description: 'Descrição passo 2' },
+            { step: 3, description: 'Descrição passo 3' },
+            { step: 4, description: 'Descrição passo 4' },
+          ],
+        },
       ],
       [
-        {step: 1, description: 'Descrição passo 1'},
-        {step: 2, description: 'Descrição passo 2'},
-        {step: 3, description: 'Descrição passo 3'},
-        {step: 4, description: 'Descrição passo 4'},
+        { step: 1, description: 'Descrição passo 1' },
+        { step: 2, description: 'Descrição passo 2' },
+        { step: 3, description: 'Descrição passo 3' },
+        { step: 4, description: 'Descrição passo 4' },
       ],
       ['panela', 'colher', 'tábua'],
-      ['esta é uma observação do chef sobre a receita', 'esta é outra observação do chef sobre a receita'],
-      ['vinho tinto', 'bourdeaux', 'vinho encorpado'],
+      'esta é uma observação do chef sobre a receita',
+      ['vinho tinto', 'bourdeaux', 'vinho encorpado']
     ),
     new Recipe(
       'Couscous',
       'CM0040',
       '../../assets/img/LogoQuadrado.png',
       'uma breve descrição da receita, como sua origem',
-      {
-        name: 'Cozinha Mediterrânea',
-        registerCode: 'Sub123987',
-        semester: 4,
-        numberOfClasses: 20,
-      },
+      'Cozinha Mediterrânea',
       'Europa/Mar Mediterrâneo',
       '1h30',
       3,
       [
-        {ingredient: {id: 'A123', name: 'Lentilha', unity: Unity.gramas}, quantity: 100},
-        {ingredient: {id: 'B123', name: 'Arroz', unity: Unity.gramas}, quantity: 200},
-        {ingredient: {id: 'C123', name: 'Feijão', unity: Unity.gramas}, quantity: 300},
-        {ingredient: {id: 'D123', name: 'Macarrão', unity: Unity.gramas}, quantity: 400},
-        {ingredient: {id: 'E123', name: 'Ervilha', unity: Unity.gramas}, quantity: 500},
+        {
+          selectedIngredients: [
+            { name: 'Lentilha', unity: Unity.gramas, quantity: 100 },
+            { name: 'Arroz', unity: Unity.gramas, quantity: 200 },
+            { name: 'Feijão', unity: Unity.gramas, quantity: 300 },
+            { name: 'Macarrão', unity: Unity.gramas, quantity: 400 },
+            { name: 'Ervilha', unity: Unity.gramas, quantity: 500 },
+          ],
+        },
       ],
       [
-          {instruction_name: 'Massa', 
-           instruction_steps: [
-            {step: 1, description: 'Descrição passo 1'},
-            {step: 2, description: 'Descrição passo 2'},
-            {step: 3, description: 'Descrição passo 3'},
-            {step: 4, description: 'Descrição passo 4'},
-          ]},
-          {instruction_name: 'Recheio', 
-           instruction_steps: [
-            {step: 1, description: 'Descrição passo 1'},
-            {step: 2, description: 'Descrição passo 2'},
-            {step: 3, description: 'Descrição passo 3'},
-            {step: 4, description: 'Descrição passo 4'},
-          ]},
+        {
+          instructionName: 'Massa',
+          instructionSteps: [
+            { step: 1, description: 'Descrição passo 1' },
+            { step: 2, description: 'Descrição passo 2' },
+            { step: 3, description: 'Descrição passo 3' },
+            { step: 4, description: 'Descrição passo 4' },
+          ],
+        },
+        {
+          instructionName: 'Recheio',
+          instructionSteps: [
+            { step: 1, description: 'Descrição passo 1' },
+            { step: 2, description: 'Descrição passo 2' },
+            { step: 3, description: 'Descrição passo 3' },
+            { step: 4, description: 'Descrição passo 4' },
+          ],
+        },
       ],
       [
-        {step: 1, description: 'Descrição passo 1'},
-        {step: 2, description: 'Descrição passo 2'},
-        {step: 3, description: 'Descrição passo 3'},
-        {step: 4, description: 'Descrição passo 4'},
+        { step: 1, description: 'Descrição passo 1' },
+        { step: 2, description: 'Descrição passo 2' },
+        { step: 3, description: 'Descrição passo 3' },
+        { step: 4, description: 'Descrição passo 4' },
       ],
       ['panela', 'colher', 'tábua'],
-      ['esta é uma observação do chef sobre a receita', 'esta é outra observação do chef sobre a receita'],
-      ['vinho tinto', 'bourdeaux', 'vinho encorpado'],
-    )
+      'esta é uma observação do chef sobre a receita',
+      ['vinho tinto', 'bourdeaux', 'vinho encorpado']
+    ),
   ];
-  constructor() { }
+  constructor() {}
 
   getRecipes() {
     return this.recipes;
@@ -120,9 +125,9 @@ export class RecipeService {
     this.recipes;
   }*/
 
-  getRecipe(rc: string) {
+  getRecipe(id: string) {
     return this.recipes.find((recipe) => {
-      return recipe.id == rc;
+      return recipe.id == id;
     });
   }
 
@@ -142,8 +147,9 @@ export class RecipeService {
   deleteRecipe(id: string) {
     console.log('deletando ingrediente com id: ', id);
 
-    this.recipes = this.recipes.filter((i)=>{ return i.id !== id});
+    this.recipes = this.recipes.filter((i) => {
+      return i.id !== id;
+    });
     return this.recipes;
   }
-
 }

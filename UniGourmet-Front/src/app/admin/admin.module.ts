@@ -67,7 +67,7 @@ import { SubjectDetailsAdminComponent } from './subject-details-admin/subject-de
     IngredientDetailsAdminComponent,
     RecipeDetailsAdminComponent,
     ClassDetailsAdminComponent,
-    SubjectDetailsAdminComponent
+    SubjectDetailsAdminComponent,
   ],
   imports: [
     CommonModule,

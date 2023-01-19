@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { DisciplineService } from 'src/app/services/discipline.service';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
-import { DisciplineWithClasses } from 'src/app/shared-components/models/DisciplineWithClasses.model';
+import { DisciplineWithClasses } from 'src/app/shared-components/models/disciplineWithClasses.model';
 
 export interface lesson {
   recipeName: string,

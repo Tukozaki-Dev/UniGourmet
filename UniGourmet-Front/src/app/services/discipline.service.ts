@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Discipline } from '../shared-components/models/discipline.model';
-import { DisciplineWithClasses } from '../shared-components/models/DisciplineWithClasses.model';
+import { DisciplineWithClasses } from '../shared-components/models/disciplineWithClasses.model';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +48,10 @@ export class DisciplineService {
   //get all displines without classes
   getDisciplines(){
     return this.disciplines;
+  }
+
+  getDisciplinesNames() {
+    return this.disciplines.map(disciplines => disciplines.name)
   }
 
   //get all displines with classes
