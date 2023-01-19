@@ -162,7 +162,7 @@ onCancel() {
 backLastPageDialog(){
   const dialogInterface: DialogInterface = {
     dialogHeader: 'Voltar',
-    dialogContent: 'Você tem certeza que deseja voltar sem que a alterações sejam salvas?',
+    dialogContent: 'Você tem certeza que deseja voltar sem que as alterações sejam salvas?',
     cancelButtonLabel: 'Cancelar',
     confirmButtonLabel: 'Sim',
     callbackMethod: () => {
