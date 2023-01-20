@@ -90,7 +90,7 @@
             </mat-form-field>
           </div>
           <div class="col-12 order-last text-center bottom-spacing-1">
-            <button mat-raised-button color="primary" type="submit">{{btnText}}</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!professorForm.valid">{{btnText}}</button>
           </div>
       </div>
     </form>
