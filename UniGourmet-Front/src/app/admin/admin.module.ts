@@ -39,7 +39,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
   ],
   declarations: [
     HomeAdminComponent,

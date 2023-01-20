@@ -1,22 +1,25 @@
 export class EventNote {
-  eventID: number;
+  registerCode: string;
   eventDate: Date;
+  eventDateString?: string;
   eventType: string;
-  notes: string;
+  note: string;
   profile: string;
   category: string;
   constructor(
-    eventID: number,
+    registerCode: string,
     eventDate: Date,
+    eventDateString: string,
     eventType: string,
-    notes: string,
+    note: string,
     profile: string,
     category: string
   ) {
-    this.eventID = eventID;
+    this.registerCode = registerCode;
     this.eventDate = eventDate;
+    this.eventDateString = eventDateString;
     this.eventType = eventType;
-    this.notes = notes;
+    this.note = note;
     this.profile = profile;
     this.category = category;
   }

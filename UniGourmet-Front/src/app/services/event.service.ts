@@ -14,10 +14,10 @@ export class EventService {
   private categories = ['Público', 'Privado'];
 
   private events: EventNote[] = [
-    new EventNote (100, new Date (2023,11,6), 'Prova', 'Uma nota aleatoria', 'Professor', 'Público'),
-    new EventNote (101, new Date (2023,11,6), 'Trabalho', 'Outra nota aleatoria', 'Aluno', 'Público'),
-    new EventNote (102, new Date (2023,11,6), 'Outro', 'Apenas uma anotação particular', 'Professor', 'Privado'),
-    new EventNote (103, new Date (2023,11,6), 'Lição de casa', 'Fazendo uma nota pessoal', 'Aluno', 'Privado'),
+    new EventNote ("100", new Date (2023,11,6),'06/11/2023', 'Prova', 'Uma nota aleatoria', 'Professor', 'Público'),
+    new EventNote ("101", new Date (2023,11,8), '08/11/2023', 'Trabalho', 'Outra nota aleatoria', 'Aluno', 'Público'),
+    new EventNote ("102", new Date (2023,11,12), '12/11/2023', 'Outro', 'Apenas uma anotação particular', 'Professor', 'Privado'),
+    new EventNote ("103", new Date (2023,11,20), '20/11/2023', 'Lição de casa', 'Fazendo uma nota pessoal', 'Aluno', 'Privado'),
   ];
 
   constructor() { }
@@ -38,9 +38,9 @@ export class EventService {
     return this.events;
   }
 
-  getEvent(id: number) {
+  getEvent(id: string) {
     return this.events.find((event) => {
-      return event.eventID == id;
+      return event.registerCode == id;
     });
   }
 
@@ -49,17 +49,18 @@ export class EventService {
     this.eventChanged.next(this.events.slice());
   }
 
-  updateEvent(id: number, editedEvent: EventNote) {
+  updateEvent(id: string, editedEvent: EventNote) {
     const index = this.events.findIndex((selectedEvent) => {
-      return id === selectedEvent.eventID;
+      return id === selectedEvent.registerCode;
     });
     this.events[index] = editedEvent;
     this.eventChanged.next(this.events.slice());
   }
 
-  deleteEvent(id: number) {
-    this.events = this.events.filter((i)=>{ return i.eventID !== id});
+
+
+  deleteEvent(id: string) {
+    this.events = this.events.filter((i)=>{ return i.registerCode !== id});
     return this.events;
   }
-
 }
