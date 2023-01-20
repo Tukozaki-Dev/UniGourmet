@@ -1,7 +1,6 @@
 import { Professor } from './../../shared-components/models/professor.model';
 import { Component, OnInit } from '@angular/core';
 import { ProfessorService } from 'src/app/services/professor.service';
-import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
 
 

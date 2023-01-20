@@ -31,10 +31,10 @@ export class EditEventAdminComponent implements OnInit {
   categories = [];
 
   eventForm = new FormGroup({
-    eventID: new FormControl(0),
+    registerCode: new FormControl(''),
     eventDate: new FormControl(new Date, Validators.required),
     eventType: new FormControl('', Validators.required),
-    notes: new FormControl('', Validators.required),
+    note: new FormControl('', Validators.required),
     profile: new FormControl('', Validators.required),
     category: new FormControl('', Validators.required),
   });
@@ -72,14 +72,14 @@ export class EditEventAdminComponent implements OnInit {
     if(id){
       this.editMode = true;
       //Search the event ID at EventService
-      this.selectedEvent = this.eventService.getEvent(+id);
+      this.selectedEvent = this.eventService.getEvent(id);
       if (this.selectedEvent) {
         //updates the form with the event previus data
         this.eventForm.setValue({
-          eventID: this.selectedEvent.eventID,
+          registerCode: this.selectedEvent.registerCode,
           eventDate: this.selectedEvent.eventDate,
           eventType: this.selectedEvent.eventType,
-          notes: this.selectedEvent.notes,
+          note: this.selectedEvent.note,
           profile: this.selectedEvent.profile,
           category: this.selectedEvent.category
         });
@@ -96,11 +96,11 @@ export class EditEventAdminComponent implements OnInit {
   //method to edit event through the EventService
    onUpdate() {
     this.eventService.updateEvent(
-      this.eventForm.value.eventID,{
-        eventID: this.eventForm.value.eventID,
+      this.eventForm.value.registerCode,{
+        registerCode: this.eventForm.value.registerCode,
         eventDate: this.eventForm.value.eventDate,
         eventType: this.eventForm.value.eventType,
-        notes: this.eventForm.value.notes,
+        note: this.eventForm.value.note,
         profile: this.eventForm.value.profile,
         category: this.eventForm.value.category
       }

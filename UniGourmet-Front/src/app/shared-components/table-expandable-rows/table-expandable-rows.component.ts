@@ -44,7 +44,7 @@ export class TableExpandableRowsComponent implements OnInit {
   editBtnIcon: string = 'edit';
   deleteBtnColor: string = 'warn';
   deleteBtnIcon: string = 'delete';
-  detailsBtnColor: string = 'tertiary'; 
+  detailsBtnColor: string = 'tertiary';
   detailsBtnIcon: string = 'add';
 
   //defining Input() to receive from parent the name of table's colunms in a string array
@@ -112,40 +112,36 @@ export class TableExpandableRowsComponent implements OnInit {
     switch (key) {
       case 'name':
         return 'nome';
-        break;
       case 'registerCode':
         return 'código de registro';
-        break;
       case 'specialties':
         return 'especialidades';
-        break;
       case 'subjects':
         return 'matérias';
-        break;
       case 'semester':
         return 'semestre';
-        break;
       case 'studentClass':
         return 'Turma';
-        break;
       case 'numberOfClasses':
         return 'Quantidade de Aulas/Semestre';
-        break;
       case 'className':
         return 'nome';
-        break;
       case 'classCode':
         return 'código de registro';
-        break;
       case 'shift':
         return 'turno';
-        break;
       case 'disciplines':
         return 'matérias';
-        break;
       case 'category':
         return 'modalidade';
-        break;
+      case 'eventDateString':
+        return 'Data';
+      case 'eventType':
+        return 'Tipo de Anotação';
+      case 'note':
+        return 'Anotação';
+      case 'profile':
+        return 'Tipo de Perfil';
       default:
         return '';
     }
@@ -166,6 +162,15 @@ export class TableExpandableRowsComponent implements OnInit {
       return true;
     }
     if (val == 'shift') {
+      return true;
+    }
+    if (val == 'eventDate') {
+      return true;
+    }
+    if (val == 'eventDateString') {
+      return true;
+    }
+    if (val == 'id') {
       return true;
     }
     if (val == 'category') {
