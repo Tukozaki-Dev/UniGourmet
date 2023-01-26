@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row">
+      <div class="col-12 col-md-12 col-lg-12 left-space top-spacing">
+        <a (click)="backLastPageDialog()">
+          <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
+        </a>
+          <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+              <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
+                  {{ editSubject }}
+              </p>
+          </div>
+          <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+              <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="!editMode">
+                  {{ addSubject }}
+              </p>
+          </div>
+      </div>
+  </div>
+    <div class="row">
+      <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+        <div class="col-lg-6 col-12">
+          <div class="row" formGroupName="subject">
+            <div class="col-12 text-center bottom-spacing-2">
+              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-large':'width-large'">
+                <mat-label>Nome da matéria:</mat-label>
+                <input matInput placeholder="Digite o nome da matéria"
+                formControlName="name" [value]="subjectForm.value.subject.name">
+              </mat-form-field>
+            </div>
+            <div class="col-6 text-end bottom-spacing-2">
+                <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-small':'input-width'">
+                    <mat-label>Código da matéria:</mat-label>
+                    <input matInput placeholder="Digite o código da matéria"
+                    formControlName="registerCode" [value]="subjectForm.value.subject.registerCode">
+                </mat-form-field>
+            </div>
+            <div class="col-6 bottom-spacing-2">
+              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width'">
+                <mat-label>Semestre</mat-label>
+                <mat-select formControlName="semester" [(value)]="subjectForm.value.subject.semester">
+                    <mat-option *ngFor="let semester of semesters" [value]="semester">
+                      {{semester}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6 text-end bottom-spacing-2">
+              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width'">
+                <mat-label>Nº de aulas no semestre</mat-label>
+                <mat-select formControlName="numberOfClasses" [(value)]="subjectForm.value.subject.numberOfClasses" (ngModelChange)="updateNumberOfClasses($event)">
+                    <mat-option *ngFor="let classNumber of numberOfClasses" [value]="classNumber">
+                      {{classNumber}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-center bottom-spacing-1">
+          <h3 class="primary-color font-size-title-medium bottom-spacing-2 text-start">Aulas da matéria:</h3>
+          <div class="row">
+            <div class="col-12">
+              <ng-container formArrayName="lessons">
+                <div *ngFor="let class of arraryNumberOfClasses" class="bottom-spacing-2 d-flex align-items-center justify-content-between">
+                  <ng-template [ngIf]="allLessons[class]" [ngIfElse]="emptyLesson" >
+                    <h4 class="primary-color">Aula {{class + 1}}:
+                      <b *ngFor="let recipe of allLessons[class].recipeLessons">
+                          {{recipe.recipeName }},
+                      </b>
+                      </h4>
+                      <app-button [text]="addRecipeText" (btnClickEvent)="onAddRecipe(allLessons[class].recipeLessons, class)"></app-button>
+                  </ng-template>
+                  <ng-template #emptyLesson>
+                    <h4 class="primary-color">Aula {{class + 1}}:
+                      <b>Nenhuma receita cadastrada</b>
+                    </h4>
+                    <app-button [text]="addRecipeText" (btnClickEvent)="onAddRecipe([], class)"></app-button>
+                  </ng-template>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-12 bottom-spacing-1 text-center">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!subjectForm.valid">{{btnText}}</button>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

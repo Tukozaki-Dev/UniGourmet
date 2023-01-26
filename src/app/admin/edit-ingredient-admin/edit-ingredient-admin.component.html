@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+      <div class="col-12 col-md-12 col-lg-12 left-space top-spacing bottom-spacing">
+        <a (click)="backLastPageDialog()">
+          <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
+        </a>
+          <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+              <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
+                  {{ editIngredient }}
+              </p>
+          </div>
+          <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+              <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="!editMode">
+                  {{ addIngredient }}
+              </p>
+          </div>
+      </div>
+  </div>
+  <form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+          <div class="col-12 text-center">
+              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">
+                  <mat-label>Nome</mat-label>
+                  <input matInput placeholder="Insira o nome do aluno aqui" formControlName="name">
+              </mat-form-field>
+          </div>
+          <div class="col-12 text-center">
+              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'" *ngIf="editMode">
+                  <mat-label>Id do ingrediente:</mat-label>
+                  <input matInput formControlName="id">
+              </mat-form-field>
+          </div>
+          <div class="col-12 text-center">
+            <mat-form-field class="btn-margin" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'width-large'">
+              <mat-label>Unidade de medida</mat-label>
+              <mat-select formControlName="unity" [(value)]="ingredientForm.value.unity">
+                  <mat-option *ngFor="let myUnity of unity | keyvalue" [value]="myUnity.value">
+                    {{myUnity.value}}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-12 order-lg-last col-md-6 order-md-last col-12 bottom-spacing text-center">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!ingredientForm.valid">{{btnText}}</button>
+          </div>
+      </div>
+  </form>
+</div>
+

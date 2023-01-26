@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="row">
+      <div class="col-12 col-md-12 col-lg-12 left-space top-spacing">
+        <a (click)="backLastPageDialog()">
+          <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
+        </a>
+          <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+              <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
+                  {{ editClass }}
+              </p>
+          </div>
+          <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+              <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="!editMode">
+                  {{ addClass }}
+              </p>
+          </div>
+      </div>
+  </div>
+  <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-lg-6 col-12">
+          <div class="row">
+            <div class="col-12 text-center bottom-spacing-2">
+              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-large':'width-large'">
+                <mat-label>Nome da turma:</mat-label>
+                <input matInput placeholder="Digite o nome da turma"
+                formControlName="name" #name [value]="classForm.value.name">
+              </mat-form-field>
+            </div>
+            <div class="col-6 text-end bottom-spacing-2">
+                <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu?'input-width-small':'input-width-large-2'">
+                    <mat-label>Código da turma:</mat-label>
+                    <input matInput placeholder="Digite o código da turma"
+                    formControlName="registerCode" #registerCode [value]="classForm.value.registerCode">
+                </mat-form-field>
+            </div>
+            <div class="col-6 bottom-spacing-2">
+              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width-large-2'">
+                <mat-label>Semestre</mat-label>
+                <mat-select formControlName="semester" [(value)]="classForm.value.semester">
+                    <mat-option *ngFor="let semester of semesters" [value]="semester">
+                      {{semester}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6 text-end bottom-spacing-2">
+              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width-large-2'">
+                <mat-label>Turno</mat-label>
+                <mat-select formControlName="shift" [(value)]="classForm.value.shift">
+                    <mat-option *ngFor="let shift of shifts" [value]="shift">
+                      {{shift}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6 bottom-spacing-2">
+              <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-small':'input-width-large-2'">
+                <mat-label>Modalidade</mat-label>
+                <mat-select formControlName="category" [(value)]="classForm.value.category">
+                    <mat-option *ngFor="let category of classesCategories" [value]="category">
+                      {{category}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12 text-center bottom-spacing-1">
+          <p>Adicionar matéria:</p>
+          <div class="bottom-spacing-2">
+            <app-icon-button [btnColor]="addBtnColor" [btnIcon]="addBtnIcon"
+            (click)="onAddDiscipline()"></app-icon-button>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <ng-container formArrayName="disciplines">
+                <ng-container *ngFor="let disciplineForm of disciplines.controls; let i = index">
+                    <div class="d-flex align-items-start justify-content-center">
+                      <mat-form-field color="primary" appearance="fill" [ngClass]="isMobileMenu?'input-width-large-2':'input-width-large'">
+                        <mat-label>Matéria</mat-label>
+                        <mat-select [formControlName]="i"  [(value)]="classForm.value.disciplines[i]"
+                        [compareWith]="compareByRegisterCode">
+                            <mat-option *ngFor="let discipline of allDisciplines" [value]="discipline">
+                              {{discipline.name}}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div class="left-space">
+                        <app-icon-button [btnColor]="deleteBtnColor" [btnIcon]="deleteBtnIcon"
+                        (click)="onDeleteDiscipline(i)"></app-icon-button>
+                      </div>
+                    </div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-12 bottom-spacing-1 text-center">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!classForm.valid">{{btnText}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
