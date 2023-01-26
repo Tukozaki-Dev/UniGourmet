@@ -21,44 +21,47 @@ export class RecipeService {
       3,
       [
         {
-          selectedIngredients: [
-            { name: 'Lentilha', unity: Unity.gramas, quantity: 100 },
-            { name: 'Arroz', unity: Unity.gramas, quantity: 200 },
-            { name: 'Feijão', unity: Unity.gramas, quantity: 300 },
-            { name: 'Macarrão', unity: Unity.gramas, quantity: 400 },
-            { name: 'Ervilha', unity: Unity.gramas, quantity: 500 },
+          ingredients: [
+            {
+              selectedIngredients: [
+                { name: 'Lentilha', unity: Unity.gramas, quantity: 100 },
+                { name: 'Arroz', unity: Unity.gramas, quantity: 200 },
+                { name: 'Feijão', unity: Unity.gramas, quantity: 300 },
+                { name: 'Macarrão', unity: Unity.gramas, quantity: 400 },
+                { name: 'Ervilha', unity: Unity.gramas, quantity: 500 },
+              ]
+            }
           ],
-        },
+          prepInstructions: [
+            {
+              instructionName: 'Massa', instructionSteps: [
+                {step: 1, description: 'descricao numero um da massa'},
+                {step: 2, description: 'descricao numero dois da massa'},
+                {step: 3, description: 'descricao numero tres da massa'},
+                {step: 3, description: 'descricao numero quatro da massa'},
+              ]
+            },
+            {
+              instructionName: 'Recheio', instructionSteps: [
+                {step: 1, description: 'descricao numero um do recheio'},
+                {step: 2, description: 'descricao numero dois do recheio'},
+                {step: 3, description: 'descricao numero tres do recheio'},
+                {step: 3, description: 'descricao numero quatro do recheio'},
+              ]
+            }
+          ]
+        }
       ],
+      'preparo previo',
       [
-        {
-          instructionName: 'Massa',
-          instructionSteps: [
-            { step: 1, description: 'Descrição passo 1' },
-            { step: 2, description: 'Descrição passo 2' },
-            { step: 3, description: 'Descrição passo 3' },
-            { step: 4, description: 'Descrição passo 4' },
-          ],
-        },
-        {
-          instructionName: 'Recheio',
-          instructionSteps: [
-            { step: 1, description: 'Descrição passo 1' },
-            { step: 2, description: 'Descrição passo 2' },
-            { step: 3, description: 'Descrição passo 3' },
-            { step: 4, description: 'Descrição passo 4' },
-          ],
-        },
+        {step: 1, description: 'descricao numero um do empratamento'},
+        {step: 2, description: 'descricao numero um do empratamento'},
+        {step: 3, description: 'descricao numero um do empratamento'},
+        {step: 4, description: 'descricao numero um do empratamento'},
       ],
-      [
-        { step: 1, description: 'Descrição passo 1' },
-        { step: 2, description: 'Descrição passo 2' },
-        { step: 3, description: 'Descrição passo 3' },
-        { step: 4, description: 'Descrição passo 4' },
-      ],
-      ['panela', 'colher', 'tábua'],
+      ['colher', 'garfo', 'panela', 'grelha', 'fouet'],
       'esta é uma observação do chef sobre a receita',
-      ['vinho tinto', 'bourdeaux', 'vinho encorpado']
+      'vinho tinto'
     ),
     new Recipe(
       'Couscous',
@@ -71,44 +74,47 @@ export class RecipeService {
       3,
       [
         {
-          selectedIngredients: [
-            { name: 'Lentilha', unity: Unity.gramas, quantity: 100 },
-            { name: 'Arroz', unity: Unity.gramas, quantity: 200 },
-            { name: 'Feijão', unity: Unity.gramas, quantity: 300 },
-            { name: 'Macarrão', unity: Unity.gramas, quantity: 400 },
-            { name: 'Ervilha', unity: Unity.gramas, quantity: 500 },
+          ingredients: [
+            {
+              selectedIngredients: [
+                { name: 'Lentilha', unity: Unity.gramas, quantity: 100 },
+                { name: 'Arroz', unity: Unity.gramas, quantity: 200 },
+                { name: 'Feijão', unity: Unity.gramas, quantity: 300 },
+                { name: 'Macarrão', unity: Unity.gramas, quantity: 400 },
+                { name: 'Ervilha', unity: Unity.gramas, quantity: 500 },
+              ]
+            }
           ],
-        },
+          prepInstructions: [
+            {
+              instructionName: 'Massa', instructionSteps: [
+                {step: 1, description: 'descricao numero um da massa'},
+                {step: 2, description: 'descricao numero dois da massa'},
+                {step: 3, description: 'descricao numero tres da massa'},
+                {step: 3, description: 'descricao numero quatro da massa'},
+              ]
+            },
+            {
+              instructionName: 'Recheio', instructionSteps: [
+                {step: 1, description: 'descricao numero um do recheio'},
+                {step: 2, description: 'descricao numero dois do recheio'},
+                {step: 3, description: 'descricao numero tres do recheio'},
+                {step: 3, description: 'descricao numero quatro do recheio'},
+              ]
+            }
+          ]
+        }
       ],
+      'preparo previo',
       [
-        {
-          instructionName: 'Massa',
-          instructionSteps: [
-            { step: 1, description: 'Descrição passo 1' },
-            { step: 2, description: 'Descrição passo 2' },
-            { step: 3, description: 'Descrição passo 3' },
-            { step: 4, description: 'Descrição passo 4' },
-          ],
-        },
-        {
-          instructionName: 'Recheio',
-          instructionSteps: [
-            { step: 1, description: 'Descrição passo 1' },
-            { step: 2, description: 'Descrição passo 2' },
-            { step: 3, description: 'Descrição passo 3' },
-            { step: 4, description: 'Descrição passo 4' },
-          ],
-        },
+        {step: 1, description: 'descricao numero um do empratamento'},
+        {step: 2, description: 'descricao numero um do empratamento'},
+        {step: 3, description: 'descricao numero um do empratamento'},
+        {step: 4, description: 'descricao numero um do empratamento'},
       ],
-      [
-        { step: 1, description: 'Descrição passo 1' },
-        { step: 2, description: 'Descrição passo 2' },
-        { step: 3, description: 'Descrição passo 3' },
-        { step: 4, description: 'Descrição passo 4' },
-      ],
-      ['panela', 'colher', 'tábua'],
+      ['colher', 'garfo', 'panela', 'grelha', 'fouet'],
       'esta é uma observação do chef sobre a receita',
-      ['vinho tinto', 'bourdeaux', 'vinho encorpado']
+      'vinho tinto'
     ),
   ];
   constructor() {}
