@@ -1,6 +1,4 @@
-import { Discipline } from './discipline.model';
-import { Ingredient, Unity } from './ingredient.model';
-
+import { Unity } from './ingredient.model';
 export class Recipe {
   name: string;
   id: string;
@@ -10,12 +8,12 @@ export class Recipe {
   region: string;
   prepDuration: string;
   yeldis: number;
-  ingredients?: SelectedIngredient[];
-  prepInstructions?: PrepInstructions[];
+  section:SectionRecipe[];
+  prevPrepare?: string;
   plateUp?: SingleInstruction[];
   equipUtensils?: string[];
   chefsNote?: string;
-  harmonization?: string[];
+  harmonization?: string;
   constructor(
     name: string,
     id: string,
@@ -25,12 +23,12 @@ export class Recipe {
     region: string,
     prepDuration: string,
     yeldis: number,
-    ingredients: SelectedIngredient[],
-    prepInstructions: PrepInstructions[],
+    section: SectionRecipe[],
+    prevPrepare?: string,
     plateUp?: SingleInstruction[],
     equipUtensils?: string[],
     chefsNote?: string,
-    harmonization?: string[]
+    harmonization?: string
   ) {
     this.name = name;
     this.id = id;
@@ -40,46 +38,39 @@ export class Recipe {
     this.region = region;
     this.prepDuration = prepDuration;
     this.yeldis = yeldis;
-    this.ingredients = ingredients;
-    this.prepInstructions = prepInstructions;
+    this.section = section;
+    this.prevPrepare = prevPrepare;
     this.plateUp = plateUp;
     this.equipUtensils = equipUtensils;
     this.chefsNote = chefsNote;
     this.harmonization = harmonization;
   }
 }
-
-
-
-export interface SelectedIngredient {
-  selectedIngredients: IngredientDetails[]
+export interface SectionRecipe{
+  ingredients?: SelectedIngredient[];
+  prepInstructions?: PrepInstructions[];
 }
-
+export interface SelectedIngredient {
+  selectedIngredients: IngredientDetails[];
+}
 export interface IngredientDetails {
   name: string;
   unity: Unity;
   quantity: number;
 }
-
-
 export class SingleInstruction {
   step: number;
   description: string;
-
   constructor(step: number, description: string) {
     this.step = step;
     this.description = description;
   }
 }
-
 export class PrepInstructions {
   instructionName: string;
   instructionSteps: SingleInstruction[];
-
   constructor(instructionName: string, instructionSteps: SingleInstruction[]) {
     this.instructionName = instructionName;
     this.instructionSteps = instructionSteps;
   }
 }
-
-
