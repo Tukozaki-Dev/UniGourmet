@@ -1,6 +1,7 @@
+import { SectionRecipe, SingleInstruction } from './../../shared-components/models/recipe.model';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormControl, FormGroup, Form } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DisciplineService } from 'src/app/services/discipline.service';
 import { GlobalStatesServiceService } from 'src/app/services/global-states-service.service';
@@ -25,6 +26,10 @@ export class EditRecipeAdminComponent implements OnInit {
   addRecipe = "";
   editRecipe ="";
 
+  arrayBtnIcon: string = '+';
+  sectionBtnText: string = 'Adicionar sessão';
+  stringBtnText: string = 'Adicionar linhas à tabela';
+
   btnText = "Salvar";
   imagePath = '';
 
@@ -33,22 +38,12 @@ export class EditRecipeAdminComponent implements OnInit {
   allDisciplines = [];
   selectedRecipe: Recipe;
 
+
   allIngredients: Ingredient[] = [];
 
-  selectedIngredients: SelectedIngredient[] = [];
-
-  recipeForm = this.fb.group({
-      imagePath: ['', Validators.required],
-      name: ['', Validators.required],
-      id: ['', Validators.required],
-      description: ['', Validators.required],
-      discipline: ['', Validators.required],
-      region: ['', Validators.required],
-      prepDuration: ['', Validators.required],
-      yeldis: [+'', Validators.required],
-      chefsNote: ['', Validators.required],
-      ingredients: this.fb.array([this.selectedIngredients], Validators.required),
-  });
+  // selectedIngredients: SelectedIngredient[] = [];
+  recipeForm: FormGroup;
+  control: FormArray;
   
 
   constructor(
@@ -61,11 +56,35 @@ export class EditRecipeAdminComponent implements OnInit {
     private fb: FormBuilder,
   ) { 
     this.isMobileMenu = this.globalStatesService.mobileMenu;
+
+    this.recipeForm = this.fb.group({
+      recipe: this.fb.group({
+        name: ['', Validators.required],
+        id: ['', Validators.required],
+        imagePath: ['', Validators.required],
+        description: ['', Validators.required],
+        discipline: ['', Validators.required],
+        region: ['', Validators.required],
+        prepDuration: ['', Validators.required],
+        yeldis: [+'', Validators.required],
+        prevPrepare: [''],
+        chefsNote: [''],
+        harmonization: [''],
+      }),
+      steps: this.fb.group({
+        section: this.fb.array([], Validators.required),
+        plateUp: this.fb.array([]),
+        equipUtensils: this.fb.array([]),
+      })
+
+  });
   }
 
   ngOnInit(): void {
+    // let result = this.getSelectedIngredients(1);
+    // console.log(result);
     this.addRecipe ='Você está no modo cadastro de receita, preencha todos os dados abaixo corretamente.';
-    this.editRecipe = `Edite as informações da receita ${this.recipeForm.value.name} asassabaixo.`;
+    this.editRecipe = `Edite as informações da receita ${this.recipeForm.value.recipe.name} abaixo.`;
 
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
@@ -77,104 +96,114 @@ export class EditRecipeAdminComponent implements OnInit {
 
 
     //Gets the Recipe Code param to edit the Recipe Class
-    let id = this.route.snapshot.paramMap.get('id');
+    // let id = this.route.snapshot.paramMap.get('id');
 
-    if(id){
-      this.editMode = true;
-      //Search the Class Code at ClassService
-      this.selectedRecipe = this.recipeService.getRecipe(id);
-
-      this.selectedRecipe.ingredients.forEach(()=>{
-        this.onAddIngredient();
-      });
-      console.log('teste',this.selectedRecipe.ingredients);
-      
-      if (this.selectedRecipe) {
-        //updates the form with the class previous data
-        this.recipeForm.setValue({
-            imagePath: this.selectedRecipe.imagePath,
-            name: this.selectedRecipe.name,
-            id: this.selectedRecipe.id,
-            description: this.selectedRecipe.description,
-            discipline: this.selectedRecipe.discipline,
-            region: this.selectedRecipe.region,
-            prepDuration: this.selectedRecipe.prepDuration,
-            yeldis: this.selectedRecipe.yeldis,
-            chefsNote: this.selectedRecipe.chefsNote,
-            ingredients: this.selectedRecipe.ingredients,
-        });
-        console.log('teste',this.selectedRecipe.region);
-      } else {
-        //The register code don't exists will throw an error
-        alert('Essa receita não existe!');
-        this.router.navigate(['../'], { relativeTo: this.route });
-      }
-    } if(!id) {
-      this.editMode = false;
-    }
+    
   }
 
-  get ingredients() {
-    return this.recipeForm.controls["ingredients"] as FormArray;
+  get section(): FormArray {
+    return this.recipeForm.controls['steps'].get('section') as FormArray;
   }
 
-  onAddIngredient(){
-    //creates a new select box each time that add button is called
-    // const ingredientsNames = new FormControl();
-    const ingredientForm = this.fb.group({
-      name: ['', Validators.required],
-      unity: ['', Validators.required],
-      quantity: ['', Validators.required]
-    })
-
-    //add the new select box to the formgroup
-    this.ingredients.push(ingredientForm);
+  get plateUp(): FormArray {
+    return this.recipeForm.controls['steps'].get('plateUp') as FormArray;
   }
 
-  onDeleteIngredient(ingredientIndex: number) {
-    this.ingredients.removeAt(ingredientIndex);
+  get equipUtensils(): FormArray {
+    return this.recipeForm.controls['steps'].get('equipUtensils') as FormArray;
   }
 
-  //method to edit class through the ClassService
-   onUpdate() {
-    this.recipeService.updateRecipe(
-      this.recipeForm.value.id,{
-        imagePath: this.selectedRecipe.imagePath,
-        name: this.selectedRecipe.name,
-        id: this.selectedRecipe.id,
-        description: this.selectedRecipe.description,
-        discipline: this.selectedRecipe.discipline,
-        region: this.selectedRecipe.region,
-        prepDuration: this.selectedRecipe.prepDuration,
-        yeldis: this.selectedRecipe.yeldis,
-        chefsNote: this.selectedRecipe.chefsNote,
-        ingredients: this.selectedRecipe.ingredients,
-      }
-    );
+  // get selectedIngredients(): FormArray {
+  //   return this.recipeForm.controls['steps'].get('section.') as FormArray;
+  // }
+  // getSelectedIngredients(index: number) {
+  //   return (this.section.at(index).get('ingredients') as FormArray).controls;
+  // }
+
+  //creates a new section FormGroup and returns it.
+  
+  newSection(): FormGroup {
+    return this.fb.group({
+      ingredients: this.fb.group({
+        selectedIngredients: this.fb.array([])
+      }),
+      prepInstructions: this.fb.group({
+        instructionName: [''],
+        instructionSteps: this.fb.array([])
+      }),
+    });
   }
 
-  //method to add a new class through the ClassService
-   onAddRecipe() {
-    this.recipeService.addRecipe(this.recipeForm.getRawValue());
+  addSection() {
+    this.section.push(this.newSection());
   }
 
-  //check if you are in edit or add mode and send updates
-  onSubmit() {
-    if (this.editMode) {
-      this.onUpdate();
-    } else {
-      this.onAddRecipe();
-    }
-    this.onCancel();
+  removeSection(sectionIndex: number) {
+    this.section.removeAt(sectionIndex);
   }
 
-  onCancel() {
-    this.router.navigate(['/receitas']);
+  //creates a new ingredient formgroup and return it
+
+  selectedIngredients(sectionIndex: number): FormArray {
+    return this.section.at(sectionIndex).get('selectedIngredients') as FormArray
   }
 
-  compareById(f1: Ingredient, f2: Ingredient):boolean {
-    return f1 && f2 && f1.id === f2.id;
+  NewSelectedIngredient(): FormGroup {
+    return this.fb.group({
+      name: [''],
+      unity: [''],
+      quantity: ['']
+    });
   }
+  
+  addSelectedIngredient(sectionIndex: number) {
+    this.selectedIngredients(sectionIndex).push(this.NewSelectedIngredient());
+  }
+
+  // removeSelectedIngredient(sectionIndex: number, selectedIngredientsIndex: number) {
+  //   this.selectedIngredients(sectionIndex).removeAt(selectedIngredientsIndex);
+  // }
+
+  // addSelectedIngredients() {
+  //   this.selectedIngredients.push(this.newSelectedIngredients());
+  // }
+
+  removeSelectedIngredient(control, selectedIngredientsIndex: number) {
+    control.removeAt(selectedIngredientsIndex);
+  }
+  
+    
+
+  //creates a new plateUp FormGroup and returns it.
+
+  newPlateUp(): FormGroup {
+    return this.fb.group({
+      step: [''],
+      description: ['']
+    });
+  }
+
+  addPlateUp() {
+    this.plateUp.push(this.newPlateUp());
+  }
+
+  removePlateUp(plateUpIndex: number) {
+    this.plateUp.removeAt(plateUpIndex);
+  }
+
+  //creates a new EquipUtensils FormGroup and returns it.
+
+  addEquipUtensils() {
+    const teste = new FormControl();
+    this.equipUtensils.push(teste);
+  }
+
+  removeEquipUtensils(equipUtensilsIndex: number) {
+    this.equipUtensils.removeAt(equipUtensilsIndex);
+  }
+
 
   
+
+
 }

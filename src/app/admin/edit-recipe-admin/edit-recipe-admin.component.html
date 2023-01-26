@@ -24,249 +24,294 @@
   </div>
 
   <div class="row">
-    <form class="example-form" [formGroup]="recipeForm">
-      <div class="col-4">
-        <table class="example-full-width" cellspacing="0">
-          <tr>
-            <td>
-              <div class="square-container" *ngIf="!editMode">
-                <app-file-upload></app-file-upload>
-              </div>
-              <div class="img-container" *ngIf="editMode">
-                <img
-                  [src]="imagePath"
-                  class="img-responsive img-size imagePath"
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field
-                appearance="fill"
-                color="primary"
-                class="example-full-width"
-              >
-                <mat-label>Nome da Receita</mat-label>
-                <input
-                  matInput
-                  placeholder="Digite o nome da receita"
-                  formControlName="name"
-                  #name
-                  [value]="recipeForm.value.name"
-                />
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field
-                appearance="fill"
-                color="primary"
-                class="example-full-width"
-              >
-                <mat-label>Descrição</mat-label>
-                <textarea
-                  matInput
-                  placeholder="Insira a descrição da receita"
-                  formControlName="description"
-                  #description
-                  [value]="recipeForm.value.description"
-                ></textarea>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field
-                appearance="fill"
-                color="primary"
-                class="example-full-width"
-              >
-                <mat-label>Código da receita</mat-label>
-                <input
-                  matInput
-                  placeholder="Digite o código da receita"
-                  formControlName="id"
-                  #id
-                  [value]="recipeForm.value.id"
-                />
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field
-                color="primary"
-                appearance="fill"
-                class="example-full-width"
-              >
-                <mat-label>Matéria</mat-label>
-                <mat-select
-                  formControlName="discipline"
-                  [(value)]="recipeForm.value.discipline"
-                >
-                  <mat-option
-                    *ngFor="let discipline of allDisciplines"
-                    [value]="discipline"
-                  >
-                    {{ discipline }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field
-                appearance="fill"
-                color="primary"
-                class="example-full-width"
-              >
-                <mat-label>País/Região</mat-label>
-                <input
-                  matInput
-                  placeholder="Digite o país/região de origem da receita"
-                  formControlName="region"
-                  #region
-                  [value]="recipeForm.value.region"
-                />
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field
-                appearance="fill"
-                color="primary"
-                class="example-full-width"
-              >
-                <mat-label>Tempo de Preparo</mat-label>
-                <input
-                  type="time"
-                  matInput
-                  placeholder="Insira o tempo de preparo da receita"
-                  formControlName="prepDuration"
-                  #prepDuration
-                  [value]="recipeForm.value.prepDuration"
-                />
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field
-                appearance="fill"
-                color="primary"
-                class="example-full-width"
-              >
-                <mat-label>Porções</mat-label>
-                <input
-                  type="number"
-                  matInput
-                  placeholder="Insira o rendimento da receita"
-                  formControlName="yeldis"
-                  #yeldis
-                  [value]="recipeForm.value.yeldis"
-                />
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field
-                appearance="fill"
-                color="primary"
-                class="example-full-width"
-              >
-                <mat-label>Observações do Chef</mat-label>
-                <textarea
-                  matInput
-                  placeholder="Caso tenha alguma nota ou observação importante, insira aqui"
-                  formControlName="chefsNote"
-                  #chefsNote
-                  [value]="recipeForm.value.chefsNote"
-                ></textarea>
-              </mat-form-field>
-            </td>
-          </tr>
-        </table>
-        <div class="col-8">
-          <table>
-            <p>Adicionar ingrediente:</p>
-            <div>
-              <app-icon-button
-                [btnColor]="addBtnColor"
-                [btnIcon]="addBtnIcon"
-                (click)="onAddIngredient()"
-              ></app-icon-button>
+    <form [formGroup]="recipeForm">
+      <div class="col-lg-6 col-12">
+        <div class="row" formGroupName="recipe">
+          <div class="col-12">
+            <div class="square-container" *ngIf="!editMode">
+              <app-file-upload></app-file-upload>
             </div>
-            <ng-container formArrayName="ingredients">
-              <ng-container
-                *ngFor="
-                  let line of ingredients.controls;
-                  let i = index"
-                  [formGroupName]="i"
+            <div class="img-container" *ngIf="editMode">
+              <img
+                [src]="imagePath"
+                class="img-responsive img-size imagePath"
+              />
+            </div>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Nome da Receita</mat-label>
+              <input
+                matInput
+                placeholder="Digite o nome da receita"
+                formControlName="name"
+                #name
+                [value]="recipeForm.value.recipe.name"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Descrição</mat-label>
+              <textarea
+                matInput
+                placeholder="Insira a descrição da receita"
+                formControlName="description"
+                #description
+                [value]="recipeForm.value.recipe.description"
+              ></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Código da receita</mat-label>
+              <input
+                matInput
+                placeholder="Digite o código da receita"
+                formControlName="id"
+                #id
+                [value]="recipeForm.value.recipe.id"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              color="primary"
+              appearance="fill"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Matéria</mat-label>
+              <mat-select
+                formControlName="discipline"
+                [(value)]="recipeForm.value.recipe.discipline"
               >
-                <div>
-                  <tr>
-                    <p>form group values: {{ ingredients[i].value.name | json }}</p>
-                    <td>
-                      <mat-form-field appearance="outline">
-                        <mat-label>Ingrediente</mat-label>
-                        <mat-select
-                          formControlName="name"
-                          #name
-                          [(value)]="ingredients[i].controls.name"
-                        >
-                          <mat-option
-                            *ngFor="let ingredient of allIngredients"
-                            [value]="ingredient"
-                          >
-                            {{ ingredient.name }} 
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </td>
-  
-                    <td>
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <input
-                          matInput
-                          formControlName="unity"
-                          [value]="recipeForm.value.ingredients[i].selectedIngredients[i].unity"
-                        />
-                      </mat-form-field>
-                    </td>
-  
-                    <td>
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <input
-                          type="number"
-                          matInput
-                          #quantity
-                          formControlName="quantity"
-                          [value]="+recipeForm.value.ingredients[i].selectedIngredients[i].quantity"
-                          maxlength="7"
-                          placeholder="Insira aqui a quantidade"
-                        />
-                      </mat-form-field>
-                      <div class="left-space">
-                        <app-icon-button [btnColor]="deleteBtnColor" [btnIcon]="deleteBtnIcon"
-                        (click)="onDeleteIngredient(i)"></app-icon-button>
-                      </div>
-                    </td>
-                  </tr>
-
-                </div>
-              </ng-container>
-            </ng-container>
-          </table>
+                <mat-option
+                  *ngFor="let discipline of allDisciplines"
+                  [value]="discipline"
+                >
+                  {{ discipline }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>País/Região</mat-label>
+              <input
+                matInput
+                placeholder="Digite o país/região de origem da receita"
+                formControlName="region"
+                #region
+                [value]="recipeForm.value.recipe.region"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Tempo de Preparo</mat-label>
+              <input
+                type="time"
+                matInput
+                placeholder="Insira o tempo de preparo da receita"
+                formControlName="prepDuration"
+                #prepDuration
+                [value]="recipeForm.value.recipe.prepDuration"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center-mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Porções</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="Insira o rendimento da receita"
+                formControlName="yeldis"
+                #yeldis
+                [value]="recipeForm.value.recipe.yeldis"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Preparo Prévio</mat-label>
+              <input
+                matInput
+                placeholder="Caso tenha algum preparo prévio, insira aqui"
+                formControlName="prevPrepare"
+                #prevPrepare
+                [value]="recipeForm.value.recipe.prevPrepare"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Observações do Chef</mat-label>
+              <textarea
+                matInput
+                placeholder="Caso tenha alguma nota ou observação importante, insira aqui"
+                formControlName="chefsNote"
+                #chefsNote
+                [value]="recipeForm.value.recipe.chefsNote"
+              ></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mb-2">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'"
+            >
+              <mat-label>Harmonização</mat-label>
+              <input
+                matInput
+                placeholder="Sugestões de harmonização? Insira aqui!"
+                formControlName="harmonization"
+                #harmonization
+                [value]="recipeForm.value.recipe.harmonization"
+              />
+            </mat-form-field>
+          </div>
         </div>
-        <app-button [text]="btnText" (btnClickEvent)="onSubmit()"></app-button>
-      </div>
-    </form>
-  </div>
-</div>
+
+        <div class="col-12 text-center mb-1">
+          <div formGroupName="steps">
+            
+            <ng-container formArrayName="section">
+              <app-button [icon]="arrayBtnIcon" [text]="sectionBtnText" (btnClickEvent)="addSection()"></app-button>
+                <div *ngFor="let s of section.controls; let sectionIndex = index">
+                  <div [formGroupName]="sectionIndex">
+                    <div formGroupName="ingredients">
+                      <ng-container formArrayName="selectedIngredients">
+                        <app-button [icon]="arrayBtnIcon" [text]="stringBtnText" (btnClickEvent)="addSelectedIngredient(s.get('ingredients')['selectedIngredients'])"></app-button>
+                          <div *ngFor="let ingredient of s.get('ingredients')['selectedIngredients']; let selectedIngredientsIndex = index">
+                            <div [formGroupName]="selectedIngredientsIndex">
+                              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'">
+                                <mat-label>Nome</mat-label>
+                                <mat-select formControlName="name" name="name">
+                                  <mat-option *ngFor="let ingredient of allIngredients" [value]="ingredient.name">
+                                    {{ingredient.name}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'">
+                                <mat-label>Unidade</mat-label>
+                                <input
+                                  matInput
+                                  placeholder="Insira aqui description"
+                                  formControlName="unity"
+                                  #unity
+                                />
+                              </mat-form-field>
+                              <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'">
+                                <mat-label>Quantidade</mat-label>
+                                <input
+                                  matInput
+                                  placeholder="Insira aqui description"
+                                  formControlName="quantity"
+                                  #quantity
+                                />
+                              </mat-form-field>
+                              <app-icon-button 
+                                [btnColor]="deleteBtnColor" 
+                                [btnIcon]="deleteBtnIcon"
+                                (iconBtnEvent)="removeSelectedIngredient(s.get('selectedIngredients'), selectedIngredientsIndex)"
+                              ></app-icon-button>                              
+                            </div>
+                          </div>
+                      </ng-container>
+
+                  </div>
+                  
+                </div>
+                
+                
+              </div>
+            </ng-container>
+
+            <ng-container formArrayName="plateUp">
+              <app-button [icon]="arrayBtnIcon" [text]="stringBtnText" (btnClickEvent)="addPlateUp()"></app-button>
+              <div *ngFor="let s of plateUp.controls; let plateUpIndex = index">
+                <div [formGroupName]="plateUpIndex">
+                  <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'">
+                    <mat-label>Etapa</mat-label>
+                    <input
+                      matInput
+                      placeholder="Insira aqui step"
+                      formControlName="step"
+                      #step
+                    />
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'">
+                    <mat-label>Descrição</mat-label>
+                    <input
+                      matInput
+                      placeholder="Insira aqui description"
+                      formControlName="description"
+                      #description
+                    />
+                  </mat-form-field>
+                  <app-icon-button 
+                    [btnColor]="deleteBtnColor" 
+                    [btnIcon]="deleteBtnIcon"
+                    (iconBtnEvent)="removePlateUp(plateUpIndex)"
+                  ></app-icon-button>
+                  
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container formArrayName="equipUtensils">
+              <app-button [icon]="arrayBtnIcon" [text]="stringBtnText" (btnClickEvent)="addEquipUtensils()"></app-button>
+              <div *ngFor="let s of equipUtensils.controls; let equipUtensilsIndex = index">
+                <div [formGroupName]="equipUtensilsIndex">
+                  <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'">
+                    <mat-label>Equipamentos/Utensílios</mat-label>
+                    <input
+                      matInput
+                      placeholder="Insira aqui os equipamentos/utensílios"
+                      #equipUtensils
+                    />
+                  </mat-form-field>
+                  <app-icon-button 
+                    [btnColor]="deleteBtnColor" 
+                    [btnIcon]="deleteBtnIcon"
+                    (iconBtnEvent)="removeEquipUtensils(equipUtensilsIndex)"
+                  ></app-icon-button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
