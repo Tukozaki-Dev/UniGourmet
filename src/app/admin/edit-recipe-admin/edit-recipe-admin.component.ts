@@ -44,7 +44,7 @@ export class EditRecipeAdminComponent implements OnInit {
   // selectedIngredients: SelectedIngredient[] = [];
   recipeForm: FormGroup;
   control: FormArray;
-  
+
 
   constructor(
     private globalStatesService: GlobalStatesServiceService,
@@ -54,7 +54,7 @@ export class EditRecipeAdminComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-  ) { 
+  ) {
     this.isMobileMenu = this.globalStatesService.mobileMenu;
 
     this.recipeForm = this.fb.group({
@@ -91,17 +91,18 @@ export class EditRecipeAdminComponent implements OnInit {
     });
 
     this.allDisciplines = this.disciplineService.getDisciplinesNames();
-    
+
     this.allIngredients = this.ingredientService.getIngredients();
 
 
     //Gets the Recipe Code param to edit the Recipe Class
     // let id = this.route.snapshot.paramMap.get('id');
 
-    
+
   }
 
   get section(): FormArray {
+    //console.log(this.recipeForm.controls['steps'].get('section'));
     return this.recipeForm.controls['steps'].get('section') as FormArray;
   }
 
@@ -121,7 +122,7 @@ export class EditRecipeAdminComponent implements OnInit {
   // }
 
   //creates a new section FormGroup and returns it.
-  
+
   newSection(): FormGroup {
     return this.fb.group({
       ingredients: this.fb.group({
@@ -144,20 +145,20 @@ export class EditRecipeAdminComponent implements OnInit {
 
   //creates a new ingredient formgroup and return it
 
-  selectedIngredients(sectionIndex: number): FormArray {
-    return this.section.at(sectionIndex).get('selectedIngredients') as FormArray
+  getSelectedIngredientsControl(sectionIndex: number): FormArray {
+    return this.section.at(sectionIndex).get('ingredients').get('selectedIngredients') as FormArray
   }
 
-  NewSelectedIngredient(): FormGroup {
+  newSelectedIngredient(): FormGroup {
     return this.fb.group({
       name: [''],
       unity: [''],
       quantity: ['']
     });
   }
-  
-  addSelectedIngredient(sectionIndex: number) {
-    this.selectedIngredients(sectionIndex).push(this.NewSelectedIngredient());
+
+  addIngredientLine(sectionIndex: number) {
+    this.getSelectedIngredientsControl(sectionIndex).push(this.newSelectedIngredient());
   }
 
   // removeSelectedIngredient(sectionIndex: number, selectedIngredientsIndex: number) {
@@ -171,8 +172,8 @@ export class EditRecipeAdminComponent implements OnInit {
   removeSelectedIngredient(control, selectedIngredientsIndex: number) {
     control.removeAt(selectedIngredientsIndex);
   }
-  
-    
+
+
 
   //creates a new plateUp FormGroup and returns it.
 
@@ -203,7 +204,7 @@ export class EditRecipeAdminComponent implements OnInit {
   }
 
 
-  
+
 
 
 }
