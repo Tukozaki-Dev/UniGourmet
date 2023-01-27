@@ -208,15 +208,15 @@
 
         <div class="col-12 text-center mb-1">
           <div formGroupName="steps">
-            
+
             <ng-container formArrayName="section">
               <app-button [icon]="arrayBtnIcon" [text]="sectionBtnText" (btnClickEvent)="addSection()"></app-button>
                 <div *ngFor="let s of section.controls; let sectionIndex = index">
                   <div [formGroupName]="sectionIndex">
                     <div formGroupName="ingredients">
                       <ng-container formArrayName="selectedIngredients">
-                        <app-button [icon]="arrayBtnIcon" [text]="stringBtnText" (btnClickEvent)="addSelectedIngredient(s.get('ingredients')['selectedIngredients'])"></app-button>
-                          <div *ngFor="let ingredient of s.get('ingredients')['selectedIngredients']; let selectedIngredientsIndex = index">
+                        <app-button [icon]="arrayBtnIcon" [text]="stringBtnText" (btnClickEvent)="addIngredientLine(sectionIndex)"></app-button>
+                          <div *ngFor="let ingredient of getSelectedIngredientsControl(sectionIndex).controls; let selectedIngredientsIndex = index">
                             <div [formGroupName]="selectedIngredientsIndex">
                               <mat-form-field appearance="fill" color="primary" [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'">
                                 <mat-label>Nome</mat-label>
@@ -244,20 +244,20 @@
                                   #quantity
                                 />
                               </mat-form-field>
-                              <app-icon-button 
-                                [btnColor]="deleteBtnColor" 
+                              <app-icon-button
+                                [btnColor]="deleteBtnColor"
                                 [btnIcon]="deleteBtnIcon"
                                 (iconBtnEvent)="removeSelectedIngredient(s.get('selectedIngredients'), selectedIngredientsIndex)"
-                              ></app-icon-button>                              
+                              ></app-icon-button>
                             </div>
                           </div>
                       </ng-container>
 
                   </div>
-                  
+
                 </div>
-                
-                
+
+
               </div>
             </ng-container>
 
@@ -283,12 +283,12 @@
                       #description
                     />
                   </mat-form-field>
-                  <app-icon-button 
-                    [btnColor]="deleteBtnColor" 
+                  <app-icon-button
+                    [btnColor]="deleteBtnColor"
                     [btnIcon]="deleteBtnIcon"
                     (iconBtnEvent)="removePlateUp(plateUpIndex)"
                   ></app-icon-button>
-                  
+
                 </div>
               </div>
             </ng-container>
@@ -305,8 +305,8 @@
                       #equipUtensils
                     />
                   </mat-form-field>
-                  <app-icon-button 
-                    [btnColor]="deleteBtnColor" 
+                  <app-icon-button
+                    [btnColor]="deleteBtnColor"
                     [btnIcon]="deleteBtnIcon"
                     (iconBtnEvent)="removeEquipUtensils(equipUtensilsIndex)"
                   ></app-icon-button>
