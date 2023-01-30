@@ -41,6 +41,7 @@ export class EditSubjectAdminComponent implements OnInit {
   numberOfClasses = [16];
   ra;
   arraryNumberOfClasses = [];
+
   subjectForm = this.fb.group({
     subject: this.fb.group({
       name: ['', Validators.required],
@@ -66,7 +67,7 @@ export class EditSubjectAdminComponent implements OnInit {
 
   ngOnInit() {
     this.addSubject ='Você está no modo cadastro de matéria, preencha todos os dados abaixo corretamente.';
-    this.editSubject = `Edite as informações da matéria ${this.subjectForm.value.subject.name} abaixo.`;
+    this.editSubject = `Edite as informações da matéria abaixo.`;
 
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;

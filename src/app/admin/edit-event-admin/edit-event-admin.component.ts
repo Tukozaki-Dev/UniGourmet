@@ -108,7 +108,7 @@ export class EditEventAdminComponent implements OnInit {
   }
 
   //method to add a new event through the EventService
-   onAddStudent() {
+  onAddEvent() {
     this.eventService.addEvent(this.eventForm.getRawValue());
   }
 
@@ -117,7 +117,7 @@ export class EditEventAdminComponent implements OnInit {
     if (this.editMode) {
       this.saveEditDialog();
     } else {
-      this.onAddStudent();
+      this.onAddEvent();
       this.onCancel();
     }
   }

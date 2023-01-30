@@ -45,7 +45,7 @@ export class EditIngredientAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editIngredient = `Edite as informações do ingrediente ${this.ingredientForm.value.name} abaixo.`
+    this.editIngredient = `Edite as informações do ingrediente abaixo.`
 
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;

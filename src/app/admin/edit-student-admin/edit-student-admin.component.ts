@@ -51,7 +51,7 @@ export class EditStudentAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editStudent = `Edite as informações do aluno ${this.studentForm.value.name} abaixo.`
+    this.editStudent = `Edite as informações do aluno abaixo.`
 
     this.globalStatesService.mobileMenuChanges.subscribe((val) => {
       this.isMobileMenu = val;
