@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { tick } from '@angular/core/testing';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -61,7 +60,7 @@ constructor(
 
 ngOnInit() {
   this.addClass ='Você está no modo cadastro de turma, preencha todos os dados abaixo corretamente.';
-  this.editClass = `Edite as informações da turma ${this.classForm.value.name} abaixo.`;
+  this.editClass = `Edite as informações da turma abaixo.`;
 
   this.globalStatesService.mobileMenuChanges.subscribe((val) => {
     this.isMobileMenu = val;
@@ -127,15 +126,15 @@ onDeleteDiscipline(disciplineIndex: number) {
 }
 
 //method to edit class through the ClassService
-  onUpdate() {
-  this.classService.updateClass(
-    this.classForm.value.registerCode,{
-      name: this.classForm.value.name,
-      registerCode: this.classForm.value.registerCode,
-      semester: this.classForm.value.semester,
-      shift: this.classForm.value.shift,
-      category: this.classForm.value.category,
-      disciplines: this.classForm.value.disciplines
+onUpdate() {
+this.classService.updateClass(
+  this.classForm.value.registerCode,{
+    name: this.classForm.value.name,
+    registerCode: this.classForm.value.registerCode,
+    semester: this.classForm.value.semester,
+    shift: this.classForm.value.shift,
+    category: this.classForm.value.category,
+    disciplines: this.classForm.value.disciplines
     }
   );
 }
