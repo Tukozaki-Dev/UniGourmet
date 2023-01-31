@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Unity } from '../shared-components/models/ingredient.model';
-import { Recipe } from '../shared-components/models/recipe.model';
+import { PrepInstructions, Recipe, RecipeGroup, SingleInstruction, StepsGroup } from '../shared-components/models/recipe.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,116 +11,223 @@ export class RecipeService {
 
   private recipes: Recipe[] = [
     new Recipe(
-      'Mjadra (Arroz com Lentilha e Cebola Caramelizada',
-      'CM0032',
-      '../../assets/img/LogoQuadrado.png',
-      'uma breve descrição da receita, como sua origem',
-      'Cozinha Mediterrânea',
-      'Europa/Mar Mediterrâneo',
-      '1h30',
-      3,
-      [
-        {
-          ingredients: [
-            {
-              selectedIngredients: [
-                { name: 'Lentilha', unity: Unity.gramas, quantity: 100 },
-                { name: 'Arroz', unity: Unity.gramas, quantity: 200 },
-                { name: 'Feijão', unity: Unity.gramas, quantity: 300 },
-                { name: 'Macarrão', unity: Unity.gramas, quantity: 400 },
-                { name: 'Ervilha', unity: Unity.gramas, quantity: 500 },
-              ]
-            }
-          ],
-          prepInstructions: [
-            {
-              instructionName: 'Massa', instructionSteps: [
-                {step: 1, description: 'descricao numero um da massa'},
-                {step: 2, description: 'descricao numero dois da massa'},
-                {step: 3, description: 'descricao numero tres da massa'},
-                {step: 3, description: 'descricao numero quatro da massa'},
-              ]
-            },
-            {
-              instructionName: 'Recheio', instructionSteps: [
-                {step: 1, description: 'descricao numero um do recheio'},
-                {step: 2, description: 'descricao numero dois do recheio'},
-                {step: 3, description: 'descricao numero tres do recheio'},
-                {step: 3, description: 'descricao numero quatro do recheio'},
-              ]
-            }
-          ]
-        }
-      ],
-      'preparo previo',
-      [
-        {step: 1, description: 'descricao numero um do empratamento'},
-        {step: 2, description: 'descricao numero um do empratamento'},
-        {step: 3, description: 'descricao numero um do empratamento'},
-        {step: 4, description: 'descricao numero um do empratamento'},
-      ],
-      ['colher', 'garfo', 'panela', 'grelha', 'fouet'],
-      'esta é uma observação do chef sobre a receita',
-      'vinho tinto'
+      new RecipeGroup(
+        "Apple Pie",
+        "12345",
+        "./assets/apple-pie.jpg",
+        "A delicious classic American dessert",
+        "Dessert",
+        "USA",
+        "1 hour",
+        8,
+        "Chill the crust in the fridge for 30 minutes",
+        "Use Granny Smith apples for a tart flavor",
+        "Vanilla ice cream",
+      ),
+      new StepsGroup(
+        [
+          {
+            sectionName: "Crust",
+            ingredients: [
+              {
+                ingredientGroup: [
+                  {
+                    name: "All-Purpose Flour",
+                    unity: Unity.gramas,
+                    quantity: 2.5
+                  },
+                  {
+                    name: "Salt",
+                    unity: Unity.gramas,
+                    quantity: 0.5
+                  },
+                  {
+                    name: "Unsalted Butter",
+                    unity: Unity.gramas,
+                    quantity: 10
+                  },
+                  {
+                    name: "Ice Water",
+                    unity: Unity.gramas,
+                    quantity: 5
+                  },
+                ]
+              },
+            ],
+            prepInstructions: [ 
+              new PrepInstructions([
+                new SingleInstruction(1, "Peel, core, and thinly slice the apples."),
+                new SingleInstruction(2, "In a large bowl, combine the apples, sugar, lemon juice, cinnamon, and nutmeg."),
+                new SingleInstruction(3, "Set aside for 15 minutes to let the flavors meld."),
+              ]),
+            ]
+          },
+          {
+            sectionName: "Filling",
+            ingredients: [
+              {
+                ingredientGroup: [
+                  {
+                    name: "Granny Smith Apples",
+                    unity: Unity.gramas,
+                    quantity: 6
+                  },
+                  {
+                    name: "Sugar",
+                    unity: Unity.gramas,
+                    quantity: 1.5
+                  },
+                  {
+                    name: "Lemon Juice",
+                    unity: Unity.gramas,
+                    quantity: 1
+                  },
+                  {
+                    name: "Cinnamon",
+                    unity: Unity.gramas,
+                    quantity: 1
+                  },
+                  {
+                    name: "Nutmeg",
+                    unity: Unity.gramas,
+                    quantity: 0.5
+                  },
+                ]
+              },
+            ],
+            prepInstructions: [ 
+              new PrepInstructions([
+                new SingleInstruction(1, "Peel, core, and thinly slice the apples."),
+                new SingleInstruction(2, "In a large bowl, combine the apples, sugar, lemon juice, cinnamon, and nutmeg."),
+                new SingleInstruction(3, "Set aside for 15 minutes to let the flavors meld."),
+              ]), 
+            ],
+          },
+        ],
+        [
+          new SingleInstruction(1, "Peel, core, and thinly slice the apples."),
+          new SingleInstruction(2, "In a large bowl, combine the apples, sugar, lemon juice, cinnamon, and nutmeg."),
+          new SingleInstruction(3, "Set aside for 15 minutes to let the flavors meld."),
+        ],
+        ['aa','bb','cc','dd']
+      ),
     ),
+
     new Recipe(
-      'Couscous',
-      'CM0040',
-      '../../assets/img/LogoQuadrado.png',
-      'uma breve descrição da receita, como sua origem',
-      'Cozinha Mediterrânea',
-      'Europa/Mar Mediterrâneo',
-      '1h30',
-      3,
-      [
-        {
-          ingredients: [
-            {
-              selectedIngredients: [
-                { name: 'Lentilha', unity: Unity.gramas, quantity: 100 },
-                { name: 'Arroz', unity: Unity.gramas, quantity: 200 },
-                { name: 'Feijão', unity: Unity.gramas, quantity: 300 },
-                { name: 'Macarrão', unity: Unity.gramas, quantity: 400 },
-                { name: 'Ervilha', unity: Unity.gramas, quantity: 500 },
-              ]
-            }
-          ],
-          prepInstructions: [
-            {
-              instructionName: 'Massa', instructionSteps: [
-                {step: 1, description: 'descricao numero um da massa'},
-                {step: 2, description: 'descricao numero dois da massa'},
-                {step: 3, description: 'descricao numero tres da massa'},
-                {step: 3, description: 'descricao numero quatro da massa'},
-              ]
-            },
-            {
-              instructionName: 'Recheio', instructionSteps: [
-                {step: 1, description: 'descricao numero um do recheio'},
-                {step: 2, description: 'descricao numero dois do recheio'},
-                {step: 3, description: 'descricao numero tres do recheio'},
-                {step: 3, description: 'descricao numero quatro do recheio'},
-              ]
-            }
-          ]
-        }
-      ],
-      'preparo previo',
-      [
-        {step: 1, description: 'descricao numero um do empratamento'},
-        {step: 2, description: 'descricao numero um do empratamento'},
-        {step: 3, description: 'descricao numero um do empratamento'},
-        {step: 4, description: 'descricao numero um do empratamento'},
-      ],
-      ['colher', 'garfo', 'panela', 'grelha', 'fouet'],
-      'esta é uma observação do chef sobre a receita',
-      'vinho tinto'
-    ),
+      new RecipeGroup(
+      "Lemon Meringue Pie",
+      "67890",
+      "./assets/lemon-meringue.jpg",
+      "A sweet and tangy dessert with a fluffy meringue topping",
+      "Dessert",
+      "Europe",
+      "2 hours",
+      8,
+      "Chill the pie in the fridge for at least 1 hour before serving",
+      "Use fresh lemon juice for the best flavor",
+      "Whipped cream",
+      ),
+      new StepsGroup(
+        [
+          {
+            sectionName: "Crust",
+            ingredients: [
+              {
+                ingredientGroup: [
+                  {
+                    name: "All-Purpose Flour",
+                    unity: Unity.gramas,
+                    quantity: 2.5
+                  },
+                  {
+                    name: "Salt",
+                    unity: Unity.gramas,
+                    quantity: 0.5
+                  },
+                  {
+                    name: "Unsalted Butter",
+                    unity: Unity.gramas,
+                    quantity: 10
+                  },
+                  {
+                    name: "Ice Water",
+                    unity: Unity.gramas,
+                    quantity: 5
+                  },
+                ]
+              },
+            ],
+            prepInstructions: [ 
+              new PrepInstructions([
+                new SingleInstruction(1, "Peel, core, and thinly slice the apples."),
+                new SingleInstruction(2, "In a large bowl, combine the apples, sugar, lemon juice, cinnamon, and nutmeg."),
+                new SingleInstruction(3, "Set aside for 15 minutes to let the flavors meld."),
+              ]),
+            ]
+          },
+          {
+            sectionName: "Filling",
+            ingredients: [
+              {
+                ingredientGroup: [
+                  {
+                    name: "Granny Smith Apples",
+                    unity: Unity.gramas,
+                    quantity: 6
+                  },
+                  {
+                    name: "Sugar",
+                    unity: Unity.gramas,
+                    quantity: 1.5
+                  },
+                  {
+                    name: "Lemon Juice",
+                    unity: Unity.gramas,
+                    quantity: 1
+                  },
+                  {
+                    name: "Cinnamon",
+                    unity: Unity.gramas,
+                    quantity: 1
+                  },
+                  {
+                    name: "Nutmeg",
+                    unity: Unity.gramas,
+                    quantity: 0.5
+                  },
+                ]
+              },
+            ],
+            prepInstructions: [ 
+              new PrepInstructions([
+                new SingleInstruction(1, "Peel, core, and thinly slice the apples."),
+                new SingleInstruction(2, "In a large bowl, combine the apples, sugar, lemon juice, cinnamon, and nutmeg."),
+                new SingleInstruction(3, "Set aside for 15 minutes to let the flavors meld."),
+              ]), 
+            ],
+          },
+        ],
+        [
+          new SingleInstruction(1, "Peel, core, and thinly slice the apples."),
+          new SingleInstruction(2, "In a large bowl, combine the apples, sugar, lemon juice, cinnamon, and nutmeg."),
+          new SingleInstruction(3, "Set aside for 15 minutes to let the flavors meld."),
+        ],
+        ['aa','bb','cc','dd']
+      ),
+    ),   
+          
   ];
+
   constructor() {}
 
   getRecipes() {
     return this.recipes;
+  }
+
+  getRecipesMain() {
+    return this.recipes.find((recipe) => {
+      return recipe.recipeMain;
+    })
   }
 
   /* 
@@ -133,7 +240,7 @@ export class RecipeService {
 
   getRecipe(id: string) {
     return this.recipes.find((recipe) => {
-      return recipe.id == id;
+      return recipe.recipeMain.id == id;
     });
   }
 
@@ -144,7 +251,7 @@ export class RecipeService {
 
   updateRecipe(id: string, editedRecipe: Recipe) {
     const index = this.recipes.findIndex((recipe) => {
-      return id === recipe.id;
+      return id === recipe.recipeMain.id;
     });
     this.recipes[index] = editedRecipe;
     this.recipesChanged.next(this.recipes.slice());
@@ -154,7 +261,7 @@ export class RecipeService {
     console.log('deletando ingrediente com id: ', id);
 
     this.recipes = this.recipes.filter((i) => {
-      return i.id !== id;
+      return i.recipeMain.id !== id;
     });
     return this.recipes;
   }

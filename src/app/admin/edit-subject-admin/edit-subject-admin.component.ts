@@ -179,8 +179,8 @@ export class EditSubjectAdminComponent implements OnInit {
       dialogContent: `Selecione uma ou mais receitas pertencentes à aula da matéria ${this.subjectForm.value.subject.name}: `,
       allChips: this.recipes.map((recipe =>{
         return {
-          name: recipe.name,
-          id: recipe.id
+          name: recipe.recipeMain.name,
+          id: recipe.recipeMain.id
         }
       })),
       confirmSaveLabel: 'Salvar',

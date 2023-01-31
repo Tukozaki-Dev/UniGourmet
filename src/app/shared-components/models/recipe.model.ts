@@ -1,5 +1,18 @@
 import { Unity } from './ingredient.model';
+
 export class Recipe {
+  recipeMain: RecipeGroup;
+  recipeSteps: StepsGroup;
+  constructor(
+    recipeMain: RecipeGroup,
+    recipeSteps: StepsGroup,
+  ) {
+    this.recipeMain = recipeMain;
+    this.recipeSteps = recipeSteps;
+  }
+}
+
+export class RecipeGroup {
   name: string;
   id: string;
   imagePath: string;
@@ -8,10 +21,7 @@ export class Recipe {
   region: string;
   prepDuration: string;
   yeldis: number;
-  section:SectionRecipe[];
   prevPrepare?: string;
-  plateUp?: SingleInstruction[];
-  equipUtensils?: string[];
   chefsNote?: string;
   harmonization?: string;
   constructor(
@@ -23,10 +33,7 @@ export class Recipe {
     region: string,
     prepDuration: string,
     yeldis: number,
-    section: SectionRecipe[],
     prevPrepare?: string,
-    plateUp?: SingleInstruction[],
-    equipUtensils?: string[],
     chefsNote?: string,
     harmonization?: string
   ) {
@@ -38,20 +45,34 @@ export class Recipe {
     this.region = region;
     this.prepDuration = prepDuration;
     this.yeldis = yeldis;
-    this.section = section;
     this.prevPrepare = prevPrepare;
-    this.plateUp = plateUp;
-    this.equipUtensils = equipUtensils;
     this.chefsNote = chefsNote;
     this.harmonization = harmonization;
   }
 }
-export interface SectionRecipe{
-  ingredients?: SelectedIngredient[];
-  prepInstructions?: PrepInstructions[];
+
+export class StepsGroup {
+  section:SectionRecipe[];
+  plateUp?: SingleInstruction[];
+  equipUtensils?: string[];
+  constructor(
+    section?: SectionRecipe[],
+    plateUp?: SingleInstruction[],
+    equipUtensils?: string[],
+  ) {
+    this.section = section;
+    this.plateUp = plateUp;
+    this.equipUtensils = equipUtensils;
+  }
 }
-export interface SelectedIngredient {
-  selectedIngredients: IngredientDetails[];
+
+export interface SectionRecipe{
+  sectionName?: string;
+  ingredients: IngredientGroup[];
+  prepInstructions: PrepInstructions[];
+}
+export interface IngredientGroup {
+  ingredientGroup: IngredientDetails[];
 }
 export interface IngredientDetails {
   name: string;
@@ -67,10 +88,8 @@ export class SingleInstruction {
   }
 }
 export class PrepInstructions {
-  instructionName: string;
-  instructionSteps: SingleInstruction[];
-  constructor(instructionName: string, instructionSteps: SingleInstruction[]) {
-    this.instructionName = instructionName;
+  instructionSteps?: SingleInstruction[];
+  constructor(instructionSteps: SingleInstruction[]) {
     this.instructionSteps = instructionSteps;
   }
 }
