@@ -134,26 +134,30 @@ export class EditRecipeAdminComponent implements OnInit {
             harmonization: this.selectedRecipe.recipeMain.harmonization,
           },
           recipeSteps: {
-            section: {
-              sectionName: this.selectedRecipe.recipeSteps.section[0].sectionName,
-              ingredients: {
-                ingredientGroup: {
-                  name: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].name,
-                  unity: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].unity,
-                  quantity: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].quantity,
+            section: [
+              {
+                sectionName: this.selectedRecipe.recipeSteps.section[0].sectionName,
+                ingredients: {
+                  ingredientGroup: {
+                    name: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].name,
+                    unity: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].unity,
+                    quantity: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].quantity,
+                  }
+                },
+                prepInstructions: {
+                  instructionSteps: {
+                    step: this.selectedRecipe.recipeSteps.section[0].prepInstructions[0].instructionSteps[0].step,
+                    description: this.selectedRecipe.recipeSteps.section[0].prepInstructions[0].instructionSteps[0].description,
+                  }
                 }
               },
-              prepInstructions: {
-                instructionSteps: {
-                  step: this.selectedRecipe.recipeSteps.section[0].prepInstructions[0].instructionSteps[0].step,
-                  description: this.selectedRecipe.recipeSteps.section[0].prepInstructions[0].instructionSteps[0].description,
-                }
-              }
-            },
-            plateUp: {
-              step: this.selectedRecipe.recipeSteps.plateUp[0].step,
-              description: this.selectedRecipe.recipeSteps.plateUp[0].description,
-            },
+            ],
+            plateUp: [
+              {
+                step: this.selectedRecipe.recipeSteps.plateUp[0].step,
+                description: this.selectedRecipe.recipeSteps.plateUp[0].description,
+              },
+            ],
             equipUtensils: equipUtensils,
     
           },
