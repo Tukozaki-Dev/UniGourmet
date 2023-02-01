@@ -27,7 +27,7 @@
               <app-file-upload></app-file-upload>
             </div>
             <div class="img-container" *ngIf="editMode">
-              <img [src]="imagePath" class="img-responsive img-size imagePath"/>
+              <img [src]="recipeForm.value.recipeMain.imagePath" class="img-responsive img-size imagePath"/>
             </div>
           </div>
           <div class="col-12 text-center mt-4 mb-2">
@@ -124,7 +124,6 @@
             >
               <mat-label>Tempo de Preparo</mat-label>
               <input
-                type="time"
                 matInput
                 placeholder="Insira o tempo de preparo da receita"
                 formControlName="prepDuration"
@@ -266,6 +265,7 @@
                                 formControlName="name"
                                 name="name"
                                 #name
+                                [compareWith]="compareSelectOptionByName"
                               >
                                 <mat-option *ngFor="let ingredient of allIngredients" [value]="ingredient.name">
                                   {{ ingredient.name }}
@@ -406,7 +406,7 @@
               <ng-container formArrayName="equipUtensils">
                 <h2 class="primary-color">Equipamentos e utensílios:</h2>
                 <div *ngFor="let s of equipUtensils.controls; let equipUtensilsIndex = index">
-                  <div [formGroupName]="equipUtensilsIndex">
+                  <div >
                     <mat-form-field
                       appearance="fill"
                       color="primary"
@@ -415,7 +415,7 @@
                       <input
                         matInput
                         placeholder="Insira aqui os equipamentos/utensílios"
-                        #equipUtensils
+                        [formControlName]="equipUtensilsIndex"
                       />
                     </mat-form-field>
                     <app-icon-button

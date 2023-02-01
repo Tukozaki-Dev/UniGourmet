@@ -1,4 +1,4 @@
-import { SectionRecipe, SingleInstruction, PrepInstructions } from './../../shared-components/models/recipe.model';
+import { SectionRecipe, SingleInstruction, IngredientDetails } from './../../shared-components/models/recipe.model';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormControl, FormGroup, Form } from '@angular/forms';
@@ -39,14 +39,34 @@ export class EditRecipeAdminComponent implements OnInit {
   id: string;
   selectedRecipe: Recipe;
 
-
   allDisciplines = [];
 
+  initializeSectionRecipes:SectionRecipe[] = [];
+  initializePlateUps: SingleInstruction[] = [];
+  initializeEquipUtensils: string[] = [];
 
   allIngredients: Ingredient[] = [];
 
-  recipeForm: FormGroup;
-
+  recipeForm = this.fb.group({
+    recipeMain: this.fb.group({
+      name: ['', Validators.required],
+      id: ['', Validators.required],
+      imagePath: ['', Validators.required],
+      description: ['', Validators.required],
+      discipline: ['', Validators.required],
+      region: ['', Validators.required],
+      prepDuration: ['', Validators.required],
+      yeldis: [+'', Validators.required],
+      prevPrepare: [''],
+      chefsNote: [''],
+      harmonization: [''],
+    }),
+    recipeSteps: this.fb.group({
+      section: this.fb.array(this.initializeSectionRecipes, Validators.required),
+      plateUp: this.fb.array(this.initializePlateUps),
+      equipUtensils: this.fb.array(this.initializeEquipUtensils),
+    })
+  });
 
   constructor(
     public dialog: MatDialog,
@@ -59,28 +79,6 @@ export class EditRecipeAdminComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.isMobileMenu = this.globalStatesService.mobileMenu;
-
-    this.recipeForm = this.fb.group({
-      recipeMain: this.fb.group({
-        name: ['', Validators.required],
-        id: ['', Validators.required],
-        imagePath: ['', Validators.required],
-        description: ['', Validators.required],
-        discipline: ['', Validators.required],
-        region: ['', Validators.required],
-        prepDuration: ['', Validators.required],
-        yeldis: [+'', Validators.required],
-        prevPrepare: [''],
-        chefsNote: [''],
-        harmonization: [''],
-      }),
-      recipeSteps: this.fb.group({
-        section: this.fb.array([], Validators.required),
-        plateUp: this.fb.array([]),
-        equipUtensils: this.fb.array([]),
-      })
-
-  });
   }
 
   ngOnInit(): void {
@@ -95,31 +93,32 @@ export class EditRecipeAdminComponent implements OnInit {
 
     this.allIngredients = this.ingredientService.getIngredients();
 
-    //initialize formarrays start
-    this.addSection();
-    
-    const numberOfArrays = [1, 2, 3, 4, 5];
-    numberOfArrays.forEach((i) => {
-      this.addPlateUp();
-      this.addEquipUtensils();
-    });
+
+
+
     //initialize formarrays end
 
-    //gets the Subject Id param to edit the Subject
+    //gets the Recipe Id param to edit the Recipe
     this.id = this.route.snapshot.paramMap.get('id');
 
     if(this.id) {
       this.editMode = true;
-      //Search the Recipe id at SubjectService
+      //Search the Recipe id at RecipeService
       this.selectedRecipe = this.recipeService.getRecipe(this.id);
 
       if(this.selectedRecipe.recipeMain.id) {
         let section: SectionRecipe[] = [...this.selectedRecipe.recipeSteps.section];
-        let equipUtensils: string[] = [...this.selectedRecipe.recipeSteps.equipUtensils]
+        let plateUp: SingleInstruction[] = [...this.selectedRecipe.recipeSteps.plateUp];
+        let equipUtensils: string[] = [...this.selectedRecipe.recipeSteps.equipUtensils];
         console.log('testando section',section);
-        // let plateUp: SingleInstruction[] = [...this.selectedRecipe.recipeSteps.plateUp];
-        //updates the form with the subject previus data
-         this.recipeForm.setValue({
+        console.log('testando plateUp',plateUp);
+
+        this.initializeSectionData(section);
+        this.initializeEquipUtensilsData(equipUtensils);
+        this.initializePlateUpData(plateUp);
+
+        //updates the form with the Recipe previus data
+        this.recipeForm.setValue({
           recipeMain: {
             name: this.selectedRecipe.recipeMain.name,
             id: this.selectedRecipe.recipeMain.id,
@@ -134,49 +133,34 @@ export class EditRecipeAdminComponent implements OnInit {
             harmonization: this.selectedRecipe.recipeMain.harmonization,
           },
           recipeSteps: {
-            section: [
-              {
-                sectionName: this.selectedRecipe.recipeSteps.section[0].sectionName,
-                ingredients: {
-                  ingredientGroup: {
-                    name: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].name,
-                    unity: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].unity,
-                    quantity: this.selectedRecipe.recipeSteps.section[0].ingredients[0].ingredientGroup[0].quantity,
-                  }
-                },
-                prepInstructions: {
-                  instructionSteps: {
-                    step: this.selectedRecipe.recipeSteps.section[0].prepInstructions[0].instructionSteps[0].step,
-                    description: this.selectedRecipe.recipeSteps.section[0].prepInstructions[0].instructionSteps[0].description,
-                  }
-                }
-              },
-            ],
-            plateUp: [
-              {
-                step: this.selectedRecipe.recipeSteps.plateUp[0].step,
-                description: this.selectedRecipe.recipeSteps.plateUp[0].description,
-              },
-            ],
+            section: section,
+            plateUp: plateUp,
             equipUtensils: equipUtensils,
-    
           },
         });
-      
+        console.log('recipeForm ',this.recipeForm.value);
+        //console.log('selected ',this.selectedRecipe);
+
       } else {
         //If the Recipe Id don't exists will throw an error
         alert('Essa receita não existe!');
         this.router.navigate(['../'], { relativeTo: this.route });
       }
-    } 
+    }else{
+       //initialize formarrays start
+      this.addSection();
+      const numberOfArrays = [1, 2, 3, 4, 5];
+      numberOfArrays.forEach((i) => {
+        this.addPlateUp();
+        this.addEquipUtensils();
+      });
+    }
 
     if(!this.id) {
       this.editMode = false;
     }
 
   }
-
-
 
   //start of formarray related methods ------------------------------------
 
@@ -215,7 +199,6 @@ export class EditRecipeAdminComponent implements OnInit {
         ])
       }),
       prepInstructions: this.fb.group({
-        instructionName: [''],
         instructionSteps: this.fb.array([
           this.fb.group({
             step: [''],
@@ -296,6 +279,40 @@ export class EditRecipeAdminComponent implements OnInit {
     this.equipUtensils.removeAt(equipUtensilsIndex);
   }
 
+  initializeSectionData(sections:SectionRecipe[]){
+    sections.forEach((section, index)=>{
+      this.addSection();
+      this.initializeSectionIngredients(section.ingredients.ingredientGroup, index);
+      this.initializeSectionPrepInstructions(section.prepInstructions.instructionSteps, index);
+    });
+  }
+
+  initializeSectionIngredients(ingredients:IngredientDetails[], sectionIndex:number){
+    ingredients.forEach((ingredient, index)=>{
+      if(index !== 0) this.addIngredientLine(sectionIndex);
+    });
+  }
+
+  initializeSectionPrepInstructions(steps:SingleInstruction[], sectionIndex:number){
+    steps.forEach((step, index)=>{
+      if(index !== 0) this.addInstructionStep(sectionIndex);
+    });
+  }
+
+  initializePlateUpData(plateUp:SingleInstruction[]){
+    const numberOfArrays = plateUp.length;
+    for(let i = 0; i < numberOfArrays; i++){
+      this.addPlateUp();
+    }
+  }
+
+  initializeEquipUtensilsData(equipUtensils:string[]){
+    const numberOfArrays = equipUtensils.length;
+    for(let i = 0; i < numberOfArrays; i++){
+      this.addEquipUtensils();
+    }
+  }
+
   //end of formarray related methods----------------------------------------
 
   //open dialog when user clicks go back arrow
@@ -346,7 +363,7 @@ export class EditRecipeAdminComponent implements OnInit {
     //       section: section,
     //       plateUp: plateUp,
     //       equipUtensils: equipUtensils,
-  
+
     //     },
     //   }
     // );
@@ -380,11 +397,10 @@ export class EditRecipeAdminComponent implements OnInit {
     });
   }
 
-  
 
-  
-
-
+  compareSelectOptionByName(data, option): boolean {
+    return data && option && data === option;
+  }
 
 
 }

@@ -21,7 +21,18 @@ export class IngredientService {
     new Ingredient('5', 'Gergelim', Unity.gramas),
     new Ingredient('6', 'Farinha de trigo', Unity.gramas),
     new Ingredient('7', 'Berinjela', Unity.gramas),
-    new Ingredient('8', 'Abobrinha', Unity.gramas),
+    new Ingredient('8', 'Cenoura', Unity.gramas),
+    new Ingredient('9', 'Cebola Pera', Unity.gramas),
+    new Ingredient('10', 'Salsão', Unity.gramas),
+    new Ingredient('11', 'Patinho de Vitelo', Unity.gramas),
+    new Ingredient('12', 'Sal Refinado', Unity.gramas),
+    new Ingredient('13', 'Pimento do Reino Preta', Unity.gramas),
+    new Ingredient('14', 'Atum em Óleo', Unity.gramas),
+    new Ingredient('15', 'Alcaparras', Unity.gramas),
+    new Ingredient('16', 'Filés de Anchova', Unity.unidade),
+    new Ingredient('17', 'Maionese', Unity.gramas),
+    new Ingredient('18', 'Rúcula Selvagem', Unity.maço),
+    new Ingredient('19', 'Azeite Extra Virgem', Unity.ml),
   ];
 
   constructor() {}
