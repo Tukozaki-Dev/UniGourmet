@@ -104,7 +104,7 @@ export class EditSubjectAdminComponent implements OnInit {
       });
       if(this.selectedSubject.subject.registerCode) {
         //updates the form with the subject previus data
-         let lessons:Lesson[] = [...this.selectedSubject.lessons];
+        let lessons:Lesson[] = [...this.selectedSubject.lessons];
         const lessonsLength = this.selectedSubject.lessons.length;
          if(this.selectedSubject.subject.numberOfClasses > lessonsLength){
           const emptyLesson:Lesson = {recipeLessons:[]};

@@ -42,9 +42,7 @@ button {
 }
 
 .img-size {
-  width: 100pt;
-  border: 2pt solid rgb(121, 121, 121);
-  border-radius: 50%;
+  width: 300pt;
 }
 
 .square-container {
@@ -103,74 +101,70 @@ button {
   margin: 40px 10px;
   padding: 0.6px;
 }
-  
-  .box-array {
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    background-color: #F2FFFD;
-    border-radius: 15px;
-    padding: 30px 10px;
-    margin-bottom: 20px;
+
+.box-array {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  background-color: #F2FFFD;
+  border-radius: 15px;
+  padding: 30px 10px;
+  margin-bottom: 20px;
+}
+
+
+
+.square-container {
+  display: flex;
+  justify-content: center;
+}
+
+.add-row{
+  color: var(--sys--light--primary);
+  text-decoration: none;
+}
+
+@media (max-width: 540px) {
+  .ingredient-name-input {
+    width: 100px;
   }
 
-  .img-size {
+  .ingredient-unity-input {
+    width: 50pt;
+  }
+
+  .ingredient-quantity-input {
+    width: 50pt;
+  }
+}
+
+@media (min-width: 541px) {
+  .ingredient-name-input {
+    width: 175pt;
+  }
+
+  .ingredient-unity-input {
+    width: 70pt;
+  }
+
+  .ingredient-quantity-input {
+    width: 70pt;
+  }
+}
+
+@media (min-width: 992px) {
+  .ingredient-name-input {
+    width: 250pt;
+  }
+
+  .ingredient-unity-input {
     width: 100pt;
-    border: 2pt solid rgb(121, 121, 121);
-    border-radius: 50%;
-  }
-  
-  .square-container {
-    display: flex;
-    justify-content: center;
   }
 
-  .add-row{
-    color: var(--sys--light--primary);
-    text-decoration: none;
+  .ingredient-quantity-input {
+    width: 100pt;
   }
 
-  @media (max-width: 540px) {
-    .ingredient-name-input {
-      width: 100px;
-    }
-    
-    .ingredient-unity-input {
-      width: 50pt;
-    }
-    
-    .ingredient-quantity-input {
-      width: 50pt;
-    }
+  .description-input {
+    width: 500pt;
   }
-
-  @media (min-width: 541px) {
-    .ingredient-name-input {
-      width: 175pt;
-    }
-    
-    .ingredient-unity-input {
-      width: 70pt;
-    }
-    
-    .ingredient-quantity-input {
-      width: 70pt;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .ingredient-name-input {
-      width: 250pt;
-    }
-    
-    .ingredient-unity-input {
-      width: 100pt;
-    }
-    
-    .ingredient-quantity-input {
-      width: 100pt;
-    }
-
-    .description-input {
-      width: 500pt;
-    }
-  }
+}
 

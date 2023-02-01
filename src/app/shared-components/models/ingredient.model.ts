@@ -23,4 +23,5 @@ export enum Unity {
   pedaço = 'Pedaço',
   gramas = 'Gramas',
   ml = 'ml',
+  maço = 'Maço',
 }
