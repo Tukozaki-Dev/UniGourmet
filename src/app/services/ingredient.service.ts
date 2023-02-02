@@ -33,6 +33,15 @@ export class IngredientService {
     new Ingredient('17', 'Maionese', Unity.gramas),
     new Ingredient('18', 'Rúcula Selvagem', Unity.maço),
     new Ingredient('19', 'Azeite Extra Virgem', Unity.ml),
+    new Ingredient('20', 'Alho in Natura', Unity.cabeça),
+    new Ingredient('21', 'Manteiga Integral sem Sal', Unity.gramas),
+    new Ingredient('22', 'Filé Mignon Bovino Limpo', Unity.gramas),
+    new Ingredient('23', 'Pimentão Vermelho', Unity.unidade),
+    new Ingredient('24', 'Pimentão Amarelo', Unity.unidade),
+    new Ingredient('25', 'Beterraba', Unity.unidade),
+    new Ingredient('26', 'Abobrinha Italiana', Unity.unidade),
+    new Ingredient('27', 'Erva Doce Fresca', Unity.unidade),
+    new Ingredient('28', 'Pão Italiano em Filão', Unity.unidade),
   ];
 
   constructor() {}

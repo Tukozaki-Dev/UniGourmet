@@ -82,7 +82,7 @@ export class RecipeService {
       {
         name: "Bagna Caoda",
         id: "CM0048",
-        imagePath: "../../assets/img/LogoQuadrado.png",
+        imagePath: "https://img.saborosos.com.br/imagens/sopa-creme-de-aspargos.jpg",
         description:"A Bagna càuda é um prato típico da culinária do Piemonte. É feito com alho, azeite de oliva, creme de leite fresco, manteiga e anchovas, variando as proporções de acordo com a região e o gosto pessoal.",
         discipline:"Cozinha Italiana",
         region: "Italia/Piemonte",

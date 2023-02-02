@@ -47,7 +47,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-6 order-md-1 col-12 text-center d-flex justify-content-center align-items-center">
+          <div class="col-md-6 order-md-1 col-12 text-end d-flex justify-content-center align-items-center">
             <mat-form-field
               appearance="fill"
               color="primary"
@@ -251,7 +251,7 @@
                           <h2 class="primary-color">Ingredientes:</h2>
                         </div>
                         <div *ngFor="let ingredient of getIngredientGroupControl(sectionIndex).controls; let ingredientGroupIndex = index">
-                          <div [formGroupName]="ingredientGroupIndex">
+                          <div [formGroupName]="ingredientGroupIndex" class="d-flex align-items-center justify-content-center text-center">
                             <mat-form-field
                               appearance="fill"
                               color="primary"
@@ -261,7 +261,7 @@
                               <mat-select
                                 formControlName="name"
                                 name="name"
-                                #name
+                                #ingredientName
                                 [compareWith]="compareSelectOptionByName"
                               >
                                 <mat-option *ngFor="let ingredient of allIngredients" [value]="ingredient.name">
@@ -293,15 +293,16 @@
                                 #quantity
                               />
                             </mat-form-field>
-
-                            <app-icon-button
+                            <div class="mb-3">
+                              <app-icon-button
                               [btnColor]="deleteBtnColor"
                               [btnIcon]="deleteBtnIcon"
                               (iconBtnEvent)="removeIngredientLine(sectionIndex, ingredientGroupIndex)"
                             ></app-icon-button>
+                            </div>
                           </div>
                         </div>
-                        <div class="text-start ms-2">
+                        <div [ngClass]="isMobileMenu ? 'text-start' : 'text-center'">
                           <a (click)="addIngredientLine(sectionIndex)" class="add-row">+ Adicionar mais ingredientes</a>
                         </div>
                       </ng-container>
@@ -309,11 +310,11 @@
 
                     <div formGroupName="prepInstructions">
                       <ng-container formArrayName="instructionSteps">
-                        <div class="text-center my-4">
+                        <div class="text-center mt-5 mb-4">
                           <h2 class="primary-color">Modo de Preparo:</h2>
                         </div>
                         <div *ngFor="let prep of getIntructionStepsControl(sectionIndex).controls; let instructionStepsIndex = index">
-                          <div [formGroupName]="instructionStepsIndex">
+                          <div [formGroupName]="instructionStepsIndex" class="d-flex align-items-center justify-content-center text-center">
                             <mat-form-field
                               appearance="fill"
                               color="primary"
@@ -324,7 +325,7 @@
                                 matInput
                                 formControlName="step"
                                 #step
-                                value="{{instructionStepsIndex + 1}}"
+                                
                               />
                             </mat-form-field>
                             <mat-form-field
@@ -339,14 +340,16 @@
                                 #description
                               />
                             </mat-form-field>
-                            <app-icon-button
+                            <div class="mb-3 mx-1">
+                              <app-icon-button
                               [btnColor]="deleteBtnColor"
                               [btnIcon]="deleteBtnIcon"
                               (iconBtnEvent)="removeInstructionStep(sectionIndex, instructionStepsIndex)"
                             ></app-icon-button>
+                            </div>
                           </div>
                         </div>
-                        <div class="text-start ms-2">
+                        <div [ngClass]="isMobileMenu ? 'text-start' : 'text-center'">
                           <a (click)="addInstructionStep(sectionIndex)" class="add-row" >+ Adicionar linhas à tabela</a>
                         </div>
                       </ng-container>
@@ -374,7 +377,7 @@
               <h2 class="primary-color">Sequência de Montagem:</h2>
               <ng-container formArrayName="plateUp">
                 <div *ngFor="let s of plateUp.controls; let plateUpIndex = index">
-                  <div [formGroupName]="plateUpIndex">
+                  <div [formGroupName]="plateUpIndex" class="d-flex align-items-center justify-content-center text-center">
                     <mat-form-field
                       appearance="fill"
                       color="primary"
@@ -385,14 +388,15 @@
                         matInput
                         formControlName="step"
                         #step
-                        value="{{ plateUpIndex + 1 }}"
+                        
+                        
                       />
                     </mat-form-field>
                     <mat-form-field
                       appearance="fill"
                       color="primary"
                       [ngClass]="isMobileMenu? 'small-description-input' : 'description-input'">
-                      <mat-label>Descrição</mat-label>
+                      <mat-label>Descrição {{s[plateUpIndex] + 1}}</mat-label>
                       <input
                         matInput
                         placeholder="Insira aqui a a descrição"
@@ -400,14 +404,16 @@
                         #description
                       />
                     </mat-form-field>
-                    <app-icon-button
+                    <div class="mb-3 mx-1">
+                      <app-icon-button
                       [btnColor]="deleteBtnColor"
                       [btnIcon]="deleteBtnIcon"
                       (iconBtnEvent)="removePlateUp(plateUpIndex)"
                     ></app-icon-button>
+                    </div>
                   </div>
                 </div>
-                <div class="text-start ms-2">
+                <div [ngClass]="isMobileMenu ? 'text-start' : 'text-center'">
                   <a (click)="addPlateUp()" class="add-row">+ Adicionar linhas à tabela</a>
                 </div>
               </ng-container>
@@ -415,7 +421,7 @@
               <ng-container formArrayName="equipUtensils">
                 <h2 class="primary-color">Equipamentos e utensílios:</h2>
                 <div *ngFor="let s of equipUtensils.controls; let equipUtensilsIndex = index">
-                  <div >
+                  <div class="d-flex align-items-center justify-content-center text-center">
                     <mat-form-field
                       appearance="fill"
                       color="primary"
@@ -424,17 +430,19 @@
                       <input
                         matInput
                         placeholder="Insira aqui os equipamentos/utensílios"
-                        [formControlName]="equipUtensilsIndex"
+                        [formControlName]="equipUtensilsIndex" 
                       />
                     </mat-form-field>
-                    <app-icon-button
+                    <div class="mb-3 mx-1">
+                      <app-icon-button
                       [btnColor]="deleteBtnColor"
                       [btnIcon]="deleteBtnIcon"
                       (iconBtnEvent)="removeEquipUtensils(equipUtensilsIndex)"
                     ></app-icon-button>
+                    </div>
                   </div>
                 </div>
-                <div class="text-start ms-4">
+                <div [ngClass]="isMobileMenu ? 'text-start' : 'text-center'">
                   <a (click)="addEquipUtensils()" class="add-row">+ Adicionar linhas à tabela</a>
                 </div>
               </ng-container>
@@ -443,7 +451,7 @@
         </div>
       </div>
 
-      <div class="col-12 my-4 text-center">
+      <div class="col-12 my-5 text-center">
         <button mat-raised-button color="primary" type="submit">
           {{ btnText }}
         </button>
