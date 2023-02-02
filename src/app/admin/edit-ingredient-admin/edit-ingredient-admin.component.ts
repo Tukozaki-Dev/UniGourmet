@@ -29,7 +29,7 @@ export class EditIngredientAdminComponent implements OnInit {
   unity = Unity;
 
   ingredientForm = new FormGroup({
-    id: new FormControl({value: '', disabled: true}),
+    id: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     unity: new FormControl(Unity.cabeça, Validators.required),
   });
@@ -78,14 +78,13 @@ export class EditIngredientAdminComponent implements OnInit {
   //method to edit ingredient through the IngredientService
    onUpdate() {
     this.ingredientService.updateIngredient(
-      this.selectedIngredient.id,{
+      this.selectedIngredient.name,{
         id: this.selectedIngredient.id,
         name: this.ingredientForm.value.name,
         unity: this.ingredientForm.value.unity
       }
     );
   }
-
 
   //method to add a new ingredient through the IngredientService
    onAddIngredient() {

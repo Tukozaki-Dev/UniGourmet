@@ -68,16 +68,43 @@ export class IngredientService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  updateIngredient(id: string, editedingredient: Ingredient) {
+  /*
+    get ingredient by id, change to this method when get the info from backend
+
+    updateIngredient(id: string, editedingredient: Ingredient) {
     const index = this.ingredients.findIndex((selectedIngredient) => {
       return id === selectedIngredient.id;
     });
     this.ingredients[index] = editedingredient;
     this.ingredientsChanged.next(this.ingredients.slice());
+  } */
+
+  //get ingredient by name, change to this method to get by ud when get the info from backend
+
+  updateIngredient(name: string, editedingredient: Ingredient) {
+    const index = this.ingredients.findIndex((selectedIngredient) => {
+      return name === selectedIngredient.name;
+    });
+    this.ingredients[index] = editedingredient;
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
+
+  /*
+
+  get ingredient by id, change to this method when get the info from backend
 
   deleteIngredient(id: string) {
     this.ingredients = this.ingredients.filter((i)=>{ return i.id !== id});
     return this.ingredients;
+  } */
+
+
+  //get ingredient by name, change to this method to get by ud when get the info from backend
+
+  deleteIngredient(name: string) {
+    this.ingredients = this.ingredients.filter((i)=>{ return i.id !== name});
+    return this.ingredients;
   }
+
+
 }
