@@ -18,15 +18,15 @@ export class IngredientAdminComponent implements OnInit {
 
     //table columns to display - assigned to Input() [displayedColumns] coming from component 'table-filtering'
   displayedColumns: object = {'id':'id', 'name':'nome', 'unity':'unidade', 'actions':''}
-  
+
   //variable created to later receive ingredients from the service
   ingredients: Ingredient[] = [];
-  
+
   constructor(
     private ingredientService: IngredientService,
     private sharedService: SharedService
   ) {}
-  
+
   ngOnInit() {
     //assign to variable ingredients all ingredients (calling ingredient service)
     this.ingredients = this.ingredientService.getIngredients();
@@ -45,8 +45,8 @@ export class IngredientAdminComponent implements OnInit {
   }
 
   //function called when callbackMethodEvent (coming from component 'table-filtering') is emitted
-  onDeleteIngredient(id: string) {
-    this.ingredients = this.ingredientService.deleteIngredient(id); //além de modificar no "banco de dados", tem que retornar o valor novo editado
+  onDeleteIngredient(name: string) {
+    this.ingredients = this.ingredientService.deleteIngredient(name); //além de modificar no "banco de dados", tem que retornar o valor novo editado
   }
 
   onDetailsIngredient(id: string) {
