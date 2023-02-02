@@ -19,10 +19,10 @@
 
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
     <div class="row justify-content-center">
-      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+      <div class="col-12">
 
         <div class="row" formGroupName="recipeMain">
-          <div class="col-12">
+          <div class="col-12 text-center mb-5">
             <div class="square-container" *ngIf="!editMode">
               <app-file-upload></app-file-upload>
             </div>
@@ -30,11 +30,11 @@
               <img [src]="recipeForm.value.recipeMain.imagePath" class="img-responsive img-size imagePath"/>
             </div>
           </div>
-          <div class="col-12 text-center mt-4 mb-2">
+          <div class="col-md-12 col-12 text-center">
             <mat-form-field
               appearance="fill"
               color="primary"
-              class="basic-input"
+              class="description-input"
             >
               <mat-label>Nome da Receita</mat-label>
               <input
@@ -47,24 +47,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-12 text-center mb-2">
-            <mat-form-field
-              appearance="fill"
-              color="primary"
-              class="basic-input"
-            >
-              <mat-label>Descrição</mat-label>
-              <textarea
-                matInput
-                placeholder="Insira a descrição da receita"
-                formControlName="description"
-                #description
-                [value]="recipeForm.value.recipeMain.description"
-              ></textarea>
-            </mat-form-field>
-          </div>
-
-          <div class="col-12 text-center mb-2">
+          <div class="col-md-6 order-md-1 col-12 text-center d-flex justify-content-center align-items-center">
             <mat-form-field
               appearance="fill"
               color="primary"
@@ -81,7 +64,25 @@
             </mat-form-field>
           </div>
 
-          <div class="col-12 text-center mb-2">
+          <div class="col-md-6 order-md-4 col-12 text-center">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              class="basic-input"
+            >
+              <mat-label>Descrição</mat-label>
+              <textarea
+                matInput
+                [rows]="4"
+                placeholder="Insira a descrição da receita"
+                formControlName="description"
+                #description
+                [value]="recipeForm.value.recipeMain.description"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6 order-md-2 col-12 text-center d-flex justify-content-center align-items-center">
             <mat-form-field
               color="primary"
               appearance="fill"
@@ -99,7 +100,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-12 text-center mb-2">
+          <div class="col-md-6 order-md-4 col-12 text-center">
             <mat-form-field
               appearance="fill"
               color="primary"
@@ -116,11 +117,29 @@
             </mat-form-field>
           </div>
 
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2" [ngClass]="isMobileMenu ? 'text-center' : 'text-end'">
+          <div class="col-md-6 order-md-3 col-12 text-center d-flex justify-content-center align-items-center">
             <mat-form-field
               appearance="fill"
               color="primary"
-              [ngClass]="isMobileMenu ? 'basic-input' : 'small-basic-input'"
+              class="basic-input"
+            >
+              <mat-label>Observações do Chef</mat-label>
+              <textarea
+                matInput
+                [rows]="4"
+                placeholder="Caso tenha alguma nota ou observação importante, insira aqui"
+                formControlName="chefsNote"
+                #chefsNote
+                [value]="recipeForm.value.recipeMain.chefsNote"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 order-md-5 col-6" [ngClass]="isMobileMenu ? 'text-end' : 'text-end'">
+            <mat-form-field
+              appearance="fill"
+              color="primary"
+              class="small-basic-input"
             >
               <mat-label>Tempo de Preparo</mat-label>
               <input
@@ -133,11 +152,11 @@
             </mat-form-field>
           </div>
 
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2" [ngClass]="isMobileMenu ? 'text-center' : ''">
+          <div class="col-md-3 order-md-5 col-6" [ngClass]="isMobileMenu ? 'text-center' : 'text-start'">
             <mat-form-field
               appearance="fill"
               color="primary"
-              [ngClass]="isMobileMenu ? 'basic-input' : 'small-basic-input'"
+              class="small-basic-input"
             >
               <mat-label>Porções</mat-label>
               <input
@@ -151,7 +170,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-12 text-center mb-2">
+          <div class="col-md-6 order-md-last col-12 text-center">
             <mat-form-field
               appearance="fill"
               color="primary"
@@ -168,24 +187,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-12 text-center mb-2">
-            <mat-form-field
-              appearance="fill"
-              color="primary"
-              class="basic-input"
-            >
-              <mat-label>Observações do Chef</mat-label>
-              <textarea
-                matInput
-                placeholder="Caso tenha alguma nota ou observação importante, insira aqui"
-                formControlName="chefsNote"
-                #chefsNote
-                [value]="recipeForm.value.recipeMain.chefsNote"
-              ></textarea>
-            </mat-form-field>
-          </div>
-
-          <div class="col-12 text-center mb-2">
+          <div class="col-md-6 order-md-last col-12 text-center">
             <mat-form-field
               appearance="fill"
               color="primary"
@@ -211,20 +213,15 @@
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
               <div class="text-center">
-                <h2 class="primary-color">
-                  Precisa adicionar mais um modo de preparo e ingredientes?
-                  Clique no botão abaixo!
+                <h2 class="primary-color my-3">
+                  Adicione aqui os ingredientes e modo de preparo!
                 </h2>
+                <h4 class="primary-color my-3">
+                  Caso precise, você pode adicionar novas sessões após o término das sessões existentes
+                </h4>
               </div>
               <ng-container formArrayName="section">
-                <div class="text-center my-4">
-                  <app-button
-                    [icon]="arrayBtnIcon"
-                    [text]="sectionBtnText"
-                    (btnClickEvent)="addSection()"
-                  ></app-button>
-                </div>
-                <div *ngFor="let s of section.controls; let sectionIndex = index">
+                <div *ngFor="let s of section.controls; let sectionIndex = index" class="my-5">
                   <div class="box-array" [formGroupName]="sectionIndex">
                     <div class="text-start ms-4">
                       <app-icon-button
@@ -260,7 +257,7 @@
                               color="primary"
                               class="me-1 ingredient-name-input"
                             >
-                              <mat-label>Nome {{ingredientGroupIndex}}</mat-label>
+                              <mat-label>Nome</mat-label>
                               <mat-select
                                 formControlName="name"
                                 name="name"
@@ -279,7 +276,7 @@
                               class="me-1 ingredient-unity-input"
                             >
                               <mat-label>Unidade</mat-label>
-                              <input matInput formControlName="unity" #unity />
+                              <input matInput formControlName="unity" #unity/>
                             </mat-form-field>
 
                             <mat-form-field
@@ -324,7 +321,6 @@
                             >
                               <mat-label>N.</mat-label>
                               <input
-                                type="number"
                                 matInput
                                 formControlName="step"
                                 #step
@@ -335,7 +331,7 @@
                               appearance="fill"
                               color="primary"
                               [ngClass]="isMobileMenu ? 'small-description-input' : 'description-input'">
-                              <mat-label>Descrição modo de preparo {{instructionStepsIndex}}</mat-label>
+                              <mat-label>Descrição</mat-label>
                               <input
                                 matInput
                                 placeholder="Insira aqui a a descrição"
@@ -356,6 +352,19 @@
                       </ng-container>
                     </div>
                   </div>
+                </div>
+                <div class="text-center">
+                  <h2 class="primary-color">
+                    Precisa adicionar mais um modo de preparo e ingredientes?
+                    Clique no botão abaixo!
+                  </h2>
+                </div>
+                <div class="text-center my-4">
+                  <app-button
+                    [icon]="arrayBtnIcon"
+                    [text]="sectionBtnText"
+                    (btnClickEvent)="addSection()"
+                  ></app-button>
                 </div>
               </ng-container>
             </div>
@@ -383,7 +392,7 @@
                       appearance="fill"
                       color="primary"
                       [ngClass]="isMobileMenu? 'small-description-input' : 'description-input'">
-                      <mat-label>Descrição {{plateUpIndex + 1}}</mat-label>
+                      <mat-label>Descrição</mat-label>
                       <input
                         matInput
                         placeholder="Insira aqui a a descrição"
@@ -411,7 +420,7 @@
                       appearance="fill"
                       color="primary"
                       [ngClass]="isMobileMenu ? 'input-width-large' : 'width-large'">
-                      <mat-label>Equipamentos/Utensílios {{equipUtensilsIndex + 1}}</mat-label>
+                      <mat-label>Equipamentos/Utensílios</mat-label>
                       <input
                         matInput
                         placeholder="Insira aqui os equipamentos/utensílios"

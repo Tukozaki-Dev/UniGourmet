@@ -110,8 +110,6 @@ export class EditRecipeAdminComponent implements OnInit {
         let section: SectionRecipe[] = [...this.selectedRecipe.recipeSteps.section];
         let plateUp: SingleInstruction[] = [...this.selectedRecipe.recipeSteps.plateUp];
         let equipUtensils: string[] = [...this.selectedRecipe.recipeSteps.equipUtensils];
-        console.log('testando section',section);
-        console.log('testando plateUp',plateUp);
 
         this.initializeSectionData(section);
         this.initializeEquipUtensilsData(equipUtensils);
@@ -138,9 +136,6 @@ export class EditRecipeAdminComponent implements OnInit {
             equipUtensils: equipUtensils,
           },
         });
-        console.log('recipeForm ',this.recipeForm.value);
-        //console.log('selected ',this.selectedRecipe);
-
       } else {
         //If the Recipe Id don't exists will throw an error
         alert('Essa receita não existe!');
@@ -279,6 +274,7 @@ export class EditRecipeAdminComponent implements OnInit {
     this.equipUtensils.removeAt(equipUtensilsIndex);
   }
 
+
   initializeSectionData(sections:SectionRecipe[]){
     sections.forEach((section, index)=>{
       this.addSection();
@@ -332,7 +328,7 @@ export class EditRecipeAdminComponent implements OnInit {
     });
   }
 
-  //method to add a new class through the ClassService
+  //method to add a new recipe through the RecipeService
   onAddRecipe() {
     this.recipeService.addRecipe(this.recipeForm.getRawValue());
   }
@@ -341,33 +337,35 @@ export class EditRecipeAdminComponent implements OnInit {
     this.router.navigate(['/receitas']);
   }
 
-  //method to edit class through the ClassService
+  //method to edit recipe through the RecipeService
   onUpdate() {
-    // this.recipeService.updateRecipe(
-    //   this.recipeForm.value.recipe.id,
-    //   {
-    //     recipeMain: {
-    //       name: this.selectedRecipe.recipeMain.name,
-    //       id: this.selectedRecipe.recipeMain.id,
-    //       imagePath: this.selectedRecipe.recipeMain.imagePath,
-    //       description: this.selectedRecipe.recipeMain.description,
-    //       discipline: this.selectedRecipe.recipeMain.discipline,
-    //       region: this.selectedRecipe.recipeMain.region,
-    //       prepDuration: this.selectedRecipe.recipeMain.prepDuration,
-    //       yeldis: this.selectedRecipe.recipeMain.yeldis,
-    //       prevPrepare: this.selectedRecipe.recipeMain.prevPrepare,
-    //       chefsNote: this.selectedRecipe.recipeMain.chefsNote,
-    //       harmonization: this.selectedRecipe.recipeMain.harmonization,
-    //     },
-    //     recipeSteps: {
-    //       section: section,
-    //       plateUp: plateUp,
-    //       equipUtensils: equipUtensils,
+    let section: SectionRecipe[] = [...this.recipeForm.value.recipeSteps.section];
+    let plateUp: SingleInstruction[] = [...this.recipeForm.value.recipeSteps.plateUp];
+    let equipUtensils: string[] = [...this.recipeForm.value.recipeSteps.equipUtensils];
+    this.recipeService.updateRecipe(
+      this.recipeForm.value.recipeMain.id,
+      {
+        recipeMain: {
+          name: this.recipeForm.value.recipeMain.name,
+          id: this.recipeForm.value.recipeMain.id,
+          imagePath: this.recipeForm.value.recipeMain.imagePath,
+          description: this.recipeForm.value.recipeMain.description,
+          discipline: this.recipeForm.value.recipeMain.discipline,
+          region: this.recipeForm.value.recipeMain.region,
+          prepDuration: this.recipeForm.value.recipeMain.prepDuration,
+          yeldis: this.recipeForm.value.recipeMain.yeldis,
+          prevPrepare: this.recipeForm.value.recipeMain.prevPrepare,
+          chefsNote: this.recipeForm.value.recipeMain.chefsNote,
+          harmonization: this.recipeForm.value.recipeMain.harmonization,
+        },
+        recipeSteps: {
+          section: section,
+          plateUp: plateUp,
+          equipUtensils: equipUtensils,
 
-    //     },
-    //   }
-    // );
-    console.log('update');
+        },
+      }
+    );
   }
 
   //check if you are in edit or add mode and send updates

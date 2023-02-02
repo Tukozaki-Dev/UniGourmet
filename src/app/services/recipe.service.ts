@@ -154,9 +154,11 @@ export class RecipeService {
   }
 
   getRecipesMain() {
-    return this.recipes.find((recipe) => {
-      return recipe.recipeMain;
-    })
+    let recipeMain: RecipeGroup[] = this.recipes.map((recipe) => {
+      let recipeGroup: RecipeGroup = recipe.recipeMain;
+      return recipeGroup;
+    });
+    return recipeMain;
   }
 
   /*

@@ -1,3 +1,4 @@
+import { RecipeGroup } from './../../shared-components/models/recipe.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -22,6 +23,8 @@ export class RecipeAdminComponent implements OnInit {
   //variable created to later receive ingredients from the service
   recipes: Recipe[] = [];
 
+  recipeMain: RecipeGroup[] = [];
+
   constructor(
     private sharedService: SharedService,
     private recipeService: RecipeService,
@@ -29,13 +32,15 @@ export class RecipeAdminComponent implements OnInit {
 
   ngOnInit(): void {
     //assign to variable ingredients all ingredients (calling ingredient service)
-    this.recipes = this.recipeService.getRecipes();
+    this.recipeMain = this.recipeService.getRecipesMain();
   }
 
   //function called when btnClickEvent (coming from component 'button') is emitted
   goToCreateNew() {
     //send to 'cadastro' route
     this.sharedService.sendTo('receita/cadastro');
+    let teste = this.recipeService.getRecipesMain();
+    console.log('testando recipemain no component recipe admin', teste);
   }
 
   //function called when onClickEditEvent (coming from component 'table-filtering') is emitted
