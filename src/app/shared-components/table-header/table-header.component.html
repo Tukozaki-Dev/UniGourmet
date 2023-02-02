@@ -1,0 +1,17 @@
+<div class="row justify-content-center">
+    <div class="col-12 w-75 my-2">
+      <div class="text-start my-2">
+        <a routerLink="../">
+          <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
+        </a>
+        
+      </div>
+      <div class="text-end">
+        <app-button [text]="btnText" (btnClickEvent)="goToCreateNew()"></app-button>
+      </div>
+      
+    </div>
+    <div class="col-12 w-75 my-3 text-start">
+      <h3>Exibindo {{ tableType }}s, use a barra de pesquisa para buscar por {{ tableType }} e selecione para ver/editar todos os detalhes:</h3>
+    </div>
+  </div>

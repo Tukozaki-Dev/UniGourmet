@@ -1,0 +1,168 @@
+a {
+  text-decoration: none;
+}
+
+button {
+  border-radius: 50px;
+  padding: 2px 30px;
+}
+
+.primary-color {
+  color: var(--sys--light--primary);
+}
+
+.font-size-title-medium {
+  font-size: var(--title--medium);
+  line-height: var(--title--medium);
+}
+
+.font-size-title-small {
+  font-size: var(--title--small);
+  line-height: var(--title--small);
+}
+
+.top-spacing {
+  padding-top: 80pt;
+}
+
+.bottom-spacing {
+  padding-bottom: 40pt;
+}
+
+.bottom-spacing-1 {
+  padding-bottom: 60pt;
+}
+
+.bottom-spacing-2 {
+  padding-bottom: 20pt;
+}
+
+.left-space {
+  padding-left: 10pt;
+}
+
+.img-size {
+  width: 300pt;
+}
+
+.square-container {
+  display: flex;
+  justify-content: center;
+}
+
+.m-bottom {
+  margin-bottom: 60pt;
+}
+
+.basic-input {
+  width: 220pt;
+}
+
+.small-basic-input {
+  width: 102pt;
+}
+
+.step-input-width {
+  width: 30pt;
+}
+
+.small-select-width {
+  width: 40pt;
+}
+
+.ingredient-name-input {
+  width: 80px;
+}
+
+.ingredient-unity-input {
+  width: 40px;
+}
+
+.ingredient-quantity-input {
+  width: 40px;
+}
+
+.select-width {
+  width: 50pt;
+}
+
+.small-description-input {
+  width: 150pt;
+}
+
+.description-input {
+  width: 200pt;
+}
+
+.div-line{
+  border: 1px solid var(--sys--light--primary);
+  border-radius: 15px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  margin: 40px 10px;
+  padding: 0.6px;
+}
+
+.box-array {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  background-color: #F2FFFD;
+  border-radius: 15px;
+  padding: 30px 10px;
+  margin-bottom: 20px;
+}
+
+.square-container {
+  display: flex;
+  justify-content: center;
+}
+
+.add-row{
+  color: var(--sys--light--primary);
+  text-decoration: none;
+}
+
+@media (max-width: 540px) {
+  .ingredient-name-input {
+    width: 100px;
+  }
+
+  .ingredient-unity-input {
+    width: 50pt;
+  }
+
+  .ingredient-quantity-input {
+    width: 50pt;
+  }
+}
+
+@media (min-width: 541px) {
+  .ingredient-name-input {
+    width: 175pt;
+  }
+
+  .ingredient-unity-input {
+    width: 70pt;
+  }
+
+  .ingredient-quantity-input {
+    width: 70pt;
+  }
+}
+
+@media (min-width: 992px) {
+  .ingredient-name-input {
+    width: 250pt;
+  }
+
+  .ingredient-unity-input {
+    width: 100pt;
+  }
+
+  .ingredient-quantity-input {
+    width: 100pt;
+  }
+
+  .description-input {
+    width: 500pt;
+  }
+}
+

@@ -1,0 +1,15 @@
+<div class="container my-5 bottom-spacing-1">
+  <app-table-header
+    [btnText]="btnText"
+    [tableType]="tableType"
+    (goToCreateNewEvent)="goToCreateNew()"
+  ></app-table-header>
+
+  <app-table-filtering
+    [displayedColumns]="displayedColumns"
+    [tableData]="recipeMain"
+    (onClickEditEvent)="onClickEdit($event)"
+    (callbackMethodEvent)="onDeleteRecipe($event)"
+    (onClickDetailsEvent)="onDetailsRecipe($event)"
+  ></app-table-filtering>
+</div>

@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12 left-space top-spacing">
+          <a (click)="backLastPageDialog()">
+            <mat-icon class="mat-18" color="primary">arrow_back</mat-icon>
+          </a>
+            <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+                <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="editMode">
+                    {{ editProfessor }}
+                </p>
+            </div>
+            <div [ngClass]="isMobileMenu?'justify-start':'justify-end'">
+                <p class="primary-color font-size-title-medium bottom-spacing" *ngIf="!editMode">
+                    {{ addProfessor }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-12 text-center bottom-spacing-2">
+              <div class="square-container" *ngIf="!editMode">
+                  <app-file-upload></app-file-upload>
+              </div>
+              <div class="img-container" *ngIf="editMode">
+                  <img [src]="imagePath" class="img-responsive img-size imagePath">
+              </div>
+          </div>
+          <div class="col-md-6 order-md-1 col-12 text-center">
+            <mat-form-field appearance="fill" color="primary" class="width-large">
+              <mat-label>Nome</mat-label>
+              <input matInput placeholder="Insira o nome do professor aqui" formControlName="name" class="name">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 order-md-3 col-12 text-center d-flex justify-content-center align-items-center">
+            <mat-form-field appearance="fill" color="primary" class="width-large">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Insira o email do professor aqui" formControlName="email">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 order-md-5 col-12 text-center">
+            <mat-form-field appearance="fill" color="primary" class="width-large">
+              <mat-label>Registro do Docente:</mat-label>
+              <input matInput placeholder="Insira o número de registro do professor aqui"
+                  formControlName="registerCode"
+                  class="registerCode">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 order-md-4 col-12 text-center">
+            <mat-form-field color="primary" appearance="fill" class="width-large">
+              <mat-label>Matérias</mat-label>
+              <mat-chip-list #subjectChipList aria-label="Subject" class="subjectCtrl">
+                  <mat-chip *ngFor="let subject of subjects" (removed)="removeSubject(subject.registerCode)">
+                      {{subject.name}}
+                      <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                      </button>
+                  </mat-chip>
+                  <input placeholder="Nova Matéria" #subjectInput [formControl]="subjectCtrl"
+                      [matAutocomplete]="autoSubject" [matChipInputFor]="subjectChipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+              </mat-chip-list>
+              <mat-autocomplete #autoSubject="matAutocomplete" (optionSelected)="selectedSubject($event)">
+                  <mat-option *ngFor="let subject of filteredSubjects | async" [value]="subject">
+                      {{subject.name}}
+                  </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 order-md-2 col-12 text-center">
+            <mat-form-field color="primary" appearance="fill" class="width-large">
+              <mat-label>Especialidade</mat-label>
+              <mat-chip-list #specialtyChipList aria-label="Specialty" class="specialtyCtrl">
+                  <mat-chip *ngFor="let specialty of specialties"
+                      (removed)="removeSpecialty(specialty.id.toString())">
+                      {{specialty.name}}
+                      <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                      </button>
+                  </mat-chip>
+                  <input placeholder="Nova Especialidade" #specialtyInput [formControl]="specialtyCtrl"
+                      [matAutocomplete]="autoSpecialty" [matChipInputFor]="specialtyChipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+              </mat-chip-list>
+              <mat-autocomplete #autoSpecialty="matAutocomplete" (optionSelected)="selectedSpecialty($event)">
+                  <mat-option *ngFor="let specialty of filteredSpecialties | async" [value]="specialty">
+                      {{specialty.name}}
+                  </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-12 order-last text-center bottom-spacing-1">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!professorForm.valid">{{btnText}}</button>
+          </div>
+      </div>
+    </form>
+</div>

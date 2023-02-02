@@ -1,0 +1,15 @@
+<div class="container my-5 bottom-spacing-1">
+  <app-table-header
+    [btnText]="btnText"
+    [tableType]="tableType"
+    (goToCreateNewEvent)="goToCreateNew()"
+  ></app-table-header>
+
+  <app-table-expandable-rows
+    [columnsToDisplay]="columnsToDisplay"
+    [tableData]="eventNotes"
+    (onClickEditEvent)="onClickEdit($event)"
+    (callbackMethodEvent)="onDeleteEvent($event)"
+    (onClickDetailsEvent)="onDetailsEvent($event)"
+  ></app-table-expandable-rows>
+</div>

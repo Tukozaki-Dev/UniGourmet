@@ -1,0 +1,87 @@
+<div class="container top-spacing">
+    <div class="row">
+        <div class="col-12">
+            <!-- <button mat-icon-button *ngIf="isMobileMenu">
+                <fa-icon [icon]="faUser"></fa-icon>
+                <span routerLink="/login" class="subicon-position">{{login}}</span>
+            </button> -->
+            <p class="primary-color font-size-healine-medium bottom-spacing text-center">
+                Olá {{name}}, o que você precisa fazer hoje?
+            </p>
+        </div>
+    </div>
+    <div class="row text-center centralize">
+        <div class="col-6 col-xs-6 col-md-4 col-lg-3">
+            <div class="square-container side-spacing">
+                <div class="background square">
+                    <div class="bg-color bg-rounded center" routerLink='/professores'>
+
+                        <fa-icon [icon]="faGraduationCap" class="icon-color"></fa-icon>
+
+                    </div>
+                    <a class="primary-color font-size-label-large" routerLink='/professores'>Professores</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-xs-6 col-md-4 col-lg-3">
+            <div class="square-container side-spacing">
+                <div class="background square">
+                    <div class="bg-color bg-rounded center" routerLink='/alunos'>
+                        <fa-icon [icon]="faUserGroup" class="icon-color"></fa-icon>
+                    </div>
+                    <a class="primary-color font-size-label-large" routerLink='/alunos'>Alunos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-xs-6 col-md-4 col-lg-3">
+            <div class="square-container side-spacing">
+                <div class="background square">
+                    <div class="bg-color bg-rounded center" routerLink='/materias'>
+                        <fa-icon [icon]="faList" class="icon-color"></fa-icon>
+                    </div>
+                    <a class="primary-color font-size-label-large" routerLink='/materias'>Matérias</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-xs-6 col-md-4 col-lg-3">
+            <div class="square-container side-spacing">
+                <div class="background square">
+                    <div class="bg-color bg-rounded center" routerLink='/turmas'>
+                        <fa-icon [icon]="faChalkboardUser" class="icon-color"></fa-icon>
+                    </div>
+                    <a class="primary-color font-size-label-large" routerLink='/turmas'>Turmas</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-xs-6 col-md-4 col-lg-3">
+            <div class="square-container side-spacing">
+                <div class="background square">
+                    <div class="bg-color bg-rounded center" routerLink='/receitas'>
+                        <fa-icon [icon]="faBook" class="icon-color"></fa-icon>
+                    </div>
+                    <a class="primary-color font-size-label-large" routerLink='/receitas'>Receitas</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-xs-6 col-md-4 col-lg-3">
+            <div class="square-container side-spacing">
+                <div class="background square">
+                    <div class="bg-color bg-rounded center" routerLink='/ingredientes'>
+                        <fa-icon [icon]="faBasketShopping" class="icon-color"></fa-icon>
+                    </div>
+                    <a class="primary-color font-size-label-large" routerLink='/ingredientes'>Ingredientes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-xs-6 col-md-4 col-lg-3 bottom-spacing-1">
+            <div class="square-container side-spacing">
+                <div class="background square">
+                    <div class="bg-color bg-rounded center" routerLink='/eventos'>
+                        <fa-icon [icon]="faNoteSticky" class="icon-color"></fa-icon>
+                    </div>
+                    <a class="primary-color font-size-label-large" routerLink='/eventos'>Eventos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

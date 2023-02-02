@@ -1,0 +1,20 @@
+.btn-container{
+    display: flex;
+    justify-content: left;
+}
+
+button {
+    border-radius: 15px;
+    margin: 2px;
+}
+
+.button-size {
+    width: 30px!important;
+    height: 30px!important;
+}
+
+.icon-size {
+    font-size: 16px;
+    text-align: center;
+}
+

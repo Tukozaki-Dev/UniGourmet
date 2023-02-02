@@ -1,0 +1,15 @@
+<mat-form-field class="btn-margin input-width" appearance="fill">
+  <mat-label>{{selectLabel}}</mat-label>
+  <mat-select formControlName="selectOption" #selectOption>
+      <mat-option *ngFor="let selectOption of selectOptions" [value]="selectOption.value">
+        {{selectOption}}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
+<!--
+ <app-icon-button></app-icon-button>
+ Usando o app button por enquanto, mas depois que o icon button for refatorado, usar ele
+ -->
+<app-button [text]="deleteDiscipline" (btnClickEvent)="onDeleteSelect(selectOption)"></app-button>
+
+
