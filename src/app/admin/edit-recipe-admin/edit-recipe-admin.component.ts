@@ -11,6 +11,7 @@ import { IngredientService } from 'src/app/services/ingredient.service';
 import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
 import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-recipe-admin',
@@ -46,7 +47,8 @@ export class EditRecipeAdminComponent implements OnInit {
   initializeEquipUtensils: string[] = [];
 
   allIngredients: Ingredient[] = [];
-
+  ingredientSubscription: Subscription;
+  
   recipeForm = this.fb.group({
     recipeMain: this.fb.group({
       name: ['', Validators.required],
@@ -92,8 +94,6 @@ export class EditRecipeAdminComponent implements OnInit {
     this.allDisciplines = this.disciplineService.getDisciplinesNames();
 
     this.allIngredients = this.ingredientService.getIngredients();
-
-
 
 
     //initialize formarrays end
@@ -149,6 +149,7 @@ export class EditRecipeAdminComponent implements OnInit {
         this.addPlateUp();
         this.addEquipUtensils();
       });
+
     }
 
     if(!this.id) {

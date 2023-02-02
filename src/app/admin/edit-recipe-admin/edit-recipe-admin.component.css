@@ -118,6 +118,11 @@ button {
 .add-row{
   color: var(--sys--light--primary);
   text-decoration: none;
+  font-weight: 500;
+}
+
+.testando {
+  border: 1px solid red;
 }
 
 @media (max-width: 540px) {
