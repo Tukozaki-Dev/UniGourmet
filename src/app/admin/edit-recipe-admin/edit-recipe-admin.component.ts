@@ -1,4 +1,4 @@
-import { SectionRecipe, SingleInstruction, IngredientDetails } from './../../shared-components/models/recipe.model';
+import { SectionRecipe, SingleInstruction, IngredientDetails, IngredientGroup } from './../../shared-components/models/recipe.model';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormControl, FormGroup, Form } from '@angular/forms';
@@ -11,7 +11,7 @@ import { IngredientService } from 'src/app/services/ingredient.service';
 import { DialogInterface } from 'src/app/shared-components/dialog/dialog.interface';
 import { DialogComponent } from 'src/app/shared-components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, startWith, map } from 'rxjs';
 
 @Component({
   selector: 'app-edit-recipe-admin',
@@ -47,7 +47,6 @@ export class EditRecipeAdminComponent implements OnInit {
   initializeEquipUtensils: string[] = [];
 
   allIngredients: Ingredient[] = [];
-  ingredientSubscription: Subscription;
   
   recipeForm = this.fb.group({
     recipeMain: this.fb.group({
@@ -69,6 +68,7 @@ export class EditRecipeAdminComponent implements OnInit {
       equipUtensils: this.fb.array(this.initializeEquipUtensils),
     })
   });
+  
 
   constructor(
     public dialog: MatDialog,
@@ -94,6 +94,7 @@ export class EditRecipeAdminComponent implements OnInit {
     this.allDisciplines = this.disciplineService.getDisciplinesNames();
 
     this.allIngredients = this.ingredientService.getIngredients();
+    this.allIngredients.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
 
     //initialize formarrays end
@@ -156,7 +157,32 @@ export class EditRecipeAdminComponent implements OnInit {
       this.editMode = false;
     }
 
+    // this.filteredOptions = this.ingredientsControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filterGroup(value.toString()))
+    // );
+
   }
+
+  // public _filterChildren = (opt: IngredientDetails[], value: string): IngredientDetails[] => {
+  //   const filterValue = value.toLowerCase();
+ 
+  //   return opt.filter(item => item.name.toLowerCase().indexOf(filterValue) === 0);
+  // };
+ 
+  //   filteredOptions: Observable<IngredientGroup[]>;
+  //   ingredientsControl = new FormControl();
+  //   ingredientGroups: IngredientGroup[];
+ 
+  //   private _filterGroup(value: string): IngredientGroup[] {
+  //     if(value) {
+  //       return this.ingredientGroups.map(group => ({ingredientGroup: this._filterChildren(group.ingredientGroup, value)
+  //         .filter(group => group.name.length > 0)
+  //       }
+  //       ))
+  //     }
+  //     return this.ingredientGroups;
+  //   }
 
   //start of formarray related methods ------------------------------------
 
@@ -175,6 +201,10 @@ export class EditRecipeAdminComponent implements OnInit {
 
   getIngredientGroupControl(sectionIndex: number): FormArray {
     return this.section.at(sectionIndex).get('ingredients').get('ingredientGroup') as FormArray
+  }
+
+  getIngredientNameControl(sectionIndex: number): FormArray {
+    return this.section.at(sectionIndex).get('ingredients').get('ingredientGroup').get('name') as FormArray
   }
 
   getIntructionStepsControl(sectionIndex: number): FormArray {
