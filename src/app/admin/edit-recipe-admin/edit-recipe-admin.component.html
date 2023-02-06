@@ -257,6 +257,25 @@
                               color="primary"
                               class="me-1 ingredient-name-input"
                             >
+                              <mat-label>Nome {{getIngredientGroupControl(sectionIndex).controls[ingredientGroupIndex].get('name')!.value}}</mat-label>
+                              <input type="text"
+                                     placeholder="Selecione um ingrediente"
+                                     matInput
+                                     formControlName="name"
+                                     #ingredientName
+                                     [matAutocomplete]="auto"
+                              >
+                              <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let ingredient of allIngredients" [value]="ingredient.name" [disabled]="ingredient.name == getIngredientGroupControl(sectionIndex).controls[ingredientGroupIndex].get('name')!.value">
+                                  {{ingredient.name}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                            <!-- <mat-form-field
+                              appearance="fill"
+                              color="primary"
+                              class="me-1 ingredient-name-input"
+                            >
                               <mat-label>Nome</mat-label>
                               <mat-select
                                 formControlName="name"
@@ -268,7 +287,7 @@
                                   {{ ingredient.name }}
                                 </mat-option>
                               </mat-select>
-                            </mat-form-field>
+                            </mat-form-field> -->
 
                             <mat-form-field
                               appearance="fill"

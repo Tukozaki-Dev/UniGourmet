@@ -29,7 +29,7 @@ export class StepsGroup {
   equipUtensils?: string[];
 }
 export interface SectionRecipe {
-  sectionName?: string;
+  sectionName: string;
   ingredients: IngredientGroup;
   prepInstructions: PrepInstructions;
 }
